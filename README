@@ -6,5 +6,7 @@ typing_program
 host名から教室判定
 3,checkPeriod
 時刻から時限を判定
-
-
+4,randomSelect
+問題選択をランダムで。
+5,saveData
+合不合に関わらず速度と誤字数を記録する
