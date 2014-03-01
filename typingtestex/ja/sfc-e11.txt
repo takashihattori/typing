@@ -1,0 +1,32 @@
+#情報処理タイピング試験用
+
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     Centre of The Earth"
+""
+"================================================================"
+"I having discovered the one only clue. For three mortal hours"
+"he continued without speaking a word, without raising his head,"
+"scratching, rewriting, calculating over and over again."
+"I knew that in time he must hit upon the right phrase. The letters"
+"of every alphabet have only a certain number of combinations."
+"================================================================"
+"全306文字 全部で5行"
+"時間制限 123秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 123
+!SET max_error_type 9
+!SET title "Centre of The Earth"
+!SET total_text_length 306
+!SET type_min_speed 150
+!TEXT
+"I having discovered the one only clue. For three mortal hours"
+"he continued without speaking a word, without raising his head,"
+"scratching, rewriting, calculating over and over again."
+"I knew that in time he must hit upon the right phrase. The letters"
+"of every alphabet have only a certain number of combinations."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

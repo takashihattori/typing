@@ -1,0 +1,31 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     The Gentle Grafter"
+""
+"================================================================"
+"The next morning Bird City woke up and found itself an island."
+"The river had busted through its old channel, and the town was"
+"surrounded by roaring torrents. The rain was still raining, and"
+"there was heavy clouds in the northwest that presaged about six"
+"more mean annual rainfalls during the next two weeks."
+"================================================================"
+"全303文字 全部で5行"
+"時間制限 122秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 122
+!SET max_error_type 9
+!SET title "The Gentle Grafter"
+!SET total_text_length 303
+!SET type_min_speed 150
+!TEXT
+"The next morning Bird City woke up and found itself an island."
+"The river had busted through its old channel, and the town was"
+"surrounded by roaring torrents. The rain was still raining, and"
+"there was heavy clouds in the northwest that presaged about six"
+"more mean annual rainfalls during the next two weeks."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

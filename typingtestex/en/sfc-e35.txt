@@ -1,0 +1,33 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      The Gift of the Magi"
+""
+"================================================================"
+"One dollar and eighty seven cents. That was all. And sixty"
+"cents of it was in pennies. Pennies saved one and two at"
+"a time by bulldozing the grocer and the vegetable man and"
+"the butcher until one's cheeks burned with the silent"
+"imputation of parsimony that such close dealing implied."
+"Three times Della counted it."
+"================================================================"
+"Total of 309 letters. 6 lines."
+"Time limit 124 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 124
+!SET max_error_type 9
+!SET title "The Gift of the Magi"
+!SET total_text_length 309
+!SET type_min_speed 150
+!TEXT
+"One dollar and eighty seven cents. That was all. And sixty"
+"cents of it was in pennies. Pennies saved one and two at"
+"a time by bulldozing the grocer and the vegetable man and"
+"the butcher until one's cheeks burned with the silent"
+"imputation of parsimony that such close dealing implied."
+"Three times Della counted it."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

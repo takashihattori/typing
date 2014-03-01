@@ -1,0 +1,9 @@
+#
+#
+#	epilogue.txt
+#
+#
+!DISP 18 4
+"お疲れ様でした。"
+""
+!PAUSE 1

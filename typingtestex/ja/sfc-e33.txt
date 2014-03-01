@@ -1,0 +1,31 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     The Blockade Runners"
+""
+"================================================================"
+"The steamer, guided by one of those excellent pilots from the"
+"Irish sea, passed without hesitation between floating buoys, stone"
+"columns, and biggings, surmounted with lighthouses, which mark"
+"the entrance to the channel. Beyond the town of Renfrew, at the"
+"foot of Kilpatrick hills, the Clyde grew wider."
+"================================================================"
+"全299文字 全部で5行"
+"時間制限 120秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 120
+!SET max_error_type 9
+!SET title "The Blockade Runners"
+!SET total_text_length 299
+!SET type_min_speed 150
+!TEXT
+"The steamer, guided by one of those excellent pilots from the"
+"Irish sea, passed without hesitation between floating buoys, stone"
+"columns, and biggings, surmounted with lighthouses, which mark"
+"the entrance to the channel. Beyond the town of Renfrew, at the"
+"foot of Kilpatrick hills, the Clyde grew wider."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

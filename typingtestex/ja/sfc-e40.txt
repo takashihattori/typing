@@ -1,0 +1,31 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     Insectivorous Plants"
+""
+"================================================================"
+"The whole upper surface is covered with gland bearing filaments,"
+"or tentacles, as I shall call them, from their manner of acting."
+"The glands were counted on thirty one leaves, but many of these"
+"were of unusually large size, and the average number was 192;"
+"the greatest number being 260, and the least 130."
+"================================================================"
+"全301文字 全部で5行"
+"時間制限 121秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 121
+!SET max_error_type 9
+!SET title "Insectivorous Plants"
+!SET total_text_length 301
+!SET type_min_speed 150
+!TEXT
+"The whole upper surface is covered with gland bearing filaments,"
+"or tentacles, as I shall call them, from their manner of acting."
+"The glands were counted on thirty one leaves, but many of these"
+"were of unusually large size, and the average number was 192;"
+"the greatest number being 260, and the least 130."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

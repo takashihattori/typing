@@ -1,0 +1,236 @@
+#
+#  define.txt --- global data definition.
+#
+
+!SET disp_message
+	"Show menu with ESCx2"
+!SET pause_message
+	"  Hit Return key and you'll see next explanation.  "
+!SET pause_message_b
+	"Next explanation with Space key, or previous one with BS key."
+!SET pause_message_test
+	"  Hit Space key!"
+!SET long_pause_message
+	"  Hit Return key and you'll see next explanation. "
+!SET long_pause_message_b
+	"Next explanation with Return key, or previous one with BS key."
+!SET long_pause_message_test
+	"Type words you have made mistakes again. Hit Return key for next screen."
+!SET long_pause_window
+"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+"┃                                                                    ┃"
+"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
+!SET hand_pattern
+""
+!SET test_before_message
+"  Hit Return key to go to final screen before the Examination.  "
+!SET test_pause_message
+"  Hit Return key to start Typing Examination.  "
+!SET test_end_message
+"  Hit Return key to view your result.  "
+!SET result_end_message
+"  Hit Return key to Quit this program.  "
+!SET go_error_check_message
+"  Hit Return key to move to Typing Error Check Screen.  "
+!SET test_time 10
+!SET disp_x 3
+!SET disp_y 3
+!SET pause_x 15
+!SET pause_y 21
+!SET long_pause_x 6
+!SET long_pause_y 20
+!SET long_pause_width 60
+#!SET hand_x 8
+#!SET hand_y 10
+!SET scroll_line 9
+!SET err_correct_line 3
+!SET test_x 8
+!SET test_y 4
+!SET begin_x 30
+!SET begin_y 12
+!SET test_width 65
+!SET test_hand_x 8
+!SET test_hand_y 5
+!SET minimum_miss_type 9
+!SET reverse_message ""
+!SET normal_message ""
+!SET newkey_message ""
+!SET learnedkey_message ""
+!SET pass_message "PASS"
+!SET fail_message "FAIL"
+!SET errchk_message "Error Check(X:exchange I:insert D:delete E:etc)"
+!SET result_message        " Examination Result "
+!SET exam_info_message     " Examination Information "
+!SET exam_result           "Passing Status                 "
+!SET exam_title            "Examination Title              "
+!SET exam_date             "Examination Date               "
+!SET typing_time           "Typing Time                    "
+!SET machine_name          "Terminal Name                  "
+!SET correct_type_per_min  "Correct Typing in a minute     "
+!SET miss_count            "Mistyped                       "
+!SET total_type            "Total Typed                    "
+!SET correct_type          "Correctly Typed                "
+!SET text_length_msg       "Text Length                    "
+!SET correct_rate          "Accuracy Rate                  "
+!SET score_message         "Score                          "
+!SET max_error_type_msg    "Maximum Mistype Accepted       "
+!SET time_limit_msg        "Time Limit                     "
+!SET word_message       "letters"
+!SET second_message       "sec"
+!SET percent_message    "%"
+!SET per_min_message    "letters/min"
+!SET penalty 3
+
+!SET test_start_message    "    Are you ready?"
+!SET test_end_message      "The examination is over."
+
+#
+#typingtestex用データ定義
+#
+!SET pass_dir "pass"
+!SET home_dir "/home/"
+!SET admin_dir ".typingtestadmin"
+!SET txt_extension "txt"
+!SET question_file ".question"
+
+#
+#typingtestex用画面表示メッセージ
+#
+
+#モード選択
+
+!SET select_mode_title	
+"
+
+Mode Selection
+=================================
+"
+!SET select_mode_message
+"Mode Selection"
+!SET error_invalid_select_mode
+"
+Hit 1 or 2 to Select Mode (Your Input: %s)
+"
+
+#試験情報入力
+
+!SET examination_info_title
+"
+
+Input Examination Information
+=================================
+"
+!SET error_not_exist_examination
+"
+
+Designated Examination does not exist.
+"
+!SET confirm_input
+"
+
+Please confirm that all information is correct.
+"
+!SET error_invalid_y_or_n
+"
+answer with y or n. (Your Input:%s)
+"
+!SET select_examination_time
+"
+Input the period of the Examination taking place"
+!SET select_examination_room
+"
+Input your Classroom.
+"
+!SET input_manager_login
+"
+Input login name of your teacher (ex：rocky)
+"
+!SET confirm_bar
+"===================================
+"
+!SET time_message "Period"
+!SET room_message "Room"
+!SET manager_login_message "Teacher's Login name"
+
+!SET registration_complete
+"
+Your Registration is finished.
+"
+
+#試験開始確認
+
+!SET error_start_examination
+"
+
+Follow the instruction given by the instructor and start your Examination.
+"
+!SET start_examination_message "Start Examination"
+!SET exit_program_message "Quit Program"
+
+#受験者情報入力
+
+!SET user_info_title
+"
+
+Input Your Information.
+=================================
+"
+!SET input_number
+"Please enter your Student number. (ex  71112345)
+"
+!SET error_input_number
+"
+Please enter a correct student number. (Your input:%s )
+"
+!SET input_family_name
+"Please enter your family name. (ex :Smith) 
+"
+!SET input_first_name
+"Please enter your given name. 　(ex ：John）
+"
+!SET confirm_re_input
+"
+Do you wish to re-register the information??"
+!SET error_same_host
+"
+This terminal has already been used for other candidate.
+Same terminal can't be used with several users in the same period. 
+Please try on another terminal.
+"
+!SET error_faild_making_user_file
+"Failed to create candidate information file.
+Please report to the indicator.
+"
+!SET your_login_message "Your login name"
+!SET your_name_message "Your name"
+!SET your_number_message "Your student number"
+
+
+!SET exit_program
+"
+
+Program will now exit.
+"
+!SET input_candidates 
+"[Select %d - %d]：
+"
+!SET error_invalid_input
+"
+Please input 1 to %d.(Your input:%s)
+
+"
+
+#
+# 合格情報登録関連メッセージ
+#
+!SET result_passing "You have PASSED the examination."
+!SET check_passing "Report to your teacher and wait for being checked."
+!SET pass_record_label "Passed information recording."
+!SET succeed_pass_record "Passed information successfully recorded."
+!SET faild_pass_record "Failed to record passed information."
+!SET call_manager_help "Please report to your indicator."
+!SET error_already_pass "You already PASSED the examination."
+!SET error_not_start "The time limit of the examination had elapsed."
+!SET error_different_question "You typed wrong question."
+!SET select_right_question "Please select the correct question and resit an examination."
+!SET error_not_found_question "Question file is not found."

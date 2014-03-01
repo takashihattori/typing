@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination    Dr. Dolittle C.6"
+""
+"================================================================"
+"The pantry window had been broken by a tennis ball the week before;"
+"and Polynesia popped in through the hole in the glass."
+"She heard Prince Bumpo snoring in his bed-room at the back of the"
+"palace. Then she tip-toed up the stairs till she came to the King's"
+"bedroom. She opened the door gently and peeped in."
+"================================================================"
+"Total of 303 letters. 6 lines."
+"Time limit 122 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 122
+!SET max_error_type 9
+!SET title "Dr. Dolittle C.6"
+!SET total_text_length 303
+!SET type_min_speed 150
+!TEXT
+"The pantry window had been broken by a tennis ball the week before;"
+"and Polynesia popped in through the hole in the glass."
+"She heard Prince Bumpo snoring in his bed-room at the back of the"
+"palace. Then she tip-toed up the stairs till she came to the King's"
+"bedroom. She opened the door gently and peeped in."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

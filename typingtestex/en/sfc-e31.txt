@@ -1,0 +1,32 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      All Around The Moon"
+""
+"================================================================"
+"Of real damage there was actually none, and even the disorder"
+"into which things had been thrown in the interior by the violent"
+"shock was comparatively slight. A few small objects lying around"
+"loose had been furiously hurled against the ceiling, but the"
+"others appeared not to have suffered the slightest injury."
+"================================================================"
+"Total of 307letters. 5 lines."
+"Time limit 123 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 123
+!SET max_error_type 9
+!SET title "All Around The Moon"
+!SET total_text_length 307
+!SET type_min_speed 150
+!TEXT
+"Of real damage there was actually none, and even the disorder"
+"into which things had been thrown in the interior by the violent"
+"shock was comparatively slight. A few small objects lying around"
+"loose had been furiously hurled against the ceiling, but the"
+"others appeared not to have suffered the slightest injury."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END
+

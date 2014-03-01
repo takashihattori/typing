@@ -1,0 +1,31 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     Coral Reefs"
+""
+"================================================================"
+"Between these plates and in the protected crevices on the reef,"
+"a multitude of branching zoophytes and other productions flourish,"
+"but the Porites and Millepora alone seem able to resist the fury"
+"of the breakers on its upper and outer edge: at the depth of"
+"a few fathoms other kinds of stony corals live."
+"================================================================"
+"全300文字 全部で5行"
+"時間制限 120秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 120
+!SET max_error_type 9
+!SET title "Coral Reefs"
+!SET total_text_length 300
+!SET type_min_speed 150
+!TEXT
+"Between these plates and in the protected crevices on the reef,"
+"a multitude of branching zoophytes and other productions flourish,"
+"but the Porites and Millepora alone seem able to resist the fury"
+"of the breakers on its upper and outer edge: at the depth of"
+"a few fathoms other kinds of stony corals live."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

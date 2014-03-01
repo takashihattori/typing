@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      The Voyage of The Beagle"
+""
+"================================================================"
+"On the 6th of January we reached Teneriffe, but were prevented"
+"landing, by fears of our bringing the cholera: the next morning"
+"we saw the sun rise behind the rugged outline of the Grand"
+"Canary island, and suddenly illuminate the Peak of Teneriffe,"
+"whilst the lower parts were veiled in fleecy clouds."
+"================================================================"
+"Total of 296 letters. 5 lines."
+"Time limit 119 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 119
+!SET max_error_type 9
+!SET title "The Voyage of The Beagle"
+!SET total_text_length 296
+!SET type_min_speed 150
+!TEXT
+"On the 6th of January we reached Teneriffe, but were prevented"
+"landing, by fears of our bringing the cholera: the next morning"
+"we saw the sun rise behind the rugged outline of the Grand"
+"Canary island, and suddenly illuminate the Peak of Teneriffe,"
+"whilst the lower parts were veiled in fleecy clouds."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

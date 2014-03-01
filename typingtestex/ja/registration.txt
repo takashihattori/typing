@@ -1,0 +1,10 @@
+#
+#
+#	registration.txt
+#
+#
+!DISP 3 4
+"otsukare"
+"========================="
+""
+!REGISTRATION

@@ -1,0 +1,31 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     All Around The Moon"
+""
+"================================================================"
+"Of real damage there was actually none, and even the disorder"
+"into which things had been thrown in the interior by the violent"
+"shock was comparatively slight. A few small objects lying around"
+"loose had been furiously hurled against the ceiling, but the"
+"others appeared not to have suffered the slightest injury."
+"================================================================"
+"全307文字 全部で5行"
+"時間制限 123秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 123
+!SET max_error_type 9
+!SET title "All Around The Moon"
+!SET total_text_length 307
+!SET type_min_speed 150
+!TEXT
+"Of real damage there was actually none, and even the disorder"
+"into which things had been thrown in the interior by the violent"
+"shock was comparatively slight. A few small objects lying around"
+"loose had been furiously hurled against the ceiling, but the"
+"others appeared not to have suffered the slightest injury."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

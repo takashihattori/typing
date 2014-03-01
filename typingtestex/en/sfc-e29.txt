@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      Anne of Green Gables"
+""
+"================================================================"
+"Not a stray stick nor stone was to be seen, for Mrs. Rachel would"
+"have seen it if there had been. Privately she was of the opinion"
+"that Marilla Cuthbert swept that yard over as often as she swept"
+"her house. One could have eaten a meal off the ground without"
+"overbrimming the proverbial peck of dirt."
+"================================================================"
+"Total of 295 letters. 5 lines."
+"Time limit 118 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 118
+!SET max_error_type 9
+!SET title "Anne of Green Gables"
+!SET total_text_length 295
+!SET type_min_speed 150
+!TEXT
+"Not a stray stick nor stone was to be seen, for Mrs. Rachel would"
+"have seen it if there had been. Privately she was of the opinion"
+"that Marilla Cuthbert swept that yard over as often as she swept"
+"her house. One could have eaten a meal off the ground without"
+"overbrimming the proverbial peck of dirt."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

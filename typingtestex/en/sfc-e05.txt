@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination    On the Origin of Species"
+""
+"================================================================"
+"The mental powers of different animals in wild and tame state"
+"present still greater difficulties require a separate section."
+"Be it remembered I have nothing to do with origin of memory,"
+"attention, and the different faculties of the mind, but merely"
+"with their differences in each of the great divisions of nature."
+"================================================================"
+"Total of 309 letters. 5 lines."
+"Time limit 124 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 124
+!SET max_error_type 9
+!SET title "On the Origin of Species"
+!SET total_text_length 309
+!SET type_min_speed 150
+!TEXT
+"The mental powers of different animals in wild and tame state"
+"present still greater difficulties require a separate section."
+"Be it remembered I have nothing to do with origin of memory,"
+"attention, and the different faculties of the mind, but merely"
+"with their differences in each of the great divisions of nature."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

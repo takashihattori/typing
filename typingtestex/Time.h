@@ -1,0 +1,9 @@
+#include "general.h"
+
+#ifndef _TIME_H_
+#define _TIME_H_
+
+void time_start();
+int time_now();
+
+#endif

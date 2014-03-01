@@ -1,0 +1,9 @@
+#
+#
+#	epilogue.txt
+#
+#
+!DISP 24 4
+"     See you next time."
+""
+!PAUSE 2

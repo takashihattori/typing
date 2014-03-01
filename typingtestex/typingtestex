@@ -1,0 +1,69 @@
+#!/bin/sh -f
+OS=`uname -s`
+
+cd /home/manabu/typingtest/typingtestex
+
+if [ $# -eq 1 ]; then
+    LOCALE=$1
+else
+    LOCALE='ja'
+fi
+
+if [ ${DISPLAY} ]; then
+    if [ ${OS} = 'SunOS' ]; then
+	kterm -xrm '*.vt100.translations: #override <Btn2Up>:bell(100)' \
+	    -km jis -fn \*-fixed-medium-r-normal--24-\*-iso8859-1 \
+	    -fr \*-fixed-medium-r-normal--24-\*-jisx0201\* \
+	    -fk -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
+	    -fkb -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
+	    -fb \*-fixed-medium-r-normal--24-\*-iso8859-1 \
+	    -frb \*-fixed-medium-r-normal--24-\*-jisx0201\* \
+	    -title 'TYPING TEST' \
+	    -e ./typing --hide-type-ex --hide-type-pra ${LOCALE}
+    elif [ ${OS} = 'Darwin' ]; then
+	if [ $# -ne 1 ]; then
+	    APPLE_LANG=`defaults read .GlobalPreferences AppleLanguages | tr -d "[:space:]" | cut -c2-3`
+	    if [ ${APPLE_LANG} = 'ja' ]; then
+		LOCALE='ja'
+	    else
+		LOCALE='en'
+	    fi
+	fi
+	kterm -xrm '*.vt100.translations: #override <Btn2Up>:bell(100)' \
+	    -km euc -fn \*-fixed-medium-r-normal--24-\*-iso8859-1 \
+	    -fr \*-fixed-medium-r-normal--24-\*-jisx0201\* \
+	    -fk -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
+	    -fkb -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
+	    -fb \*-fixed-medium-r-normal--24-\*-iso8859-1 \
+	    -frb \*-fixed-medium-r-normal--24-\*-jisx0201\* \
+	    -title 'TYPING TEST' \
+	    -e ./typing --hide-type-ex --hide-type-pra ${LOCALE}
+    else
+	kterm -xrm '*.vt100.translations: #override <Btn2Up>:bell(100)' \
+	    -km jis -fn \*-fixed-medium-r-normal--24-\*-iso8859-1 \
+	    -fr \*-fixed-medium-r-normal--24-\*-jisx0201\* \
+	    -fkB -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
+	    -fk@ -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
+	    -fkbB -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
+	    -fkb@ -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
+	    -fb \*-fixed-medium-r-normal--24-\*-iso8859-1 \
+	    -frb \*-fixed-medium-r-normal--24-\*-jisx0201\* \
+	    -title 'TYPING TEST' \
+	    -e ./typing --hide-type-ex --hide-type-pra ${LOCALE}
+    fi
+else
+    ./typing --hide-type-ex --hide-type-pra ${LOCALE}
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      The Variation of Animals"
+""
+"================================================================"
+"In scientific investigations it is permitted to invent"
+"any hypothesis, and if it explains various large and"
+"independent classes of facts it rises to the rank of a well"
+"grounded theory. The undulations of the ether and even"
+"its existence are hypothetical, yet every one now admits"
+"the undulatory theory of light."
+"================================================================"
+"Total of 306 letters. 6 lines."
+"Time limit 123 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 123
+!SET max_error_type 9
+!SET title "The Variation of Animals"
+!SET total_text_length 306
+!SET type_min_speed 150
+!TEXT
+"In scientific investigations it is permitted to invent"
+"any hypothesis, and if it explains various large and"
+"independent classes of facts it rises to the rank of a well"
+"grounded theory. The undulations of the ether and even"
+"its existence are hypothetical, yet every one now admits"
+"the undulatory theory of light."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

@@ -1,0 +1,175 @@
+!SET menu_height 11
+!SET menu_start_line 2
+!MENU
+!MESSAGE
+"Use down/up arrow keys to select the menu.      "
+"Then hit Return key.                "
+
+!TITLE "Q     U     I     T"
+!EXIT "QUIT"
+
+#!TITLE "test"
+#!LOAD "test-exam.txt"
+#!ITEM "test"
+
+!TITLE "SFC Typing Exam (1)"
+!LOAD "en/sfc-e01.txt"
+!ITEM "Keio"
+
+!TITLE "SFC Typing Exam (2)"
+!LOAD "en/sfc-e02.txt"
+!ITEM "Fukuzawa"
+
+!TITLE "SFC Typing Exam (3)"
+!LOAD "en/sfc-e03.txt"
+!ITEM "History of Keio"
+
+!TITLE "SFC Typing Exam (4)"
+!LOAD "en/sfc-e04.txt"
+!ITEM "Relativity"
+
+!TITLE "SFC Typing Exam (5)"
+!LOAD "en/sfc-e05.txt"
+!ITEM "On the Origin of Species"
+
+!TITLE "SFC Typing Exam (6)"
+!LOAD "en/sfc-e06.txt"
+!ITEM "Skylark Three"
+
+!TITLE "SFC Typing Exam (7)"
+!LOAD "en/sfc-e07.txt"
+!ITEM "Spacehounds of IPC"
+
+!TITLE "SFC Typing Exam (8)"
+!LOAD "en/sfc-e08.txt"
+!ITEM "Subspace Survivors"
+
+!TITLE "SFC Typing Exam (9)"
+!LOAD "en/sfc-e09.txt"
+!ITEM "VORTEX BLASTER"
+
+!TITLE "SFC Typing Exam (10)"
+!LOAD "en/sfc-e10.txt"
+!ITEM "Twenty Thousand Leagues"
+
+!TITLE "SFC Typing Exam (11)"
+!LOAD "en/sfc-e11.txt"
+!ITEM "Centre of The Earth"
+
+!TITLE "SFC Typing Exam (12)"
+!LOAD "en/sfc-e12.txt"
+!ITEM "The Underground City"
+
+!TITLE "SFC Typing Exam (13)"
+!LOAD "en/sfc-e13.txt"
+!ITEM "Dr. Dolittle"
+
+!TITLE "SFC Typing Exam (14)"
+!LOAD "en/sfc-e14.txt"
+!ITEM "Dr. Dolittle C.6"
+
+!TITLE "SFC Typing Exam (15)"
+!LOAD "en/sfc-e15.txt"
+!ITEM "Voyages of Dr. Dolittle"
+
+!TITLE "SFC Typing Exam (16)"
+!LOAD "en/sfc-e16.txt"
+!ITEM "Voyages of Dr. Dolittle 2"
+
+!TITLE "SFC Typing Exam (17)"
+!LOAD "en/sfc-e17.txt"
+!ITEM "The Magician"
+
+!TITLE "SFC Typing Exam (18)"
+!LOAD "en/sfc-e18.txt"
+!ITEM "Moon and Sixpence"
+
+!TITLE "SFC Typing Exam (19)"
+!LOAD "en/sfc-e19.txt"
+!ITEM "The Gentle Grafter"
+
+!TITLE "SFC Typing Exam (20)"
+!LOAD "en/sfc-e20.txt"
+!ITEM "Leonardo Da Vinci"
+
+!TITLE "SFC Typing Exam (21)"
+!LOAD "en/sfc-e21.txt"
+!ITEM "The Voyage of The Beagle"
+
+!TITLE "SFC Typing Exam (22)"
+!LOAD "en/sfc-e22.txt"
+!ITEM "Triplanetary"
+
+!TITLE "SFC Typing Exam (23)"
+!LOAD "en/sfc-e23.txt"
+!ITEM "The Invisible Man"
+
+!TITLE "SFC Typing Exam (24)"
+!LOAD "en/sfc-e24.txt"
+!ITEM "Sylvie and Bruno"
+
+!TITLE "SFC Typing Exam (25)"
+!LOAD "en/sfc-e25.txt"
+!ITEM "DADDY-LONG-LEGS"
+
+!TITLE "SFC Typing Exam (26)"
+!LOAD "en/sfc-e26.txt"
+!ITEM "Dear Enemy"
+
+!TITLE "SFC Typing Exam (27)"
+!LOAD "en/sfc-e27.txt"
+!ITEM "Rue Morgue"
+
+!TITLE "SFC Typing Exam (28)"
+!LOAD "en/sfc-e28.txt"
+!ITEM "The Oval Portrait"
+
+!TITLE "SFC Typing Exam (29)"
+!LOAD "en/sfc-e29.txt"
+!ITEM "Anne of Green Gables"
+
+!TITLE "SFC Typing Exam (30)"
+!LOAD "en/sfc-e30.txt"
+!ITEM "Anne of Avonlea"
+
+!TITLE "SFC Typing Exam (31)"
+!LOAD "en/sfc-e31.txt"
+!ITEM "All Around The Moon"
+
+!TITLE "SFC Typing Exam (32)"
+!LOAD "en/sfc-e32.txt"
+!ITEM "An Antarctic Mystery"
+
+!TITLE "SFC Typing Exam (33)"
+!LOAD "en/sfc-e33.txt"
+!ITEM "The Blockade Runners"
+
+!TITLE "SFC Typing Exam (34)"
+!LOAD "en/sfc-e34.txt"
+!ITEM "The Four Million"
+
+!TITLE "SFC Typing Exam (35)"
+!LOAD "en/sfc-e35.txt"
+!ITEM "The Gift of the Magi"
+
+!TITLE "SFC Typing Exam (36)"
+!LOAD "en/sfc-e36.txt"
+!ITEM "Coral Reefs"
+
+!TITLE "SFC Typing Exam (37)"
+!LOAD "en/sfc-e37.txt"
+!ITEM "The Decent of Man"
+
+!TITLE "SFC Typing Exam (38)"
+!LOAD "en/sfc-e38.txt"
+!ITEM "Volcanic Islands"
+
+!TITLE "SFC Typing Exam (39)"
+!LOAD "en/sfc-e39.txt"
+!ITEM "The Variation of Animals"
+
+!TITLE "SFC Typing Exam (40)"
+!LOAD "en/sfc-e40.txt"
+!ITEM "Insectivorous Plants"
+
+!MENU_END

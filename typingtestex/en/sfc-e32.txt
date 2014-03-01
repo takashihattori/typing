@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      An Antarctic Mystery"
+""
+"================================================================"
+"One day I witnessed the departure of an albatross, saluted by"
+"the very best croaks of the penguins, no doubt as a friend whom"
+"they were to see no more. Those powerful birds can fly for two"
+"hundred leagues without resting for a moment, and with such"
+"rapidity that they sweep through vast spaces in a few hours."
+"================================================================"
+"Total of 305 letters. 5 lines."
+"Time limit 122 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 122
+!SET max_error_type 9
+!SET title "An Antarctic Mystery"
+!SET total_text_length 305
+!SET type_min_speed 150
+!TEXT
+"One day I witnessed the departure of an albatross, saluted by"
+"the very best croaks of the penguins, no doubt as a friend whom"
+"they were to see no more. Those powerful birds can fly for two"
+"hundred leagues without resting for a moment, and with such"
+"rapidity that they sweep through vast spaces in a few hours."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

@@ -1,0 +1,7 @@
+!LOAD "en/define.txt"
+!SELECTMODE
+!REGISTRATION
+# main sequence
+!LOAD "en/menu.txt"
+!LOAD "en/epilogue.txt"
+

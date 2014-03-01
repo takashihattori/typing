@@ -1,0 +1,33 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     Keio"
+""
+"================================================================"
+"Keio University has a long, distinguished tradition in medical"
+"education, with practical training dating back to the founding of"
+"Keio University hospital in 1920. Keio has since established"
+"a number of medical organizations, all adhering to the original"
+"concept of care based on three fundamentals."
+"================================================================"
+"全294文字 全部で5行"
+"時間制限 118秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 118
+!SET max_error_type 9
+!SET title "Keio"
+!SET total_text_length 294
+!SET type_min_speed 150
+!TEXT
+"Keio University has a long, distinguished tradition in medical"
+"education, with practical training dating back to the founding of"
+"Keio University hospital in 1920. Keio has since established"
+"a number of medical organizations, all adhering to the original"
+"concept of care based on three fundamentals."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END
+
+

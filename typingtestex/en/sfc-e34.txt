@@ -1,0 +1,33 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      The Four Million"
+""
+"================================================================"
+"There was a fat woman inside in a red jumper with pothooks"
+"and beasties embroidered upon it. Tobin gives her ten cents"
+"and extends one of his hands. She lifts Tobin's hand, which"
+"is own brother to the hoof of a drayhorse, and examines"
+"it to see whether 'tis a stone in the frog or a cast shoe"
+"he has come for."
+"================================================================"
+"Total of 304 letters. 6 lines."
+"Time limit 122 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 122
+!SET max_error_type 9
+!SET title "The Four Million"
+!SET total_text_length 304
+!SET type_min_speed 150
+!TEXT
+"There was a fat woman inside in a red jumper with pothooks"
+"and beasties embroidered upon it. Tobin gives her ten cents"
+"and extends one of his hands. She lifts Tobin's hand, which"
+"is own brother to the hoof of a drayhorse, and examines"
+"it to see whether 'tis a stone in the frog or a cast shoe"
+"he has come for."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

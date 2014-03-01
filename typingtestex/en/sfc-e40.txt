@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      Insectivorous Plants"
+""
+"================================================================"
+"The whole upper surface is covered with gland bearing filaments,"
+"or tentacles, as I shall call them, from their manner of acting."
+"The glands were counted on thirty one leaves, but many of these"
+"were of unusually large size, and the average number was 192;"
+"the greatest number being 260, and the least 130."
+"================================================================"
+"Total of 301 letters. 5 lines."
+"Time limit 121 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 121
+!SET max_error_type 9
+!SET title "Insectivorous Plants"
+!SET total_text_length 301
+!SET type_min_speed 150
+!TEXT
+"The whole upper surface is covered with gland bearing filaments,"
+"or tentacles, as I shall call them, from their manner of acting."
+"The glands were counted on thirty one leaves, but many of these"
+"were of unusually large size, and the average number was 192;"
+"the greatest number being 260, and the least 130."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      Sylvie and Bruno"
+""
+"================================================================"
+"I might have wondered to see fruit and flowers growing together:"
+"here, my chief wonder was that neither fruit nor flowers were"
+"such as I had ever seen before. Higher up, each wall contained"
+"a circular window of coloured glass; and over all was an arched"
+"roof, that seemed to be spangled all over with jewels."
+"================================================================"
+"Total of 304 letters. 5 lines."
+"Time limit 122 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 122
+!SET max_error_type 9
+!SET title "Sylvie and Bruno"
+!SET total_text_length 304
+!SET type_min_speed 150
+!TEXT
+"I might have wondered to see fruit and flowers growing together:"
+"here, my chief wonder was that neither fruit nor flowers were"
+"such as I had ever seen before. Higher up, each wall contained"
+"a circular window of coloured glass; and over all was an arched"
+"roof, that seemed to be spangled all over with jewels."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

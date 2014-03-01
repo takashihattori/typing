@@ -1,0 +1,31 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     Volcanic Islands"
+""
+"================================================================"
+"Difficulty of tracing over a bare plain recent streams of lava."
+"Inland hills of more ancient volcanic rock. Decomposed olivine"
+"in large masses. Feldspathic rocks beneath the upper crystalline"
+"basaltic strata. Uniform structure and form of the more ancient"
+"volcanic hills. Form of the valleys near the coast."
+"================================================================"
+"全303文字 全部で5行"
+"時間制限 122秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 122
+!SET max_error_type 9
+!SET title "Volcanic Islands"
+!SET total_text_length 303
+!SET type_min_speed 150
+!TEXT
+"Difficulty of tracing over a bare plain recent streams of lava."
+"Inland hills of more ancient volcanic rock. Decomposed olivine"
+"in large masses. Feldspathic rocks beneath the upper crystalline"
+"basaltic strata. Uniform structure and form of the more ancient"
+"volcanic hills. Form of the valleys near the coast."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

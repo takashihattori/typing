@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      The Decent of Man"
+""
+"================================================================"
+"In consequence of the views now adopted by most naturalists, and"
+"which will ultimately, as in every other case, be followed by"
+"others who are not scientific, I have been led to put together"
+"my notes, so as to see how far the general conclusions arrived"
+"at in my former works were applicable to man."
+"================================================================"
+"Total of 294 letters. 5 lines."
+"Time limit 118 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 118
+!SET max_error_type 9
+!SET title "The Decent of Man"
+!SET total_text_length 294
+!SET type_min_speed 150
+!TEXT
+"In consequence of the views now adopted by most naturalists, and"
+"which will ultimately, as in every other case, be followed by"
+"others who are not scientific, I have been led to put together"
+"my notes, so as to see how far the general conclusions arrived"
+"at in my former works were applicable to man."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

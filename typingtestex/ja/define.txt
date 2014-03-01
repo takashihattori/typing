@@ -1,0 +1,229 @@
+#
+#  define.txt --- global data definition.
+#
+
+!SET disp_message
+	"ESC キー2回でメニュー"
+!SET pause_message
+	"  Enterキーを押すと，試験開始前の画面に移ります．	"
+!SET pause_message_b
+	"スペースバーで次の説明、BackSpaceキーで前の説明がでます。"
+!SET pause_message_test
+	"  Enterキーを押してください。  "
+!SET long_pause_message
+	"  リターンキーを押すと、次の説明がでます。  "
+!SET long_pause_message_b
+	"リターンキーで次の説明、BackSpaceキーで前の説明がでます。"
+!SET long_pause_message_test
+	"エラーチェックの結果を表示します．Enterキーで次の画面へ"
+!SET long_pause_window
+"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+"┃                                                                    ┃"
+"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
+!SET hand_pattern
+""
+!SET test_before_message
+"  Enterキーを押すと試験開始直前画面に移ります"
+!SET test_pause_message
+"  Enterキーを押すとタイピングの試験が始まります．"
+!SET test_end_message
+"  Enterキーを押すと，試験結果が表示されます．"
+!SET result_end_message
+"  Enterキーを押すと，試験を終了します．"
+!SET go_error_check_message
+"  Enterキーを押すと，タイピングのエラーチェック画面に移ります．"
+!SET test_time 10
+!SET disp_x 3
+!SET disp_y 3
+!SET pause_x 15
+!SET pause_y 21
+!SET long_pause_x 6
+!SET long_pause_y 20
+!SET long_pause_width 60
+#!SET hand_x 8
+#!SET hand_y 10
+!SET scroll_line 9
+!SET err_correct_line 3
+!SET test_x 8
+!SET test_y 4
+!SET begin_x 30
+!SET begin_y 12
+!SET test_width 65
+!SET test_hand_x 8
+!SET test_hand_y 5
+!SET minimum_miss_type 9
+!SET reverse_message ""
+!SET normal_message ""
+!SET newkey_message ""
+!SET learnedkey_message ""
+!SET pass_message "合格"
+!SET fail_message "不合格"
+!SET errchk_message "エラーチェック（X:入替 I:余分 D:欠落 E:その他）"
+!SET result_message        " 試  験  結  果"
+!SET exam_info_message     " 試  験  情  報"
+!SET exam_result           "合否結果                  "
+!SET exam_title            "試験問題名                "
+!SET exam_date             "試験日                    "
+!SET typing_time           "タイピング時間            "
+!SET machine_name          "端末名                    "
+!SET correct_type_per_min  "1分あたりの正しいタッチ数 "
+!SET miss_count            "誤字数                    "
+!SET total_type            "総打鍵数                  "
+!SET correct_type          "正打鍵数                  "
+!SET text_length_msg       "テキスト総文字数          "
+!SET correct_rate          "正解率                    "
+!SET score_message         "得点                      "
+!SET max_error_type_msg    "最大誤字制限              "
+!SET time_limit_msg        "時間制限                  "
+!SET word_message       "字"
+!SET second_message       "秒"
+!SET percent_message    "％"
+!SET per_min_message    "字/分"
+!SET penalty 3
+
+!SET test_start_message    "本当に試験を開始しますか?"
+!SET test_end_message      "試験が終了しました"
+
+#
+#typingtestex用データ定義
+#
+!SET pass_dir "pass"
+!SET home_dir "/home/"
+!SET admin_dir ".typingtestadmin"
+!SET txt_extension "txt"
+!SET question_file ".question"
+
+#
+#typingtestex用画面表示メッセージ
+#
+
+#モード選択
+
+!SET select_mode_title	
+"
+
+モード選択を行います
+=================================
+"
+!SET select_mode_message
+"モードを選択"
+!SET error_invalid_select_mode
+"
+モード選択は1 か 2を入力して下さい．(あなたの入力：%s)
+"
+
+#試験情報入力
+
+!SET examination_info_title
+"
+
+試験情報を入力します
+=================================
+"
+!SET error_not_exist_examination
+"
+指定された試験は存在しません．
+"
+!SET confirm_input
+"
+上記の情報でよろしいですか？"
+!SET error_invalid_y_or_n
+"
+y か n を入力して下さい．（あなたの入力:%s)
+"
+!SET select_examination_time
+"
+試験実施時限の入力 "
+!SET select_examination_room
+"
+教室の入力 "
+!SET input_manager_login
+"
+試験監督官のログイン名の入力 (例：rocky)
+"
+!SET confirm_bar
+"===================================
+"
+!SET time_message "時間"
+!SET room_message "部屋"
+!SET manager_login_message "試験官ログイン名"
+
+!SET registration_complete 
+"受験登録が完了しました
+"
+
+#試験開始確認
+
+!SET error_start_examination
+"
+
+試験監督の指示を待って試験を受けて下さい．"
+!SET start_examination_message "試験を受ける"
+!SET exit_program_message "プログラムを終了する"
+
+#受験者情報入力
+
+!SET user_info_title
+"
+
+受験者情報を入力します
+=================================
+"
+!SET input_number
+"あなたの学籍番号を半角数字で入力して下さい．　（例：80140153）   
+"
+!SET error_input_number
+"
+正しい学籍番号を半角数字で入力して下さい．（あなたの入力した学籍番号:%s)
+"
+!SET input_family_name
+"あなたの苗字を入力して下さい．　(例：Yamada) 
+"
+!SET input_first_name
+"あなたの名前を入力して下さい．　(例：Tarou）
+"
+!SET confirm_re_input
+"
+再度登録を行いますか？"
+!SET error_same_host
+"
+この端末は他の受験者がすでに使用しました．
+同じ端末で複数の受験者は同一時間に受験できません．
+別の端末で受験して下さい．
+"
+!SET error_faild_making_user_file
+"受験者情報ファイルの作成に失敗しました．試験官に連絡して下さい．
+"
+!SET your_login_message "あなたのログイン名"
+!SET your_name_message "あなたの名前"
+!SET your_number_message "あなたの学籍番号"
+
+
+!SET exit_program
+"
+
+プログラムを終了します．
+"
+!SET input_candidates 
+"[%d - %d を選択]：
+"
+!SET error_invalid_input
+"
+1 から %d を入力して下さい．（あなたの入力した文字:%s)
+
+"
+
+#
+# 合格情報登録関連メッセージ
+#
+!SET result_passing "あなたは試験に合格しました"
+!SET check_passing "試験監督を呼び合格のチェックを受けて下さい"
+!SET pass_record_label "合格情報記録"
+!SET succeed_pass_record "合格者情報の記録に成功しました．"
+!SET faild_pass_record "合格者情報の記録に失敗しました．"
+!SET call_manager_help "試験監督を呼んで下さい．"
+!SET error_already_pass "既に１度合格しています．"
+!SET error_not_start "現在，試験は終了中となっています．"
+!SET error_different_question "指定された試験問題と異なります．"
+!SET select_right_question "正しい試験問題を選択して再度受験して下さい．"
+!SET error_not_found_question "試験問題ファイルが見つかりません．"

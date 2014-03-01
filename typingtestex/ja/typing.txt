@@ -1,0 +1,7 @@
+!LOAD "ja/define.txt"
+!SELECTMODE
+!REGISTRATION
+# main sequence
+#!LOAD "ja/title.txt"
+!LOAD "ja/menu.txt"
+!LOAD "ja/epilogue.txt"

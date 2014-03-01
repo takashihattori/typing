@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination    Dr. Dolittle"
+""
+"================================================================"
+"But they were always glad when the night came and they stopped for"
+"their resting-time. Then the Doctor used to make a little fire of"
+"sticks; and after they had had their supper, they would sit round"
+"it in a ring, listening to Polynesia singing songs about the sea,"
+"or to Chee-Chee telling stories of the jungle."
+"================================================================"
+"Total of 307 letters. 7 lines."
+"Time limit 123 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 123
+!SET max_error_type 9
+!SET title "Dr. Dolittle"
+!SET total_text_length 307
+!SET type_min_speed 150
+!TEXT
+"But they were always glad when the night came and they stopped for"
+"their resting-time. Then the Doctor used to make a little fire of"
+"sticks; and after they had had their supper, they would sit round"
+"it in a ring, listening to Polynesia singing songs about the sea,"
+"or to Chee-Chee telling stories of the jungle."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

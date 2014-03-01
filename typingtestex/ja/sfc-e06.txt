@@ -1,0 +1,33 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     Skylark Three"
+""
+"================================================================"
+"Some material essential to the operation of their war machinery"
+"apparently must come from their own planet, for they have ceased"
+"attacking, have dug in, and are simply holding their ground."
+"It may be that they had not anticipated as much resistance as we"
+"could offer with space-ships and intra-atomic energy."
+"================================================================"
+"全304文字 全部で5行"
+"時間制限 122秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 122
+!SET max_error_type 9
+!SET title "Skylark Three"
+!SET total_text_length 304
+!SET type_min_speed 150
+!TEXT
+"Some material essential to the operation of their war machinery"
+"apparently must come from their own planet, for they have ceased"
+"attacking, have dug in, and are simply holding their ground."
+"It may be that they had not anticipated as much resistance as we"
+"could offer with space-ships and intra-atomic energy."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END
+
+

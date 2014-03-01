@@ -1,0 +1,316 @@
+#
+#
+#	prologue.txt
+#
+#
+!SECTION 1
+!DISP 13 2
+"      Introduction"
+""
+"¢¨ Please practice according the below instruction.  Whenever"
+"   you feel that you are not improving, check this instruction"
+"   so you can practice in a correct way."
+""
+"               The important points are, "
+""
+"             'maintain a right posture'"
+"                         and"
+"             'Following the home position'."
+""
+""
+!PAUSE_B
+!DISP 12 3
+"¡ü The posture when you type a keyboard"
+"   It's important that"
+"   you maintain a right posture."
+""
+""
+" Adjust your seat elevation so your elbows are right angled 
+and your arms stay horizontal ."
+""
+"  Sit up straight."
+"  Don't make your palms touch to a desk and keyboard."
+""
+!PAUSE_B
+!DISP 5 1
+"  Why can we type keyboards without looking the keys?"
+"This is because each finger is assigned to corresponding keys"
+"and is always at the certain position on the keyboard."
+"  Therefore, we can type without looking at our fingers."
+" Fingers assignment is shown on the figure below."
+!SET new ""
+!SET learned "qwertyuiopasdfghjkl;zxcvbnm,./"
+!DISP_HAND
+!PAUSE_B
+!DISP 5 2
+"  Your fingers should always be on the reversed keys. "  
+"Since fingers are always on these keys, we call it 'Home Position' ."
+""
+!SET new "asdfjkl;"
+!SET learned "qwertyuiopghzxcvbnm,./"
+!DISP_HAND
+!PAUSE_B
+!DISP 2 1
+"    Let's put your fingers on the home position.  Start with your left hand."
+"    Put your left hand on 'ASDF'."
+""
+"Note:Don't stick your fingers each other.  Separete them naturally."
+"      Put your fingers on the home position as if you grasp an egg."
+"      "
+!SET new "asdf"
+!SET learned ""
+!DISP_HAND
+!PAUSE_B
+!DISP 5 2
+"¡¡Put your right hand on the 'JKL:'"
+!SET new "jkl;"
+!SET learned ""
+!DISP_HAND
+!PAUSE_B
+!DISP 5 1
+"¡¡When you hit the Space key, use thumb of your right hand."
+"Remember to keep other fingers on the home position."
+""
+" When you hit the Return key, use a baby finger of your right hand."
+" This is the end of the section on Home Position."
+!SET new ""
+!SET learned ""
+!DISP_HAND
+!PAUSE_B
+!DISP 5 2
+"¡¡As explained above, each finger is assigned to each key."
+"This is shown on the figure."
+"  All right. Let's start practicing."
+!SET new ""
+!SET learned "qwertyuiopasdfghjkl;zxcvbnm,./"
+!DISP_HAND
+!PAUSE_B
+!DISP 5 1
+"¡¡Make sure your fingers stay at the home position,"
+"when you type keys on the home position."
+"Don't look at your hands."
+" Then, let's type keys with your left hand at the home position."
+"
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+"Let's type 'f' with your left forefinger, 'd' with your left middle finger,"
+"and Space bar with your right thumb. Type 'fdf fdf " continually."
+"Hit return key, so the next page will be shown."
+!SET new "asdfjkl;"
+!SET learned "qwertyuiopghzxcvbnm,./"
+!DISP_HAND 7
+!LONG_PAUSE_B
+!DISP 5 1
+"Then, let's type keys with your right hand at the home position."
+"Stay your fingers on the home position.  Don't look at your hands." 
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+"Let's type 'j' with your right forefinger, 'k' with your right middle finger,"
+"and Space bar with your right thumb. Let's type 'jkj jkj ' continually."
+"Hit return key, so the next page will be shown."
+!SET new "asdfjkl;"
+!SET learned "qwertyuiopghzxcvbnm,./"
+!DISP_HAND 7
+!LONG_PAUSE_B
+!DISP 5 1
+"Let's practice upper part keys with your left hand. "
+"Put back your figners to the home position after you type."
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+"Let's type 'f' with your left forefinger at the home position, 'r' with your"
+left forefinger after you move left hand upper, and Space bar with your right"
+"thumb.  Let's type 'frf frf ' continually."
+!SET new "asdfjkl;r"
+!SET learned "qwetyuiopghzxcvbnm,./"
+!DISP_HAND 7
+!LONG_PAUSE_B
+!DISP 5 1
+"Let's practice lower part keys with your left hand. "
+"Put back your figners at the home position after you type."
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+"Let's type 'f' with your left forefinger at the home position, 'v' with your"
+left forefinger after you move left hand lower, and Space bar with your right"
+"thumb. Let's type 'fvf fvf ' continually."
+!SET new "asdfjkl;v"
+!SET learned "qwertyuiopghzxcbnm,./"
+!DISP_HAND 7
+!LONG_PAUSE_B
+!DISP 5 1
+"Let's practice typing a key inside with your left forefinger.  Strech"
+"your forefinger and type a key inside.  Put back your fingers right away."
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+""
+"Let's type 'f' with your left forefinger at the home position, 'g' with it"
+"after you move your left hand right, and Space bar with your right thumb."
+"Let's type 'fgf fgf ' continually."
+!SET new "asdfjkl;g"
+!SET learned "qwertyuiophzxcvbnm,./"
+!DISP_HAND 7
+!LONG_PAUSE_B
+!DISP 2 1
+"  Let's type the sentence below with your left hand, the do the same with right hand."
+"¢¨Don't mind if you make a mistake. Keep on typing.
+"¢¨Hit return key, so the next page will be shown."
+""
+"¡¦Let's practice the upper keys with your right hand 
+"               juj juj juj juj juj juj juj juj"
+""
+"¡¦Let's practice the lower keys with your right hand "
+"               jmj jmj jmj jmj jmj jmj jmj jmj"
+""
+"¡¦Let's practice the inside keys with your right hand "
+"               jhj jhj jhj jhj jhj jhj jhj jhj"
+!LONG_PAUSE_B
+!DISP 11 3
+"            When you type a keyboard, check"
+""
+"                'maitain a right posture'"
+"               'following the home position'"
+"                           and"
+"                    'fingers assignment'"
+""
+""
+"¡¡This is the end of the introduction."
+!PAUSE_B
+!SECTION 2
+!DISP 10 1
+"        Usage"
+""
+""
+"   I'll explain how to use this software."
+""
+""
+" We don't use CAPS key when you practice."
+""
+"Before you practice typing, check if it is not"
+" turned on."
+!PAUSE_B
+!DISP 2 1
+"                       ¡ù Outline¡ÊPart 1¡Ë"
+""
+"  This software is composed of 20 lessons. Each lesson is composed of "
+"3 - 5 sections.  You'll practice 8 times of 1minute exercise in each section.  
+"Then notice the explanations below. "
+""
+"  ¡ùDon't mind making mistake at the first time.  Keep on typing."
+""
+"¡¡¡ùIn two to five times, don't mind making mistake and type as fast as"
+"    you can."
+"¡¡¡ùIn six to eight times, type at the pace you don't make a mistake."
+""
+""
+"¡¡¡ùAfter you finish typing a line, hit Return key and type next line." 
+""
+!PAUSE_B
+!DISP 10 1
+"           ¡ù Outline¡ÊPart 2¡Ë"
+""
+"This software doesn't display which key you typed while your pracitice"
+""
+"This is because we want you not to worry about making mistakes. "
+""
+"So we intentionally don't display."
+""
+""
+""
+""
+""
+"You can look at 'Check Display' and 'Result Display''"
+"to check out your result of one minute practice"
+!PAUSE_B
+!DISP 2 0
+"      ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡ù Check Display"
+""
+"After you finished one minute praciticing, the text you have typed will"
+"be displayed, the mistyped text will be marked with X,I,D and E."
+"Example:"
+"    deed did feed freed red deer¡¡¡¡¡¡¡¡¡¡¡¡¡Ý¡ä¡¡text for pracitice "
+"    deed ddi feeed freedred deerf           ¡Ý¡ä¡¡text you typed"
+"          XX    I       D       E           ¡Ý¡ä¡¡checked result"
+"   ¡ûThe result is composed of the sympols which have each meaning"
+"     below."
+""
+"                ¡¡¡üthe case two characters are eXchanged    X"
+"                ¡¡¡üthe case a extra character is Inserted   I"
+"                  ¡üthe case a character is Deleted          D"
+"                ¡¡¡üEtc                                      E"
+""
+"         Check this display very well and check the character you mistype"
+"         many times."
+!PAUSE_B
+!DISP 10 0
+" ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡ù Result Display"
+""
+"After your error is displayed, the result is displayed as the figure below."
+""
+"Example:"
+"                   Total Count    56 chars"
+""
+"                   Correct Type   56 chars"
+""
+"                   Correct Rate       100%"
+""
+"  ¡¡¡¡===> ¡ÊMessage from this software¡Ë<==="
+""
+"     Total Count is the character number you typed."
+"     Correct Type is the character number you typed correctly."
+""
+"Let's practice as you can type over 100 characters which are right."
+!PAUSE_B
+!DISP 10 1
+"    ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡ù Last Comments"
+""
+"It's very easy to type a keyboard without looking it, once"
+""
+"you get used to.  It's up to your practice."
+""
+"Never give up!  Do your best to complete it!"
+""
+"This is the end of usage of this software."
+!PAUSE_B
+

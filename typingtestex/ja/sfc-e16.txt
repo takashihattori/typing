@@ -1,0 +1,33 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験   Voyages of Dr. Dolittle 2"
+""
+"================================================================"
+"We were now come beyond the edge of the town. And the house"
+"that Matthew pointed out was quite a small one standing by"
+"itself. There seemed to be a big garden around it; and this"
+"garden was much higher than the road, so you had to go up"
+"a flight of steps in the wall before you reached the front"
+"gate at the top."
+"================================================================"
+"全307文字 全部で6行"
+"時間制限 124秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 124
+!SET max_error_type 9
+!SET title "Voyages of Dr. Dolittle 2"
+!SET total_text_length 307
+!SET type_min_speed 150
+!TEXT
+"We were now come beyond the edge of the town. And the house"
+"that Matthew pointed out was quite a small one standing by"
+"itself. There seemed to be a big garden around it; and this"
+"garden was much higher than the road, so you had to go up"
+"a flight of steps in the wall before you reached the front"
+"gate at the top."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

@@ -1,0 +1,31 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験   The Underground City"
+""
+"================================================================"
+"The better to understand this narrative, it will be as well"
+"to hear a few words on the origin of coal. During the geological"
+"epoch, when the terrestrial spheroid was still in course of"
+"formation, a thick atmosphere surrounded it, saturated with"
+"watery vapors, and copiously impregnated with carbonic acid."
+"================================================================"
+"全301文字 全部で6行"
+"時間制限 121秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 121
+!SET max_error_type 9
+!SET title "The Underground City"
+!SET total_text_length 301
+!SET type_min_speed 150
+!TEXT
+"The better to understand this narrative, it will be as well"
+"to hear a few words on the origin of coal. During the geological"
+"epoch, when the terrestrial spheroid was still in course of"
+"formation, a thick atmosphere surrounded it, saturated with"
+"watery vapors, and copiously impregnated with carbonic acid."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

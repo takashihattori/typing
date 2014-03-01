@@ -1,0 +1,31 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験   Dr. Dolittle"
+""
+"================================================================"
+"But they were always glad when the night came and they stopped for"
+"their resting-time. Then the Doctor used to make a little fire of"
+"sticks; and after they had had their supper, they would sit round"
+"it in a ring, listening to Polynesia singing songs about the sea,"
+"or to Chee-Chee telling stories of the jungle."
+"================================================================"
+"全307文字 全部で7行"
+"時間制限 123秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 123
+!SET max_error_type 9
+!SET title "Dr. Dolittle"
+!SET total_text_length 307
+!SET type_min_speed 150
+!TEXT
+"But they were always glad when the night came and they stopped for"
+"their resting-time. Then the Doctor used to make a little fire of"
+"sticks; and after they had had their supper, they would sit round"
+"it in a ring, listening to Polynesia singing songs about the sea,"
+"or to Chee-Chee telling stories of the jungle."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

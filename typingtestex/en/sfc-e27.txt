@@ -1,0 +1,31 @@
+#For Information Processing
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      Rue Morgue"
+""
+"================================================================"
+"Beyond doubt there is nothing of a similar nature so greatly"
+"tasking the faculty of analysis. The best chess-player in"
+"Christendom may be little more than the best player of chess;"
+"but proficiency in whist implies capacity for success in all"
+"those more important undertakings where mind struggles with mind."
+"================================================================"
+"Total of 300 letters. 5 lines."
+"Time limit 120 sec Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 120
+!SET max_error_type 9
+!SET title "Rue Morgue"
+!SET total_text_length 300
+!SET type_min_speed 150
+!TEXT
+"Beyond doubt there is nothing of a similar nature so greatly"
+"tasking the faculty of analysis. The best chess-player in"
+"Christendom may be little more than the best player of chess;"
+"but proficiency in whist implies capacity for success in all"
+"those more important undertakings where mind struggles with mind."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END

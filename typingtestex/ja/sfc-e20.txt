@@ -1,0 +1,31 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     Leonardo Da Vinci"
+""
+"================================================================"
+"These rules are of use only in correcting the figures; since"
+"every man makes some mistakes in his first compositions and"
+"he who knows them not, cannot amend them. But you, knowing"
+"your errors, will correct your works and where you find mistakes"
+"amend them, and remember never to fall into them again."
+"================================================================"
+"全296文字 全部で5行"
+"時間制限 119秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 119
+!SET max_error_type 9
+!SET title "Leonardo Da Vinci"
+!SET total_text_length 296
+!SET type_min_speed 150
+!TEXT
+"These rules are of use only in correcting the figures; since"
+"every man makes some mistakes in his first compositions and"
+"he who knows them not, cannot amend them. But you, knowing"
+"your errors, will correct your works and where you find mistakes"
+"amend them, and remember never to fall into them again."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

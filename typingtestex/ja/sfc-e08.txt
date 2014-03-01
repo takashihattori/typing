@@ -1,0 +1,32 @@
+#情報処理タイピング試験用
+
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     Subspace Survivors"
+""
+"================================================================"
+"To Adams it was only one tiny datum in an incredibly huge and"
+"complex mathematical structure. The parents did not want to be"
+"pilloried as crackpots, as publicity seeking liars, or as being"
+"unable to count; and they knew that nobody would believe them if"
+"they told the truth; even or especially? no medical doctor."
+"================================================================"
+"全309文字 全部で5行"
+"時間制限 124秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 124
+!SET max_error_type 9
+!SET title "Subspace Survivors"
+!SET total_text_length 309
+!SET type_min_speed 150
+!TEXT
+"To Adams it was only one tiny datum in an incredibly huge and"
+"complex mathematical structure. The parents did not want to be"
+"pilloried as crackpots, as publicity seeking liars, or as being"
+"unable to count; and they knew that nobody would believe them if"
+"they told the truth; even or especially? no medical doctor."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END
