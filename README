@@ -1,0 +1,10 @@
+typing_program
+
+1,info
+ログイン名->学籍番号、氏名の変換
+2,checkRoom
+host名から教室判定
+3,checkPeriod
+時刻から時限を判定
+
+
