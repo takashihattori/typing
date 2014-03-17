@@ -125,6 +125,28 @@ void inputTime(Examination * examination){
 	char buf[256];
 	int number;
 	
+	time_t timer;
+	struct tm *t_st;
+	int t;
+	
+	time(&timer);
+	t_st=localtime(&timer);
+	printf("%d:%d\n",t_st->tm_hour,t_st->tm_min);
+	t=t_st->tm_hour*100+t_st->tm_min;
+	
+	if(t<925)number=0;
+	else if(t<1110)number=1;
+	else if(t<1300)number=2;
+	else if(t<1445)number=3;
+	else if(t<1615)number=4;
+	else if(t<1800)number=5;
+	else if(t<1930)number=6;
+	else number=0;
+	printf("%d限なう\n",number);
+	
+	examination->time=number;
+	
+	/*
 	//選択肢を作る
 	for(i = 0; i < 6; i++){
 		times[i] = (char * )malloc(strlen("%d限(%d period)"));
@@ -138,7 +160,7 @@ void inputTime(Examination * examination){
 	//後処理
 	for(i =0 ; i < 6; i++){
 		free(times[i]);
-	}
+	}*/
 }
 
 //教室を入力する
