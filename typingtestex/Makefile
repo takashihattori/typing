@@ -14,7 +14,7 @@ install:
 	install -c -m 755 typing $(DEST_DIR)
 
 typing: $(OBJS)
-	gcc -funsigned-char -o typing $(OBJS)
+	gcc -funsigned-char -lldap -o typing $(OBJS)
 
 depend:
 	mkdep $(SRCS)

@@ -1,7 +1,7 @@
 #!/bin/sh -f
 OS=`uname -s`
 
-cd /home/manabu/typingtest/typingtestex
+cd /home/t11131tu/typing/git_type/typing/typingtestex
 
 if [ $# -eq 1 ]; then
     LOCALE=$1

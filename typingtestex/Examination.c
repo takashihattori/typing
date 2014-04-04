@@ -15,6 +15,12 @@
 #include <dirent.h>
 #include <time.h>
 #include <stdlib.h>
+#include <ldap.h>
+#include <pwd.h>
+#include <sys/types.h>
+
+#define l_SERVER     'ldaps://ldap.sfc.keio.ac.jp'
+#define BASE_DN      "ou=people,dc=sfc,dc=keio,dc=ac,dc=jp"
 
 //private関数たち
 void inputExaminationInfo(Examination *);
@@ -121,7 +127,7 @@ void inputExaminationInfo(Examination * examination){
 //試験時間を入力する
 void inputTime(Examination * examination){
 	int i;
-	char * times[6];
+	//char * times[6];
 	char buf[256];
 	int number;
 	
@@ -134,14 +140,14 @@ void inputTime(Examination * examination){
 	printf("%d:%d\n",t_st->tm_hour,t_st->tm_min);
 	t=t_st->tm_hour*100+t_st->tm_min;
 	
-	if(t<925)number=0;
+	if(t<925)number=1;
 	else if(t<1110)number=1;
 	else if(t<1300)number=2;
 	else if(t<1445)number=3;
 	else if(t<1615)number=4;
 	else if(t<1800)number=5;
 	else if(t<1930)number=6;
-	else number=0;
+	else number=6;
 	printf("%d限なう\n",number);
 	
 	examination->time=number;
@@ -165,9 +171,27 @@ void inputTime(Examination * examination){
 
 //教室を入力する
 void inputRoom(Examination * examination){
+	char host[256];
+	char *str;
+	get_hostname(host);
 	int number;
+	
+	str=strtok(host,".");
+	str=strtok(str,"zmac");
+	number=atoi(str);
+	if(number<40)number=0;
+	else if(number<80)number=1;
+	else if(number<120)number=2;
+	else if(number<160)number=3;
+	else number=4;
+	
+	strcpy(examination->room, ROOMS[number]);
+	printf("%s館なう\n",ROOMS[number]);
+	
+	/*
 	number = selectNumber(ref("select_examination_room"),ROOMS,5);
 	strcpy(examination->room, ROOMS[number-1]);
+	*/
 }
 
 //試験官のログイン名を入力する
@@ -365,6 +389,73 @@ void inputUserInfo(Examination * examination, User * user){
 
 //学籍番号を取得する
 void inputNumber(User * user){
+	
+	struct passwd *p;
+	LDAP        *ld;
+    LDAPMessage *result=NULL;
+	int          entries;
+	char ll[64]="ldap.sfc.keio.ac.jp";
+	const char *hostname=ll;
+	
+	char *base=BASE_DN;
+	char str[80];
+	char *attrs[2]={"keioIDNumber",0};
+	//ユーザー名からログイン名を取得
+	uid_t uid = getuid();
+	p=getpwuid(uid);
+	//printf("login name:%s\n",p->pw_name);
+	// Initialize
+	ld = ldap_init(hostname, 389);
+	if (ld == NULL) {
+        perror("ldap_init");
+        exit(1);
+	}
+	if (ldap_simple_bind_s(ld, NULL, NULL) != LDAP_SUCCESS) {
+        ldap_perror(ld, "ldap_simple_bind_s");
+        ldap_unbind(ld);
+        exit(1);
+	}
+	strcpy(str,p->pw_name);
+	char attr[100]="(uid=";
+	strcat(attr,str);
+	strcat(attr,")");
+	//printf("%s\n",attr);
+	char *a=attr;
+	if (ldap_search_s(ld, base, LDAP_SCOPE_SUBTREE,
+        a, 0, 0, &result) != LDAP_SUCCESS)
+    {
+        ldap_perror(ld, "ldap_search_s");
+        ldap_unbind(ld);
+        exit(1);
+	}
+	entries = ldap_count_entries(ld, result);
+    //printf("Found %d entries\n", entries);
+	
+	result=ldap_first_entry(ld,result);
+	int i,j,lim;
+	char **vals;
+	char *num;
+	if(result==NULL){
+		ldap_perror(ld,"ldap_first_entry");
+		ldap_unbind(ld);
+		exit(1);
+	}else{
+		while(result!=NULL){
+			vals=ldap_get_values(ld,result,"keioIDNumber");
+			lim=ldap_count_values(vals);
+			for(i=0;i<lim;i++){
+				//printf("ID:%s\n",vals[i]);
+				if(strlen(vals[i]) == 8 && atoi(vals[i]) != 0)j=atoi(vals[i]);
+			}
+			result=ldap_next_entry(ld,result);
+		}
+		ldap_value_free(vals);
+	}
+    ldap_msgfree(result);
+	ldap_unbind(ld);
+	
+	user->number=j;
+	/*
 	char buf[256];
 	while(1){
 		printf(ref("input_number"));
@@ -372,11 +463,12 @@ void inputNumber(User * user){
 		inputString(buf,256);
 		if(strlen(buf) == 8 && atoi(buf) != 0){
 			user->number = atoi(buf);
+			fprintf(stderr,"aa\n");
 			break;
 		}else{
 			printf(ref("error_input_number"),buf);
 		}
-	}
+	}*/
 }
 
 //名前を入力する

@@ -433,7 +433,7 @@
 	  Test * test2 = Test_get_test();
 	  
 	  //合格情報を記録する for typingtestex拡張
-  Examination_writePassInfoAndShowResult(&(test.examination), &(test.user));
+	  Examination_writePassInfoAndShowResult(&(test.examination), &(test.user));
 	 
 	  term_clear();
 	  
