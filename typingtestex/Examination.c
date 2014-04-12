@@ -25,7 +25,9 @@
 //private関数たち
 void inputExaminationInfo(Examination *);
 void	inputTime(Examination*);//時間を入力する
+void	inputTimeAuto(Examination*);//自動入力Ver
 void 	inputRoom(Examination*);//教室を入力する
+void 	inputRoomAuto(Examination*);//教室を入力する
 void 	inputManagerLogin(Examination*, char *);//監督官のログイン名を入力する
 void 	setExaminationDate(Examination*);//日付を設定する
 int confirmExaminationInfo(Examination * examination);//入力した情報が正しいか確認する
@@ -34,6 +36,7 @@ int checkExamination(Examination *);
 int isInitialized(Examination *);
 void inputUserInfo(Examination *, User * );
 void inputNumber(User *);
+void inputNumberAuto(User*);
 void inputName(User *);
 int checkReInput();
 int writeUserInfo(Examination *, User * );
@@ -47,6 +50,7 @@ void checkStartExamination(Examination *);
 void inputString(char *,int);
 int isRightQuestion(Examination * );
 int isFirstUserInHost(Examination *);
+int selectMode(Examination *);
 
 const char * ROOMS[5] = {"k","e","i","o","l"};
 const char * YESNO[2] = {"はい(Yes)","いいえ(No)"};  
@@ -88,12 +92,18 @@ void Examination_registration(Examination * examination, User * user){
 void inputExaminationInfo(Examination * examination){
 	int result;
 	char buf[256];
+	int AUTO_SELECT=1;//auto
 	
 	while(1){
 		//試験情報の入力と設定を行う
 		printf(ref("examination_info_title"));
-		inputTime(examination);//時間を入力する
-		inputRoom(examination);//教室を入力する
+		if(AUTO_SELECT){
+			inputTimeAuto(examination);
+			inputRoomAuto(examination);
+		}else{
+			inputTime(examination);//時間を入力する
+			inputRoom(examination);
+		}
 		inputManagerLogin(examination, buf);//監督官のログイン名を入力する
 		setExaminationDate(examination);//日付を設定する
 		
@@ -104,7 +114,8 @@ void inputExaminationInfo(Examination * examination){
 			if(!checkReInput()){
 				typingtestExit();
 			}
-			continue;	
+			AUTO_SELECT=selectMode(examination);
+			continue;
 		}
 		
 		//同じ時間に別のユーザーが受験していなかったか確認する
@@ -113,6 +124,7 @@ void inputExaminationInfo(Examination * examination){
 			if(!checkReInput()){
 				typingtestExit();
 			}
+			AUTO_SELECT=selectMode(examination);
 			continue;
 		}
 		
@@ -121,13 +133,52 @@ void inputExaminationInfo(Examination * examination){
 		if(result){
 			break;
 		}
+		AUTO_SELECT=selectMode(examination);
+	}
+}
+
+int selectMode(Examination * examination){
+	char str[256];
+	while(1){
+		printf("\n手動入力を行いますか？\n(1)はい\n(2)いいえ\n");
+		showPrompt();
+		inputString(str,256);
+		if(strlen(str)==1){
+			if(atoi(str)==1){
+				//手動入力
+				return 0;
+			}else if(atoi(str)==2){
+				//自動入力
+				return 1;
+			}
+		}
 	}
 }
 
 //試験時間を入力する
 void inputTime(Examination * examination){
+	char * times[6];
+	int i,number;
+	
+	//選択肢を作る
+	for(i = 0; i < 6; i++){
+		times[i] = (char * )malloc(strlen("%d限(%d period)"));
+		sprintf(times[i], "%d限(%d period)",i + 1,i+1);
+	}
+	
+	//試験時間を入力する
+	number = selectNumber(ref("select_examination_time"),times,6);
+	examination->time = number;
+	
+	//後処理
+	for(i =0 ; i < 6; i++){
+		free(times[i]);
+	}
+}
+//自動入力Ver
+void inputTimeAuto(Examination * examination){
+	
 	int i;
-	//char * times[6];
 	char buf[256];
 	int number;
 	
@@ -152,25 +203,17 @@ void inputTime(Examination * examination){
 	
 	examination->time=number;
 	
-	/*
-	//選択肢を作る
-	for(i = 0; i < 6; i++){
-		times[i] = (char * )malloc(strlen("%d限(%d period)"));
-		sprintf(times[i], "%d限(%d period)",i + 1,i+1);
-	}
-	
-	//試験時間を入力する
-	number = selectNumber(ref("select_examination_time"),times,6);
-	examination->time = number;
-	
-	//後処理
-	for(i =0 ; i < 6; i++){
-		free(times[i]);
-	}*/
 }
 
 //教室を入力する
 void inputRoom(Examination * examination){
+	int number;
+	number = selectNumber(ref("select_examination_room"),ROOMS,5);
+	strcpy(examination->room, ROOMS[number-1]);
+}
+//自動入力
+
+void inputRoomAuto(Examination * examination){
 	char host[256];
 	char *str;
 	get_hostname(host);
@@ -187,11 +230,6 @@ void inputRoom(Examination * examination){
 	
 	strcpy(examination->room, ROOMS[number]);
 	printf("%s館なう\n",ROOMS[number]);
-	
-	/*
-	number = selectNumber(ref("select_examination_room"),ROOMS,5);
-	strcpy(examination->room, ROOMS[number-1]);
-	*/
 }
 
 //試験官のログイン名を入力する
@@ -358,18 +396,23 @@ void inputUserInfo(Examination * examination, User * user){
 	int result;
 	
 	printf(ref("user_info_title"));
+	int AUTO_SELECT=1;//auto
 	while(1){
 		//ログイン名を取得する
 		user->loginName = getlogin(); // 環境によっては使えない可能性があるのでgetenvに変更する必要あり．
-	
+		
 		//名前を入力する
 		inputName(user);
-		
-		//学籍番号を入力する
-		inputNumber(user);
+		if(AUTO_SELECT){
+			inputNumberAuto(user);
+		}else{
+			//学籍番号を入力する
+			inputNumber(user);
+		}
 		
 		//入力情報が正しいか確認する
 		if(!confirmUserInfo(user,buf)){//入力した情報が正しくなければ
+			AUTO_SELECT=selectMode(examination);
 			continue;//再入力
 		}
 
@@ -382,6 +425,7 @@ void inputUserInfo(Examination * examination, User * user){
 				typingtestExit();
 			}
 		}
+		AUTO_SELECT=selectMode(examination);
 	}
 	term_clear();
 	printf(ref("registration_complete"));
@@ -389,6 +433,21 @@ void inputUserInfo(Examination * examination, User * user){
 
 //学籍番号を取得する
 void inputNumber(User * user){
+	char buf[256];
+	while(1){
+		printf(ref("input_number"));
+		showPrompt();
+		inputString(buf,256);
+		if(strlen(buf) == 8 && atoi(buf) != 0){
+			user->number = atoi(buf);
+			break;
+		}else{
+			printf(ref("error_input_number"),buf);
+		}
+	}
+}
+
+void inputNumberAuto(User * user){
 	
 	struct passwd *p;
 	LDAP        *ld;
@@ -455,20 +514,6 @@ void inputNumber(User * user){
 	ldap_unbind(ld);
 	
 	user->number=j;
-	/*
-	char buf[256];
-	while(1){
-		printf(ref("input_number"));
-		showPrompt();
-		inputString(buf,256);
-		if(strlen(buf) == 8 && atoi(buf) != 0){
-			user->number = atoi(buf);
-			fprintf(stderr,"aa\n");
-			break;
-		}else{
-			printf(ref("error_input_number"),buf);
-		}
-	}*/
 }
 
 //名前を入力する
