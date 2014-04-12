@@ -1,0 +1,20 @@
+Examination.c:	examination->mode = number;
+Examination.c:	examination->time=number;
+Examination.c:	examination->time = number;
+Examination.c:	strcpy(examination->room, ROOMS[number]);
+Examination.c:	strcpy(examination->room, ROOMS[number-1]);
+Examination.c:	inputString(examination->managerLogin,MAX_TEXT);
+Examination.c:	examination->date = localtime(&timer);
+Examination.c:	examination->testStartDate = localtime(&timer);
+Examination.c:	strcat(path, examination->managerLogin);
+Examination.c:	strftime(dateString, 255, "%Y-%m-%d", examination->date);
+Examination.c:	sprintf(examinationDir,"%s-%s-%d",dateString,examination->room,examination->time);
+Examination.c:	printf("%s - %d\n",ref("time_message"),examination->time);
+Examination.c:	printf("%s - %s\n",ref("room_message"),examination->room);
+Examination.c:	printf("%s - %s\n",ref("manager_login_message"), examination->managerLogin);
+Examination.c:	strftime(dateString, 255, "%Y-%m-%d-%H:%M", examination->date);
+Examination.c:	  if(examination->mode == EXAM_MODE){
+Examination.c:				strftime(date, 255, "%Y-%m-%d-%H:%M", examination->testStartDate);
+Intprt.c:	if(examination->mode  == EXAM_MODE){
+Menu.c:	if(examination->mode  == EXAM_MODE){
+Test.c:				if(examination->mode  == EXAM_MODE){//本番モードの場合

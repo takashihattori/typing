@@ -6,6 +6,7 @@
 #include "general.h"
 #include "Global.h"
 #include "Menu.h"
+#include "Test.h"
 
 #define MENU_HEAD_X 15
 #define MENU_HEAD_Y 6
@@ -21,6 +22,10 @@ Intprt menu;
  */
 void Menu_run(Token* token_temp)
 {
+	Examination * examination;
+	Test * test = Test_get_test();
+	examination = &(test->examination);
+	if(examination->mode  == EXAM_MODE){
 	menu.token = token_temp;
 	MenuCtrl_init();
 
@@ -40,10 +45,36 @@ void Menu_run(Token* token_temp)
 			Intprt_run(&menu);
 		}
 	}
-
+	
 	MenuCtrl_go_origin();
 	
-	while(Menu_mainloop()) ;	
+	while(Menu_mainloop()) ;
+	}else{
+		menu.token = token_temp;
+	MenuCtrl_init();
+
+	Intprt_goto_next(&menu);
+	while(!Token_compare(token_temp, "!MENU_END")){
+		if(Token_compare(token_temp, "!MESSAGE")){
+			Menu_message();
+		} else if (Token_compare(token_temp, "!TITLE")){
+			Menu_title();
+		} else if (Token_compare(token_temp, "!LOAD")){
+			Menu_load();
+		} else if (Token_compare(token_temp, "!ITEM")){
+			Menu_item();
+		} else if (Token_compare(token_temp, "!EXIT")){
+			Menu_menu_exit();
+		} else {
+			Intprt_run(&menu);
+		}
+	}
+	
+	MenuCtrl_go_origin();
+	
+	while(Menu_mainloop()) ;
+		
+	}
 }
 
 /**
@@ -111,7 +142,7 @@ void Menu_title()
     } else {
 	term_error("!TITLE コマンドの使用法が誤っています。");
     }
-
+	
     Intprt_goto_next(&menu);
 }
 
@@ -272,7 +303,6 @@ void MenuCtrl_up()
     } else {
 	x0 = ctrl.x;
     }
-    MenuCtrl_moveto(x0, y0);
 }
 
 void MenuCtrl_down()
@@ -289,7 +319,7 @@ void MenuCtrl_down()
     } else {
 	x0 = ctrl.x;
     }
-    MenuCtrl_moveto(x0, y0);
+	MenuCtrl_moveto(x0, y0);
 }
 
 /*
@@ -299,7 +329,6 @@ Bool MenuCtrl_run()
 {
     Intprt intprt;
     int ret;
-
     if (ctrl.chap[ctrl.y].exit){
 	return FALSE;
     }
