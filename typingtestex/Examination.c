@@ -188,7 +188,7 @@ void inputTimeAuto(Examination * examination){
 	
 	time(&timer);
 	t_st=localtime(&timer);
-	printf("%d:%d\n",t_st->tm_hour,t_st->tm_min);
+	//printf("%d:%d\n",t_st->tm_hour,t_st->tm_min);
 	t=t_st->tm_hour*100+t_st->tm_min;
 	
 	if(t<925)number=1;
@@ -199,7 +199,7 @@ void inputTimeAuto(Examination * examination){
 	else if(t<1800)number=5;
 	else if(t<1930)number=6;
 	else number=6;
-	printf("%d限なう\n",number);
+	//printf("%d限なう\n",number);
 	
 	examination->time=number;
 	
@@ -229,7 +229,7 @@ void inputRoomAuto(Examination * examination){
 	else number=4;
 	
 	strcpy(examination->room, ROOMS[number]);
-	printf("%s館なう\n",ROOMS[number]);
+	//printf("%s館なう\n",ROOMS[number]);
 }
 
 //試験官のログイン名を入力する
