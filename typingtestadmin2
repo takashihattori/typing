@@ -1,0 +1,1275 @@
+#!/bin/bash
+
+export LANG=ja_JP.eucJP
+
+#
+# 情報技術認定試験 タイピングテスト 試験監督補助システム
+#
+# Manabu Sugiura(gackt@crew.sfc.keio.ac.jp)
+# Copyright(C) 2007-2009 CreW Project All Rights Reserved.
+# $Id: typingtestadmin 2520 2009-04-04 05:47:53Z gackt $
+#
+
+#selectの表示を一列にする
+export COLUMNS=1
+
+########################################################
+# グローバル変数（※大文字）
+########################################################
+
+DEBUG=0
+
+APP_VERSION="1.8 (2011/9/22)"
+PROMPT=">"
+ADMIN_DATA_DIR_NAME=".typingtestadmin"
+ADMIN_DATA_DIR="$HOME/$ADMIN_DATA_DIR_NAME"
+PASS_DIR="pass"
+OFFICIAL_QUALIFIED_DATA_DIR="/pub/WWW/ipl/qualified/typing"
+
+TMP_TXT_FILE="$ADMIN_DATA_DIR/.tmp.txt"
+TMP_PS_FILE="$ADMIN_DATA_DIR/.tmp.ps"
+TMP_DIR="$ADMIN_DATA_DIR/.tmpdir"
+
+CNS_IMAC_HOME="$HOME/CNSiMac";
+CNS_LAMDA_MAC_HOME="$HOME/CNSMac";
+
+OFFICIAL_QUESTION_MENUTXT="/usr/local/lib/typing/typingtestex/ja/menu.txt"
+
+ID_LIST="/pub/sfc/ipl/idtable"
+
+START_TIME="-1"
+
+#一覧表示の制御（-aなら全部表示，オプションなしなら最近の6件のみ）
+OPTION=$1
+
+
+########################################################
+# 便利関数
+########################################################
+
+#
+# 画面のクリア
+#
+# 引数:なし
+#
+_clear_screen(){
+	if [ $DEBUG -eq 0 ] ; then
+		/usr/bin/clear
+	else
+		echo -e "DEBUG:CLEAR\n\n\n\n\n"
+	fi
+}
+
+#
+# プロンプトの表示
+#
+# 引数:なし
+#
+_show_prompt(){
+	echo -n $PROMPT
+}
+
+#
+# 試験の情報を表示
+#
+# 引数:年，月，日，教室，時限，問題名
+#
+_show_examination_info(){
+	echo "----------------------------------------"
+	echo "日時:$1年$2月$3日"
+	echo "教室:$4"
+	echo "時限:$5限"
+	echo "問題:"$6
+	echo "----------------------------------------"
+}
+
+#
+# 試験の状態を表示
+#
+# 引数:表示する試験（年-月-日-教室-時限のフォーマット）
+#
+_show_current_examination_state(){
+	
+	local target_examination=$1
+	
+	if [ -w "$ADMIN_DATA_DIR/$target_examination/$PASS_DIR" ]; then
+		echo "========================================"
+		echo "現在の状態:試験中（開始時刻 $START_TIME）"
+		echo "========================================"
+	else
+		echo "========================================"
+		echo "現在の状態:終了"
+		echo "========================================"
+	fi
+
+}
+#
+# 試験の文字列表現を作成
+#
+# 引数:表示する試験（年-月-日-教室-時限のフォーマット）
+#
+_create_examination_string(){
+	
+	local str=$1
+	local question_name
+	
+	str=${str/"-"/"年"}
+	str=${str/"-"/"月"}
+	str=${str/"-"/"日 "}
+	str=${str/"-"/" "}
+	
+	
+	local directory_name="$1-$2-$3-$4-$5"
+	question_name=`cat "$ADMIN_DATA_DIR/$1/.question"`
+	
+	echo $str"限 "$question_name
+}
+
+#
+# 試験問題の名前を読み込みます
+#
+_load_question_names(){
+	
+	local examnames=""
+	local examnamestmp=""
+	
+	examnamestmp=`grep '\!ITEM' $OFFICIAL_QUESTION_MENUTXT | grep -v '^#' | cut -f 2- -d " "`
+	examnames=$examnames" "${examnamestmp//" "/"　"}
+	echo $examnames
+}
+
+#
+# 試験問題の個数を読み込みます
+#
+_count_question(){
+	
+	local datafilename=""
+	local examcount=0
+	
+	examcount=`grep '\!ITEM' $OFFICIAL_QUESTION_MENUTXT | grep -v '^#' | grep -c '\!ITEM'`
+	echo $examcount
+}
+
+#
+# ファイルの印刷
+#
+# 引数:印刷するファイルの呼び名（メッセージに利用する，ex,合格者一覧）
+#
+_print_out(){
+	
+	local target=$1
+	
+	rm -f "$TMP_PS_FILE"
+	
+	echo "$targetを出力するプリンタ名を入力してください"
+	_show_prompt
+	read printer
+	
+	if [ ! ${printer} = 0 ]; then
+		#psファイルに変換
+		a2ps -nt -nh -w "$TMP_TXT_FILE" > "$TMP_PS_FILE"
+		if [ $? -ne 0 ] ;then
+			echo -e "＊PSファイルの生成に失敗しました\n"
+			echo -e "［エンターキーを押してください］\n\n"
+			read
+			return -1
+		fi
+		
+		#出力
+		lpr -P "$printer" "$TMP_PS_FILE"
+		if [ $? -ne 0 ] ;then
+			echo -e "＊印刷に失敗しました\n"
+			echo -e "［エンターキーを押してください］\n\n"
+			read
+			return -1
+		fi
+		
+		echo -e "［エンターキーを押してください］\n\n"
+		read
+		return 0
+	else
+		echo -e "＊不正なプリンタ名です\n"
+		echo -e "［エンターキーを押してください］\n\n"
+		read
+		return -1
+	fi
+	
+	#お掃除
+	rm -f "$TMP_TXT_FILE"
+	rm -f "$TMP_PS_FILE"
+}
+
+
+#
+# tmpのディレクトリを初期化します
+#
+# 引数:なし
+#
+_initialize_tmp_dir(){
+
+	if [ ! -e "$TMP_DIR" ];then
+		mkdir "$TMP_DIR"
+	else
+		rm -rf "$TMP_DIR"
+		mkdir "$TMP_DIR"
+	fi
+
+}
+
+########################################################
+# 開始・終了処理関連
+########################################################
+
+#
+# 開始処理
+#
+# 引数:なし
+#
+_initialize(){
+	
+	local home_full_path=`ls -l /home/$USER`
+	home_full_path=`echo $home_full_path | cut -f 10 -d ' '`
+	
+	local hostname=`hostname`
+	if [ `expr match $hostname ccx01` -eq 0 ];then
+		_clear_screen
+		echo "このプログラムはccx01にリモートログインしてから実行してください"
+		echo -e "[ 何かキーを押してください ]"
+		read
+		exit 1
+	fi
+		
+	#データフォルダの作成
+	if [ ! -d "$ADMIN_DATA_DIR" ];then
+		mkdir "$ADMIN_DATA_DIR"
+	fi
+	
+	#Macのホームにシンボリックリンクを貼る
+	if [ -d "$CNS_IMAC_HOME" ];then
+		chmod -f go+rwx $CNS_IMAC_HOME
+		if [ ! -e "$CNS_IMAC_HOME/$ADMIN_DATA_DIR_NAME" ];then
+			ln -f -s "$home_full_path/$ADMIN_DATA_DIR_NAME" "$CNS_IMAC_HOME/$ADMIN_DATA_DIR_NAME"
+		fi
+	fi
+	if [ -d "$CNS_LAMDA_MAC_HOME" ];then
+		chmod -f go+rwx $CNS_LAMDA_MAC_HOME
+		if [ ! -e "$CNS_LAMDA_MAC_HOME/$ADMIN_DATA_DIR_NAME" ];then
+			ln -f -s "$home_full_path/$ADMIN_DATA_DIR_NAME" "$CNS_LAMDA_MAC_HOME/$ADMIN_DATA_DIR_NAME"
+		fi
+	fi
+	
+	#データフォルダの設定
+	chgrp -f -R ipl "$ADMIN_DATA_DIR"
+	chgrp -f -R ipl "$CNS_IMAC_HOME/$ADMIN_DATA_DIR_NAME"
+	if [ -d "$CNS_LAMDA_MAC_HOME" ];then
+	    chgrp -f -R ipl "$CNS_LAMDA_MAC_HOME/$ADMIN_DATA_DIR_NAME"
+	fi
+	chmod -f -R go+rwx "$ADMIN_DATA_DIR"
+	chmod -f -R go-rw "$ADMIN_DATA_DIR/"*"/$PASS_DIR" #全試験の停止
+	
+	#tempファイルの削除
+	if [ -e "$ADMIN_DATA_DIR" ];then
+		rm -f "$TMP_TXT_FILE"
+		rm -f "$TMP_PS_FILE"
+		rm -rf "$TMP_DIR"
+	fi
+
+}
+
+#
+# 終了処理
+#
+# 引数:なし
+#
+_quit(){
+	
+	#データフォルダの設定
+	chmod -f -R go-rw "$ADMIN_DATA_DIR" #データフォルダのアクセス権設定
+	chmod -f -R go-w "$ADMIN_DATA_DIR/"*"/$PASS_DIR" #全試験の停止
+	
+	#Macフォルダの設定
+	chmod -f go-rw $CNS_LAMDA_MAC_HOME
+	chmod -f go-rw $CNS_IMAC_HOME
+	
+	#tempファイルの削除
+	if [ -e "$ADMIN_DATA_DIR" ]; then
+		rm -f "$TMP_TXT_FILE"
+		rm -f "$TMP_PS_FILE"
+		rm -rf "$TMP_DIR"
+	fi	
+	
+	#終了メッセージの表示
+	_clear_screen
+	echo "試験監督お疲れ様でした"
+	echo "ict-foundation@sfc.keio.ac.jpに報告メールを送るのを忘れないでください！"
+	
+	exit 0
+}
+
+########################################################
+# 新規試験登録
+########################################################
+
+#
+# 新規試験登録
+#
+# 引数:なし
+#
+_register_new_examination(){
+	
+	local input="" #入力受け取り用の一時変数
+	local year=`date +%Y` month=`date +%m` day=`date +%d`
+	local period="" room=""  question_name=""
+	
+	_clear_screen
+	echo "新規の試験登録を開始します"
+	echo "========================================"
+
+	echo "教室の入力［1から5を選択］"
+	select input in "k教室" "e教室" "i教室" "o教室" "l教室"
+	do 
+		if [ $input ]; then
+			room="${input%%教室}"
+			break
+		else
+			echo -e "＊1から5の番号を入力してください\n"
+		fi
+	done
+
+	echo "時限を番号で入力してださい［1から6を選択］"
+	select input in "1限" "2限" "3限" "4限" "5限" "6限"
+	do 
+		if [ $input ]; then
+			period="${input%%限}"
+			break
+		else
+			echo -e "＊1から6の番号を入力してください\n"
+		fi
+    done
+
+	local question_count=`_count_question`
+	local question_name=""
+	local question_name_tmp=""
+	local question_names=`_load_question_names`
+	echo "試験問題の名前を番号で入力してください［1から$question_countを選択］"
+	select input in $question_names
+	do 
+		if [ $input ]; then
+			question_name_tmp=${input//"　"/" "}
+			question_name=${question_name_tmp//"\""/}
+			break
+		else
+			echo -e "＊1から$question_countの番号を入力してください\n"
+		fi
+    done
+	unset $quesiton_names
+
+	#登録情報の確認
+	_show_examination_info $year $month $day $room $period "$question_name"
+	echo "上記の試験を登録してよろしいですか？"
+	
+	#登録
+	local register
+	select register in "はい" "いいえ"
+	do 
+		if [ $register ]; then
+			case $register in
+				はい)
+					_create_new_examination_directory $year $month $day $room $period "$question_name"
+					break;;
+				いいえ) 
+					_register_new_examination
+					break;;
+			esac
+		else
+			echo -e "＊1か2の番号を入力してください\n"
+		fi
+    done
+    
+    #運営画面への遷移
+	local goadmin
+	echo "登録した試験の運営を行いますか？"
+	select goadmin in "はい" "いいえ"
+	do 
+		if [ $goadmin ]; then
+			case $goadmin in
+				はい)
+					_exec_support_commnad $year-$month-$day-$room-$period
+					break;;
+				いいえ) 
+					_main_menu
+					break;;
+			esac
+		else
+			echo -e "＊1か2の番号を入力してください\n"
+		fi
+    done
+}
+
+#
+# 試験データを保存するディレクトリ作成
+#
+# 引数:年，月，日，教室，時限，問題名
+#
+_create_new_examination_directory(){
+
+	#作成するディレクトリは年-月-日-教室-時間
+	local directory_name="$1-$2-$3-$4-$5"
+	
+	
+	#エントリ用のデータディレクトリ
+	if [ ! -d "$ADMIN_DATA_DIR/$directory_name" ];then
+		mkdir "$ADMIN_DATA_DIR/$directory_name"
+		chmod -f go+rwx "$ADMIN_DATA_DIR/$directory_name"
+	else
+		echo -e "＊その試験は既に登録されています［エンターキーを押してください］\n"
+		read 
+		return -1
+	fi
+	
+	#合格者ディレクトリ
+	mkdir "$ADMIN_DATA_DIR/$directory_name/$PASS_DIR"
+	chmod -f go-rw "$ADMIN_DATA_DIR/$directory_name/$PASS_DIR"
+	chmod -f u-w "$ADMIN_DATA_DIR/$directory_name/$PASS_DIR"
+	chmod -f u+rx "$ADMIN_DATA_DIR/$directory_name/$PASS_DIR"
+	
+	#問題番号記録ファイル
+	echo "$6" > "$ADMIN_DATA_DIR/$directory_name/.question"
+	if [ $? -ne 0 ] ; then #quotaチェック
+		echo -e "プログラムでファイルを書き込むことができません\n quota -v を実行してみてください．［エンターキーを押してください］\n\n"
+		read
+		exit 1
+	fi
+	chmod -f go-w "$ADMIN_DATA_DIR/$directory_name/.question"
+}
+
+########################################################
+# 試験運営
+########################################################
+
+#
+# 運営する試験を選択し，コマンドを実行
+#
+# 引数:なし
+#
+_invigilation_support(){
+	
+	local examinations
+	local select_examination
+
+	_clear_screen
+
+	echo "----------------------------------------"
+	echo "登録済の試験一覧"
+	echo "----------------------------------------"
+	echo "試験運営を実施する試験の番号を入力してください"
+	
+	if [ "$OPTION" = "-a" ]; then
+		examinations=`ls -r "$ADMIN_DATA_DIR"`
+	else
+		examinations=`ls -r "$ADMIN_DATA_DIR" | head -6`
+	fi
+	select select_examination in $examinations "メインメニューへ"  
+	do 
+		if [ $select_examination ]; then
+			if [ $select_examination == "メインメニューへ" ]; then
+				_main_menu
+				break
+			fi
+			_exec_support_commnad $select_examination
+			break
+		else
+			echo -e "＊数値を入力してください\n"
+		fi
+    done
+}
+
+
+#
+# 管理コマンドを実行
+#
+# 引数:管理対象の試験（年-月-日-教室-時限のフォーマット）
+#
+_exec_support_commnad(){
+	
+	local target_examination=$1
+
+	_clear_screen
+
+	echo "----------------------------------------"
+	echo "［`_create_examination_string $1`］の試験運営"
+	echo "----------------------------------------"
+
+	echo "実施する試験運営業務の番号を入力してください"
+	select command in "試験開始・終了" "受験者一覧表示・印刷" "合格者一覧表示・印刷" "合格者登録" "戻る"
+	do 
+		if [ $command ]; then
+			case $command in
+				"試験開始・終了")
+					_start_stop_examination $target_examination;;
+				"受験者一覧表示・印刷")
+					_show_all_students $target_examination;;
+                                #"学籍番号確認")
+                                #        _validate_studentids $target_examination;;
+				"合格者一覧表示・印刷")
+					_show_pass_students $target_examination;;
+				"合格者登録")
+					_save_pass_students $target_examination;;
+				"戻る")
+					#試験をやめておく
+					chmod -f go-w "$ADMIN_DATA_DIR/$target_examination/$PASS_DIR"
+					_invigilation_support;;
+			esac
+			break
+		else
+			echo -e "＊1から6の番号を入力してください\n"
+		fi
+	done
+}
+
+#
+# 試験の開始・終了
+# 引数:管理対象の試験（年-月-日-教室-時限のフォーマット）
+#
+_start_stop_examination(){
+	
+	local target_examination=$1
+	local examination_state
+	
+	_clear_screen
+	
+	echo "----------------------------------------"
+	echo "［`_create_examination_string $1`］の開始・終了"
+	echo "----------------------------------------"
+	#echo -e "※戻るを選択すると，試験は終了します\n"
+	_show_current_examination_state $target_examination
+
+	select command in "試験開始" "試験終了" "戻る"
+	do 
+		if [ $command ]; then
+			case $command in
+				"試験開始")
+					if [ $START_TIME -eq "-1" ]; then
+						START_TIME=`date +%H:%M:%S`
+					fi
+					chmod -f ugo+w "$ADMIN_DATA_DIR/$target_examination/$PASS_DIR"
+					echo "試験を開始しました..."
+					_show_current_examination_state $target_examination
+					_start_stop_examination $target_examination;;
+				"試験終了")
+					START_TIME="-1"
+					chmod -f ugo-w "$ADMIN_DATA_DIR/$target_examination/$PASS_DIR"
+					echo "試験を終了しました"
+					_show_current_examination_state $target_examination
+					_start_stop_examination $target_examination;;
+				#"受験者一覧印刷")
+				#	_show_all_students $target_examination
+				#	_start_stop_examination $target_examination;;
+				"戻る")
+					#試験中のままにしない
+					#chmod -f ugo-w "$ADMIN_DATA_DIR/$target_examination/$PASS_DIR"
+					
+					_exec_support_commnad $target_examination;;
+			esac
+		else
+			echo -e "＊1から3の番号を入力してください\n"
+		fi
+	done
+}
+
+#
+# 受験者一覧の表示と印刷
+#
+# 引数:管理対象の試験（年-月-日-教室-時限のフォーマット）
+#
+_show_all_students(){
+	
+	local target_examination=$1
+	local datafile=""
+	local oneline=""
+	local counter=0
+	local -a datafiles hosts loginnames ids names times	
+
+                        local TMP_IFS
+                        TMP_IFS=$IFS
+                        IFS="
+"
+
+	#受験者のデータファイルを読み込む
+	for datafile in "$ADMIN_DATA_DIR"/"$target_examination"/*.txt""; do
+	
+			if [ "$datafile" = "$ADMIN_DATA_DIR/$target_examination/*.txt" ] ; then
+				echo -e "＊受験者が居ません［エンターキーを押してください］\n\n"
+				read
+				_exec_support_commnad $target_examination 
+			fi
+			local tmphost=`basename "$datafile" .txt`
+			hosts[${#hosts[*]}]=${tmphost%.sfc.keio.ac.jp}
+			for oneline in $(cat "$datafile") ; do
+				case $counter in
+					0)
+						loginnames[${#loginnames[*]}]=$oneline;;
+					1)
+						ids[${#ids[*]}]=$oneline;;
+					2)	
+						names[${#names[*]}]=${oneline//-/ };;
+					3)
+						times[${#times[*]}]=${oneline};;
+				esac
+				counter=`expr "$counter" + 1`
+  			done
+  			counter=0
+	done
+	
+	#受験者リストを表示
+	#_clear_screen
+	echo "----------------------------------------"
+	echo "［`_create_examination_string $1`］の受験者リスト"
+	echo "----------------------------------------"
+	echo -e "受験者総計:${#hosts[@]}名\n"
+	
+	local i=0
+	while [ "$i" -lt "${#hosts[*]}" ] ; do
+		echo -e `expr "$i" + 1`". "${hosts[$i]}" "${times[$i]}"" ${loginnames[$i]}" "${ids[$i]}" "${names[$i]}
+		i=`expr "$i" + 1`
+	done
+	
+	#メニューを表示
+	echo -e "\n\n"
+	select command in "受験者リストを印刷" "戻る"
+	do 
+		if [ $command ]; then
+			case $command in
+				"受験者リストを印刷")
+					while [ "$i" -lt "${#hosts[*]}" ] ; do
+						echo -e "□ "`expr "$i" + 1`". "${hosts[$i]}" "${times[$i]}"" ${loginnames[$i]}" "${ids[$i]}" "${names[$i]}
+						i=`expr "$i" + 1`
+					done
+					_print_all_students $target_examination
+					_exec_support_commnad $target_examination;;
+				"戻る")
+					_exec_support_commnad $target_examination;;
+			esac
+		else
+			echo -e "＊1か2の番号を入力してください\n"
+		fi
+    done
+}
+
+#
+# 受験者一覧の印刷
+#
+# 引数:印刷対象の試験（年-月-日-教室-時限のフォーマット）
+#
+_print_all_students(){
+	
+	local target_examination=$1
+	local datafile=""
+	local oneline=""
+	local counter=0
+	local -a datafiles hosts loginnames ids names times
+	
+	#受験者のデータファイルを読み込む
+	for datafile in "$ADMIN_DATA_DIR"/"$target_examination"/*.txt""; do
+			local tmphost=`basename "$datafile" .txt`
+			hosts[${#hosts[*]}]=${tmphost%.sfc.keio.ac.jp}
+			for oneline in $(cat "$datafile") ; do
+				case $counter in
+					0)
+						loginnames[${#loginnames[*]}]=$oneline;;
+					1)
+						ids[${#ids[*]}]=$oneline;;
+					2)	
+						names[${#names[*]}]=${oneline//-/ };;
+					3)
+						times[${#times[*]}]=$oneline;;
+				esac
+				counter=`expr "$counter" + 1`
+  			done
+  			counter=0
+	done
+	
+	#出力用のファイルを作成
+	rm -f "$TMP_TXT_FILE"
+	rm -f "$TMP_PS_FILE"
+	
+	echo -e "----------------------------------------" > "$TMP_TXT_FILE"
+	echo -e "［`_create_examination_string $1`］の受験者リスト" >> "$TMP_TXT_FILE"
+	echo -e "----------------------------------------" >> "$TMP_TXT_FILE"
+	echo -e "受験者総計:${#hosts[@]}名\n" >> "$TMP_TXT_FILE"
+	echo -e "`date +%Y年%m月%d日-%H時%M分%S秒` 時点\n" >> "$TMP_TXT_FILE"
+	echo "--------------------------------------------------------------------------------------------------------" >> "$TMP_TXT_FILE"
+    echo "    学生証  合否  端末      登録日時           ログイン    学籍番号     名前" >> "$TMP_TXT_FILE"
+	echo "--------------------------------------------------------------------------------------------------------" >> "$TMP_TXT_FILE"
+	
+	local i=0
+	local num=""
+	while [ "$i" -lt "${#hosts[*]}" ] ; do
+		num=`expr "$i" + 1`
+		if [ ${#num} -eq 1 ] ; then
+			num="0$num"
+		fi
+		echo -e " "$num".  □     □   "${hosts[$i]}"   "${times[$i]}"  "   ${loginnames[$i]}"   "  ${ids[$i]}"     "  ${names[$i]} >> "$TMP_TXT_FILE"
+		i=`expr "$i" + 1`
+	done
+	
+	#出力
+	_print_out "受験者リスト"
+
+	#_exec_support_commnad $target_examination
+}
+
+#
+# 入力された学籍番号が正しいかチェックします
+# 2008/07/02 緊急追加
+#
+_validate_studentids(){
+
+    local target_examination=$1
+    local datafile=""
+    local oneline=""
+    local counter=0
+    local -a datafiles hosts loginnames ids
+
+    for datafile in "$ADMIN_DATA_DIR"/"$target_examination"/*.txt""; do
+	local tmphost=`basename "$datafile" .txt`
+	hosts[${#hosts[*]}]=${tmphost%.sfc.keio.ac.jp}
+	for oneline in $(cat "$datafile") ; do
+	    case $counter in
+		0)
+	          loginnames[${#loginnames[*]}]=$oneline;;
+		1)
+		  ids[${#ids[*]}]=$oneline;;
+		esac
+		  counter=`expr "$counter" + 1`
+        done
+        counter=0
+     done
+	
+     local i=0
+     local targetloginname=""
+     local correctid=""
+     local inputid=""
+     while [ "$i" -lt "${#loginnames[*]}" ] ; do
+	 targetloginname=${loginnames[$i]}
+	 inputid=${ids[$i]}
+	 correctid=`grep $targetloginname $ID_LIST | cut -d, -f2`
+	 if [ -z "$correctid" ]; then
+	     echo -e "$targetloginnameの正しい学籍番号が不明です" 
+	 elif [ "$inputid" != "$correctid" ]; then
+	    local targetfile="$ADMIN_DATA_DIR"/"$target_examination"/${hosts[$i]}.txt
+            local tempfile="$ADMIN_DATA_DIR"/"$target_examination"/${hosts[$i]}.temp
+            local backupfile="$ADMIN_DATA_DIR"/"$target_examination"/${hosts[$i]}.txt~
+
+	    cp -f "$targetfile" "$backupfile"
+	    sed 's/'$inputid'/'$correctid'/g' $targetfile > $tempfile
+            rm -f "$targetfile"
+            mv -f "$tempfile" "$targetfile"
+	    echo "-----------------------------------------------------------"
+	    echo "$targetloginname@${hosts[$i]}の学籍番号を正しく修正しました"
+	    echo "誤:$inputid -> 正:$correctid"
+	    echo "-----------------------------------------------------------"	
+	 else
+	     echo -e "$targetloginname -> 正しい学籍番号が入力されています"
+	 fi
+         i=`expr "$i" + 1`
+     done
+     
+     echo -e "[ 何かキーを押してください ]"
+     read
+
+     _exec_support_commnad $target_examination
+}
+			
+#
+# 合格者一覧の表示と印刷
+#
+# 引数:表示対象の試験（年-月-日-教室-時限のフォーマット）
+#
+_show_pass_students(){
+	
+	local target_examination=$1
+	local tmpdatafile=""
+	local datafile=""
+	local oneline=""
+	local counter=0
+	local -a datafiles tmphosts hosts loginnames ids names quesiton_names registertimes starttimes finishtimes
+	
+	#データ生成用のディレクトリを初期化
+	_initialize_tmp_dir
+	
+	#合格者のデータをtempのディレクトリに合成する
+	for tmpdatafile in "$ADMIN_DATA_DIR"/"$target_examination"/*.txt""; do
+			local tmphost=`basename "$datafile" .txt`
+			tmphosts[${#tmphosts[*]}]=${tmphost%.sfc.keio.ac.jp}
+			
+			if [ "$tmpdatafile" = "$ADMIN_DATA_DIR/$target_examination/*.txt" ] ; then
+				echo -e "＊受験者が居ません［エンターキーを押してください］\n\n"
+				rm -rf $TMP_DIR
+				read
+				_exec_support_commnad $target_examination 
+			fi			
+			
+			for oneline in $(cat "$tmpdatafile") ; do
+				if [ -e "$ADMIN_DATA_DIR"/"$target_examination"/"$PASS_DIR"/`basename "$tmpdatafile"` ] ; then
+					cp "$tmpdatafile" "$TMP_DIR"/.
+					echo "" >> "$TMP_DIR"/`basename "$tmpdatafile"` #ファイルの末尾に改行を付け足す
+					cat "$ADMIN_DATA_DIR"/"$target_examination"/"$PASS_DIR"/`basename "$tmpdatafile"` >> "$TMP_DIR"/`basename "$tmpdatafile"`
+				fi
+  			done
+	done
+	
+	#合格者のデータファイルを読み込む
+	for datafile in "$TMP_DIR"/*.txt"" ; do
+			local tmphost=`basename "$datafile" .txt`
+			hosts[${#hosts[*]}]=${tmphost%.sfc.keio.ac.jp}
+		
+			if [ "$datafile" = "$TMP_DIR/*.txt" ] ; then
+				echo -e "＊合格者が居ません［エンターキーを押してください］\n\n"
+				rm -rf $TMP_DIR
+				read
+				_exec_support_commnad $target_examination
+			fi
+			local TMP_IFS
+			TMP_IFS=$IFS    
+			IFS="
+"
+			for oneline in $(cat "$datafile") ; do
+				case $counter in
+					0)
+						loginnames[${#loginnames[*]}]=$oneline;;
+					1)
+						ids[${#ids[*]}]=$oneline;;
+					2)	
+						names[${#names[*]}]=${oneline//-/ };;
+					3)
+						registertimes[${#registertimes[*]}]=$oneline;;
+					4)
+						question_names[${#question_names[*]}]=$oneline;;
+					5)
+						starttimes[${#starttimes[*]}]=$oneline;;
+					6)
+						finishtimes[${#finishtimes[*]}]=$oneline;;
+				esac
+				counter=`expr "$counter" + 1`
+  			done
+  			counter=0
+	done
+	IFS=$TMP_IFS
+	
+	#合格者リストを表示
+	_clear_screen
+	echo "----------------------------------------"
+	echo "［`_create_examination_string $1`］の合格者リスト"
+	echo "----------------------------------------"
+	echo -e "合格者総計:${#hosts[@]}名\n"
+	
+	local i=0
+	while [ "$i" -lt "${#hosts[*]}" ] ; do
+		echo -e `expr "$i" + 1`". "${hosts[$i]}" "${loginnames[$i]}" "${ids[$i]}" "${question_names[$i]}"  "${registertimes[$i]}" "${starttimes[$i]}" "${finishtimes[$i]}" "${names[$i]}
+		i=`expr "$i" + 1`
+	done
+	
+	
+	#メニューを表示
+	echo -e "\n\n"
+	select command in "合格者リストを印刷" "戻る"
+	do 
+		if [ $command ]; then
+			case $command in
+				"合格者リストを印刷")
+					while [ "$i" -lt "${#hosts[*]}" ] ; do
+						echo -e "□ "`expr "$i" + 1`". "${hosts[$i]}" "${loginnames[$i]}" "${ids[$i]}" "${question_names[$i]}" "${registertimes[$i]}" "${starttimes[$i]}" "${finishtimes[$i]}" "${names[$i]}
+						i=`expr "$i" + 1`
+					done
+					_print_pass_students $target_examination
+					;;
+				"戻る")
+					_exec_support_commnad $target_examination
+					;;
+			esac
+		else
+			echo -e "＊1か2の番号を入力してください\n"
+		fi
+    done
+	
+	_exec_support_commnad $target_examination
+}
+
+
+#
+# 合格者一覧の印刷
+#
+# 引数:表示対象の試験（年-月-日-教室-時限のフォーマット）
+#
+_print_pass_students(){
+
+	local target_examination=$1
+	local tmpdatafile=""
+	local datafile=""
+	local oneline=""
+	local counter=0
+	local -a datafiles tmphosts hosts loginnames ids names question_names registertimes starttimes finishtimes
+	
+	#データ生成用のディレクトリを初期化
+	_initialize_tmp_dir
+
+	#合格者のデータをtempのディレクトリに合成する
+	for tmpdatafile in "$ADMIN_DATA_DIR"/"$target_examination"/*.txt""; do
+			if [ "$tmpdatafile" = "$ADMIN_DATA_DIR/$target_examination/*.txt" ] ; then
+				echo -e "＊受験者が居ません［エンターキーを押してください］\n\n"
+				rm -rf $TMP_DIR
+				read
+				_exec_support_commnad $target_examination 
+			fi		
+			local tmphost=`basename "$datafile" .txt`
+			tmphosts[${#tmphosts[*]}]=${tmphost%.sfc.keio.ac.jp}
+			for oneline in $(cat "$tmpdatafile") ; do
+				if [ -e "$ADMIN_DATA_DIR"/"$target_examination"/"$PASS_DIR"/`basename "$tmpdatafile"` ] ; then
+					cp "$tmpdatafile" "$TMP_DIR"/.
+					echo "" >> "$TMP_DIR"/`basename "$tmpdatafile"` #ファイルの末尾に改行を付け足す
+					cat "$ADMIN_DATA_DIR"/"$target_examination"/"$PASS_DIR"/`basename "$tmpdatafile"` >> "$TMP_DIR"/`basename "$tmpdatafile"`
+				fi
+  			done
+	done
+	
+	#合格者のデータファイルを読み込む
+	for datafile in "$TMP_DIR"/*.txt"" ; do
+			local tmphost=`basename "$datafile" .txt`
+			hosts[${#hosts[*]}]=${tmphost%.sfc.keio.ac.jp}
+			local TMP_IFS
+			TMP_IFS=$IFS
+			IFS="
+"
+			for oneline in $(cat "$datafile") ; do
+				case $counter in
+					0)
+						loginnames[${#loginnames[*]}]=$oneline;;
+					1)
+						ids[${#ids[*]}]=$oneline;;
+					2)	
+						names[${#names[*]}]=${oneline//-/ };;
+					3)
+						registertimes[${#registertimes[*]}]=$oneline;;
+					4)
+						question_names[${#question_names[*]}]=$oneline;;
+					5)
+						starttimes[${#starttimes[*]}]=$oneline;;
+					6)
+						finishtimes[${#finishtimes[*]}]=$oneline;;
+				esac
+				counter=`expr "$counter" + 1`
+  			done
+  			counter=0
+	done
+	IFS=$TMP_IFS
+	
+	#ファイル出力
+	rm -f "$TMP_TXT_FILE"
+	rm -f "$TMP_PS_FILE"
+	
+	echo -e "----------------------------------------" > "$TMP_TXT_FILE"
+	echo -e "［`_create_examination_string $1`］の合格者リスト" >> "$TMP_TXT_FILE"
+	echo -e "----------------------------------------" >> "$TMP_TXT_FILE"
+	echo -e "合格者総計:${#hosts[@]}名\n" >> "$TMP_TXT_FILE"
+	echo -e "`date +%Y年%m月%d日-%H時%M分%S秒` 時点\n" >> "$TMP_TXT_FILE"
+	echo "--------------------------------------------------------------------------------------------------------" >> "$TMP_TXT_FILE"
+    echo "       端末    登録日時         ログイン 学籍番号 問題      開始日時         終了日時       名前" >> "$TMP_TXT_FILE"
+	echo "--------------------------------------------------------------------------------------------------------" >> "$TMP_TXT_FILE"
+	
+	local i=0
+	local num=""
+	while [ "$i" -lt "${#hosts[*]}" ] ; do
+		num=`expr "$i" + 1`
+		if [ ${#num} -eq 1 ] ; then
+			num="0$num"
+		fi
+		echo -e "□" $num". "${hosts[$i]}" "${registertimes[$i]}"" ${loginnames[$i]}" "${ids[$i]}" "${question_names[$i]}"    "${starttimes[$i]}" "${finishtimes[$i]}" "${names[$i]} >> "$TMP_TXT_FILE"
+		i=`expr "$i" + 1`
+	done
+	
+	#印刷
+	_print_out "合格者リスト"
+}
+
+
+#
+# 合格者登録
+#
+# 引数:管理対象の試験（年-月-日-教室-時限のフォーマット）
+#
+_save_pass_students(){
+	
+	local target_examination=$1
+	local tmpdatafile=""
+	local datafile=""
+	local oneline=""
+	local counter=0
+	local -a datafiles tmphosts hosts loginnames ids names question_names registertimes starttimes finishtimes
+	
+	#データ生成用のディレクトリを初期化
+	_initialize_tmp_dir
+	
+	#合格者のデータをtempのディレクトリに合成する
+	for tmpdatafile in "$ADMIN_DATA_DIR"/"$target_examination"/*.txt""; do
+			if [ "$tmpdatafile" = "$ADMIN_DATA_DIR/$target_examination/*.txt" ] ; then
+				echo -e "＊受験者が居ません［エンターキーを押してください］\n\n"
+				rm -rf $TMP_DIR
+				read
+				_exec_support_commnad $target_examination 
+			fi
+			
+			local tmphost=`basename "$datafile" .txt`
+			tmphosts[${#tmphosts[*]}]=${tmphost%.sfc.keio.ac.jp}
+
+			for oneline in $(cat "$tmpdatafile") ; do
+				if [ -e "$ADMIN_DATA_DIR"/"$target_examination"/"$PASS_DIR"/`basename "$tmpdatafile"` ] ; then
+					cp "$tmpdatafile" "$TMP_DIR"/.
+					echo "" >> "$TMP_DIR"/`basename "$tmpdatafile"` #ファイルの末尾に改行を付け足す
+					cat "$ADMIN_DATA_DIR"/"$target_examination"/"$PASS_DIR"/`basename "$tmpdatafile"` >> "$TMP_DIR"/`basename "$tmpdatafile"`
+				fi
+  			done
+	done
+	
+	#合格者のデータファイルを読み込む
+	for datafile in "$TMP_DIR"/*.txt"" ; do
+			if [ "$datafile" = "$TMP_DIR/*.txt" ] ; then
+				echo -e "合格者が居ません。デフォルトのファイル名で合格者登録（空ファイルを作る）を行いますか？"
+				select answer in "デフォルトのファイル名で登録" "登録しない"
+				do 
+					if [ $answer ]; then
+						case $answer in
+							デフォルトのファイル名で登録)
+								#ファイル名を登録用に変更する（2006-06-20-k-2を2006-06-20-k2へ）
+								local file_name="${target_examination:0:12}"
+								file_name="$file_name${target_examination:13}.txt"
+
+								#データフォルダがあるか
+								if [ ! -e "$OFFICIAL_QUALIFIED_DATA_DIR" ] ; then
+									echo -e "＊書き込み先のディレクトリが見つかりません［エンターキーを押してください］\n\n"
+									read
+									_exec_support_commnad $target_examination;						
+								fi
+								
+								#同名のファイルがないか
+								if [ -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name" ] ; then
+									echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name は既に存在します［エンターキーを押してください］\n\n"
+									read
+									_exec_support_commnad $target_examination;	
+								fi
+								
+								#空ファイルを作る
+								touch "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
+								if [ $? -eq 0 ]; then
+									chmod -f 664 "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
+									chgrp ipl "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
+									echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name を書き込みました［エンターキーを押してください］\n\n"
+									read
+								else
+									echo -e "＊書き込みに失敗しました［エンターキーを押してください］\n\n"
+									read
+								fi
+								;;
+							いいえ) 
+								_exec_support_commnad $target_examination;;
+						esac
+						break
+					else
+						echo -e "＊1か2の番号を入力してください\n"
+					fi
+				done
+				rm -rf $TMP_DIR
+				_exec_support_commnad $target_examination;
+				break
+			fi	
+			local tmphost=`basename "$datafile" .txt`
+			hosts[${#hosts[*]}]=${tmphost%.sfc.keio.ac.jp}
+			
+			for oneline in $(cat "$datafile") ; do
+				case $counter in
+					1)
+						ids[${#ids[*]}]=$oneline;;
+				esac
+				counter=`expr "$counter" + 1`
+  			done
+  			counter=0
+	done
+	
+	#ファイル出力
+	rm -f "$TMP_TXT_FILE"
+	rm -f "$TMP_PS_FILE"
+	
+	local i=0
+	while [ "$i" -lt "${#hosts[*]}" ] ; do
+		echo -e "${ids[$i]}" >> "$TMP_TXT_FILE"
+		i=`expr "$i" + 1`
+	done
+	
+	#ファイル名を登録用に変更する（2006-06-20-k-2を2006-06-20-k2へ）
+	local file_name="${target_examination:0:12}"
+	file_name="$file_name${target_examination:13}.txt"
+
+	echo "------------------"
+	cat "$TMP_TXT_FILE"
+	echo "------------------"
+	echo "上記の${#hosts[*]}名の合格登録を行ってよろしいですか？"
+	select answer in "デフォルトのファイル名で登録" "ファイル名を指定して登録" "登録しない"
+	do 
+		if [ $answer ]; then
+			case $answer in
+				デフォルトのファイル名で登録)
+					#データフォルダがあるか
+					if [ ! -e "$OFFICIAL_QUALIFIED_DATA_DIR" ] ; then
+						echo -e "＊書き込み先のディレクトリが見つかりません［エンターキーを押してください］\n\n"
+						read
+						_exec_support_commnad $target_examination;						
+					fi
+					
+					#同名のファイルがないか
+					if [ -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name" ] ; then
+						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name は既に存在します［エンターキーを押してください］\n\n"
+						read
+						_exec_support_commnad $target_examination;	
+					fi
+					
+					#書き込み
+					mv -f "$TMP_TXT_FILE" "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
+					if [ $? -eq 0 ]; then
+						chmod -f 664 "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
+						chgrp ipl "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
+						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name を書き込みました［エンターキーを押してください］\n\n"
+						read
+					else
+						echo -e "＊書き込みに失敗しました［エンターキーを押してください］\n\n"
+						read
+					fi
+					;;
+				ファイル名を指定して登録)
+					#データフォルダがあるか
+					if [ ! -e "$OFFICIAL_QUALIFIED_DATA_DIR" ] ; then
+						echo -e "＊書き込み先のディレクトリが見つかりません［エンターキーを押してください］\n\n"
+						read
+						_exec_support_commnad $target_examination;						
+					fi
+					
+					#ファイル名の入力
+					echo -e "ファイル名を入力してください"
+					#local $input_file_name
+					_show_prompt
+					read input_file_name
+					
+					
+					#同名のファイルがないか
+					if [ -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name" ] ; then
+						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name は既に存在します［エンターキーを押してください］\n\n"
+						read
+						_exec_support_commnad $target_examination;	
+					fi
+					
+					#書き込み
+					mv -f "$TMP_TXT_FILE" "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name"
+					if [ $? -eq 0 ]; then
+						chmod -f 664 "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name"
+						chgrp ipl "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name"
+						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name を書き込みました［エンターキーを押してください］\n\n"
+						read
+					else
+						echo -e "＊書き込みに失敗しました［エンターキーを押してください］\n\n"
+						read
+					fi
+					;;
+				
+				いいえ) 
+					_exec_support_commnad $target_examination;;
+			esac
+			break
+		else
+			echo -e "＊1か2の番号を入力してください\n"
+		fi
+    done
+    
+	_exec_support_commnad $target_examination
+}
+
+#
+# メインメニュー
+#
+# 引数:なし
+#
+_main_menu(){
+	
+	local command=""
+	
+	_clear_screen
+	echo "**********************************************************"
+	echo " 情報技術認定試験 タイピングテスト"
+	echo " 試験監督補助システム"
+	echo ""
+	echo " Version:$APP_VERSION"
+	echo " E-mail:manabu@sfc.keio.ac.jp"
+	echo " Copyright(C) 2007-2011 CreW Project All Rights Reserved."
+	echo "**********************************************************"
+	
+	select command in "新規試験登録" "試験運営" "終了"
+	do
+		if [ $command ]; then
+			case $command in
+				"新規試験登録")
+					_register_new_examination;;
+				"試験運営") 
+					_invigilation_support;;
+				"終了")
+					_quit;;
+			esac
+			break
+		else
+			echo "＊1から3の番号を入力してください"
+		fi
+    done
+}
+
+
+########################################################
+# メイン
+########################################################
+
+_initialize
+_main_menu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

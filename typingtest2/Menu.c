@@ -303,6 +303,7 @@ void MenuCtrl_up()
     } else {
 	x0 = ctrl.x;
     }
+    MenuCtrl_moveto(x0, y0);
 }
 
 void MenuCtrl_down()
@@ -319,7 +320,7 @@ void MenuCtrl_down()
     } else {
 	x0 = ctrl.x;
     }
-	MenuCtrl_moveto(x0, y0);
+    MenuCtrl_moveto(x0, y0);
 }
 
 /*
