@@ -1,3 +1,6 @@
+# Makefile
+typingtest2/.depend
+
 # Object files
 *.o
 *.ko
@@ -16,3 +19,9 @@
 *.exe
 *.out
 *.app
+typingtest2/typing
+
+# GNU Global
+GPATH
+GRTAGS
+GTAGS
