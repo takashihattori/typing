@@ -21,8 +21,10 @@
 #define LONG_PAUSE_WIDTH ref_i("long_pause_width")
 
 //typingtestモード定義　（typingtestex用拡張）
-#define EXAM_MODE 1
-#define PRACTICE_MODE 2
+#define ORDINARY_MODE 1
+#define COVER_MODE 2
+#define PRACTICE_MODE 3
+#define EXAM_MODE(m) (m == ORDINARY_MODE || m == COVER_MODE) 
 
 typedef struct {
     Bool status;

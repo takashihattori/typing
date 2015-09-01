@@ -263,7 +263,7 @@
 				Examination * examination;
 				Test * test = Test_get_test();
 				examination = &(test->examination);
-				if(examination->mode  == EXAM_MODE){//本番モードの場合
+				if(EXAM_MODE(examination->mode)){//本番モードの場合
 	  	            if(HIDE_TYPE_MODE_EX==1){//本番モードでタイプエコーを隠す場合
 	     		        term_disp(" ");
 	     	        }else{//本番モードでタイプエコーを隠さない場合				
@@ -388,7 +388,7 @@
 	    
 	    //HIDE_MODEでなければ誤字結果の詳細を表示する
 	    examination2 = &(test2->examination);
-		if(examination2->mode  == EXAM_MODE){//本番モードの場合
+	    if(EXAM_MODE(examination2->mode)){//本番モードの場合
 	      if(HIDE_ERR_MODE_EX==0){//エラーチェック画面を表示する
     	    Intprt_long_pause_core(&test.intprt, ref("long_pause_message_test"), FALSE);
 	      }
@@ -523,7 +523,7 @@
 	  
 	  //次の画面遷移のメッセージを表示する
 	  examination2 = &(test2->examination);
-	  if(examination2->mode  == EXAM_MODE){//本番モードの場合
+	  if(EXAM_MODE(examination2->mode)){//本番モードの場合
 	    if(HIDE_ERR_MODE_EX){  
 	      Intprt_pause_core(&test.intprt, ref("result_end_message"), FALSE);
 	    }else{

@@ -54,7 +54,7 @@ int selectMode(Examination *);
 
 const char * ROOMS[5] = {"k","e","i","o","l"};
 const char * YESNO[2] = {"はい(Yes)","いいえ(No)"};  
-const char * MODES[2] = {"本番試験モード(exam mode)","練習モード(practice mode)"};
+const char * MODES[3];
 
 #define PASS_RECORD_SUCCEED 1
 #define PASS_RECORD_ALREADY_PASS 2
@@ -69,7 +69,10 @@ const char * MODES[2] = {"本番試験モード(exam mode)","練習モード(practice mode)"
  void Examination_selectMode(Examination * examination){
  	int number;
 	printf(ref("select_mode_title"));
-	number = selectNumber(ref("select_mode_message"),MODES,2);
+	MODES[0] = ref("ordinary_mode");
+	MODES[1] = ref("cover_mode");
+	MODES[2] = ref("practice_mode");
+	number = selectNumber(ref("select_mode_message"),MODES,3);
 	examination->mode = number;
  }
 
@@ -628,7 +631,7 @@ void showUserInfo(User * user){
 	if(exam_result(typing_second)){
 #endif
 	
-	  if(examination->mode == EXAM_MODE){
+	  if(EXAM_MODE(examination->mode)){
 	    term_clear();
 	  	writeResult = Examination_writePassInfo(examination,user);
 	  	term_gotoxy(RESULT_X, RESULT_Y+2);

@@ -109,8 +109,11 @@
 "モードを選択"
 !SET error_invalid_select_mode
 "
-モード選択は1 か 2を入力して下さい．(あなたの入力：%s)
+モード選択は 1 から 3 を入力して下さい．(あなたの入力：%s)
 "
+!SET ordinary_mode "通常方式（キーボードを見てもよい）"
+!SET cover_mode "カバー方式（キーボードを隠す）"
+!SET practice_mode "練習モード"
 
 #試験情報入力
 

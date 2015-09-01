@@ -54,44 +54,10 @@ void term_reset()
     key_mode = TRUE;
 }
 
-#ifdef UNIX
 void term_disp(char* str)
 {
-
-#ifdef CYGWIN
   printf("%s", str);
-#else
-#ifdef CURSES
-    addstr(str);
-#else
-    /* Convert from EUC code to JIS code */
-    //unsigned char *p;
-    char *p;
-    for(p = str; *p; p++){
-	if (*p > 0x7f){
-	    if (!kanji){
-		kanji_in();
-		kanji = TRUE;
-	    }
-	    putchar(*p % 0x80);
-	} else {
-	    if (kanji){
-		kanji_out();
-		kanji = FALSE;
-	    }
-	    putchar(*p);
-	}
-    }
-#endif
-#endif
 }
-#endif
-#ifdef MSDOS
-void term_disp(unsigned char* str)
-{
-    printf("%s", str);
-}
-#endif
 
 void term_center_disp(char *str, int y)
 {

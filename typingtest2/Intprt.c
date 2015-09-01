@@ -472,7 +472,7 @@ void Intprt_registration(Intprt *in){
 	Examination * examination;
 	Test * test = Test_get_test();
 	examination = &(test->examination);
-	if(examination->mode  == EXAM_MODE){
+	if(EXAM_MODE(examination->mode)){
 		term_end();//入力モードを変更する
 		Examination_registration(&(test->examination),&(test->user));
 		term_init();//入力モードを戻す

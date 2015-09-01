@@ -25,7 +25,7 @@ void Menu_run(Token* token_temp)
 	Examination * examination;
 	Test * test = Test_get_test();
 	examination = &(test->examination);
-	if(examination->mode  == EXAM_MODE){
+	if(EXAM_MODE(examination->mode)){
 	menu.token = token_temp;
 	MenuCtrl_init();
 

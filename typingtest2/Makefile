@@ -14,7 +14,7 @@ install:
 	done
 	install -c -m 755 typing $(DEST_DIR)
 
-typing: $(OBJS)
+typing: $(OBJS) Makefile
 	gcc $(CFLAGS) $(LIBS) -o typing $(OBJS)
 
 depend:

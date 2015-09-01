@@ -345,7 +345,7 @@ _register_new_examination(){
 		else
 			echo -e "＊1から6の番号を入力してください\n"
 		fi
-    done
+	done
 
 	local question_count=`_count_question`
 	local question_name=""
