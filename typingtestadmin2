@@ -18,8 +18,9 @@ export COLUMNS=1
 ########################################################
 
 DEBUG=0
+RETURNVAL=""
 
-APP_VERSION="1.8 (2011/9/22)"
+APP_VERSION="2.0 (2015/9/2)"
 PROMPT=">"
 ADMIN_DATA_DIR_NAME=".typingtestadmin"
 ADMIN_DATA_DIR="$HOME/$ADMIN_DATA_DIR_NAME"
@@ -33,7 +34,8 @@ TMP_DIR="$ADMIN_DATA_DIR/.tmpdir"
 CNS_IMAC_HOME="$HOME/CNSiMac";
 CNS_LAMDA_MAC_HOME="$HOME/CNSMac";
 
-OFFICIAL_QUESTION_MENUTXT="/usr/local/lib/typing/typingtestex/ja/menu.txt"
+#OFFICIAL_QUESTION_MENUTXT="/usr/local/lib/typing/typingtestex/ja/menu.txt"
+OFFICIAL_QUESTION_MENUTXT="/Users/hattori/Documents/typing/typingtest2/ja/menu.txt"
 
 ID_LIST="/pub/sfc/ipl/idtable"
 
@@ -133,21 +135,72 @@ _load_question_names(){
 	local examnames=""
 	local examnamestmp=""
 	
-	examnamestmp=`grep '\!ITEM' $OFFICIAL_QUESTION_MENUTXT | grep -v '^#' | cut -f 2- -d " "`
+	examnamestmp=`grep '^\!ITEM' $OFFICIAL_QUESTION_MENUTXT | $1 | cut -f 2- -d " "`
 	examnames=$examnames" "${examnamestmp//" "/"　"}
 	echo $examnames
 }
 
+_clean_question_name(){
+
+    local tmp=${1//"　"/" "}
+    RETURNVAL=${tmp//"\""/}
+
+}
+
 #
-# 試験問題の個数を読み込みます
+# 試験問題の選択
 #
-_count_question(){
-	
-	local datafilename=""
-	local examcount=0
-	
-	examcount=`grep '\!ITEM' $OFFICIAL_QUESTION_MENUTXT | grep -v '^#' | grep -c '\!ITEM'`
-	echo $examcount
+
+_choose_question_at_random(){
+
+    local question_count=`grep -c '^\!ITEM' $OFFICIAL_QUESTION_MENUTXT`
+    local question_count_ordinary=`grep -c '^\!LOAD.*sfc-e' $OFFICIAL_QUESTION_MENUTXT`
+    local question_count_cover=$(($question_count - $question_count_ordinary))
+    local question_number_ordinary=$(($RANDOM % $question_count_ordinary + 1))
+    local question_number_cover=$(($RANDOM % $question_count_cover + $question_count_ordinary + 1))
+    _clean_question_name `_load_question_names "sed -n ${question_number_ordinary}p"`
+    local question_name_ordinary=$RETURNVAL
+    _clean_question_name `_load_question_names "sed -n ${question_number_cover}p"`
+    local question_name_cover=$RETURNVAL
+
+    RETURNVAL="$question_name_ordinary:$question_name_cover"
+}
+
+_choose_question_by_hand(){
+
+    local question_count=`grep -c '^\!ITEM' $OFFICIAL_QUESTION_MENUTXT`
+    local question_count_ordinary=`grep -c '^\!LOAD.*sfc-e' $OFFICIAL_QUESTION_MENUTXT`
+    local question_count_cover=$(($question_count - $question_count_ordinary))
+    local question_names_ordinary=`_load_question_names "head -n $question_count_ordinary"`
+    local question_names_cover=`_load_question_names "tail -n +$(($question_count_ordinary + 1))"`
+    local question_name_ordinary=""
+    local question_name_cover=""
+
+    echo "通常方式の問題を番号で入力してください［1から$question_count_ordinaryを選択］"
+    select input in $question_names_ordinary
+    do 
+	if [ $input ]; then
+	    _clean_question_name $input
+	    question_name_ordinary=$RETURNVAL
+	    break
+	else
+	    echo -e "＊1から$question_count_ordinaryの番号を入力してください\n"
+	fi
+    done
+
+    echo "カバー方式の問題を番号で入力してください［1から$question_count_coverを選択］"
+    select input in $question_names_cover
+    do 
+	if [ $input ]; then
+	    _clean_question_name $input
+	    question_name_cover=$RETURNVAL
+	    break
+	else
+	    echo -e "＊1から$question_count_coverの番号を入力してください\n"
+	fi
+    done
+
+    RETURNVAL="$question_name_ordinary:$question_name_cover"
 }
 
 #
@@ -319,7 +372,7 @@ _register_new_examination(){
 	
 	local input="" #入力受け取り用の一時変数
 	local year=`date +%Y` month=`date +%m` day=`date +%d`
-	local period="" room=""  question_name=""
+	local period="" room="" question_name=""
 	
 	_clear_screen
 	echo "新規の試験登録を開始します"
@@ -347,22 +400,24 @@ _register_new_examination(){
 		fi
 	done
 
-	local question_count=`_count_question`
-	local question_name=""
-	local question_name_tmp=""
-	local question_names=`_load_question_names`
-	echo "試験問題の名前を番号で入力してください［1から$question_countを選択］"
-	select input in $question_names
+	echo "問題を乱数で選びますか？ "
+	select input in "はい" "いいえ"
 	do 
-		if [ $input ]; then
-			question_name_tmp=${input//"　"/" "}
-			question_name=${question_name_tmp//"\""/}
-			break
-		else
-			echo -e "＊1から$question_countの番号を入力してください\n"
-		fi
-    done
-	unset $quesiton_names
+	    if [ $input ]; then
+		case $input in
+		    はい)
+			_choose_question_at_random
+			question_name=$RETURNVAL
+			break;;
+		    いいえ) 
+			_choose_question_by_hand
+			question_name=$RETURNVAL
+			break;;
+		esac
+	    else
+		echo -e "＊1か2の番号を入力してください\n"
+	    fi
+	done
 
 	#登録情報の確認
 	_show_examination_info $year $month $day $room $period "$question_name"

@@ -171,4 +171,13 @@
 !TITLE "SFCタイピング試験(40)"
 !LOAD "ja/sfc-e40.txt"
 !ITEM "Insectivorous Plants"
+
+!TITLE "SFCタイピング試験(カバー1)"
+!LOAD "ja/sfc-c01.txt"
+!ITEM "Cover1"
+
+!TITLE "SFCタイピング試験(カバー2)"
+!LOAD "ja/sfc-c02.txt"
+!ITEM "Cover2"
+
 !MENU_END
