@@ -22,59 +22,61 @@ Intprt menu;
  */
 void Menu_run(Token* token_temp)
 {
-	Examination * examination;
-	Test * test = Test_get_test();
-	examination = &(test->examination);
-	if(EXAM_MODE(examination->mode)){
-	menu.token = token_temp;
-	MenuCtrl_init();
+  Examination * examination;
+  Test * test = Test_get_test();
+  int qnum;
+  
+  examination = &(test->examination);
+  if(EXAM_MODE(examination->mode)){
+    menu.token = token_temp;
+    MenuCtrl_init();
 
-	Intprt_goto_next(&menu);
-	while(!Token_compare(token_temp, "!MENU_END")){
-		if(Token_compare(token_temp, "!MESSAGE")){
-			Menu_message();
-		} else if (Token_compare(token_temp, "!TITLE")){
-			Menu_title();
-		} else if (Token_compare(token_temp, "!LOAD")){
-			Menu_load();
-		} else if (Token_compare(token_temp, "!ITEM")){
-			Menu_item();
-		} else if (Token_compare(token_temp, "!EXIT")){
-			Menu_menu_exit();
-		} else {
-			Intprt_run(&menu);
-		}
-	}
-	
-	MenuCtrl_go_origin();
-	
-	while(Menu_mainloop()) ;
-	}else{
-		menu.token = token_temp;
-	MenuCtrl_init();
+    Intprt_goto_next(&menu);
+    while(!Token_compare(token_temp, "!MENU_END")){
+      if(Token_compare(token_temp, "!MESSAGE")){
+	Menu_message();
+      } else if (Token_compare(token_temp, "!TITLE")){
+	Menu_title();
+      } else if (Token_compare(token_temp, "!LOAD")){
+	Menu_load();
+      } else if (Token_compare(token_temp, "!ITEM")){
+	Menu_item();
+      } else if (Token_compare(token_temp, "!EXIT")){
+	Menu_menu_exit();
+      } else {
+	Intprt_run(&menu);
+      }
+    }
+    
+    qnum = atoi(examination->question);
+    while(Menu_chosen_question(qnum));
 
-	Intprt_goto_next(&menu);
-	while(!Token_compare(token_temp, "!MENU_END")){
-		if(Token_compare(token_temp, "!MESSAGE")){
-			Menu_message();
-		} else if (Token_compare(token_temp, "!TITLE")){
-			Menu_title();
-		} else if (Token_compare(token_temp, "!LOAD")){
-			Menu_load();
-		} else if (Token_compare(token_temp, "!ITEM")){
-			Menu_item();
-		} else if (Token_compare(token_temp, "!EXIT")){
-			Menu_menu_exit();
-		} else {
-			Intprt_run(&menu);
-		}
-	}
+  }else{
+    menu.token = token_temp;
+    MenuCtrl_init();
+
+    Intprt_goto_next(&menu);
+    while(!Token_compare(token_temp, "!MENU_END")){
+      if(Token_compare(token_temp, "!MESSAGE")){
+	Menu_message();
+      } else if (Token_compare(token_temp, "!TITLE")){
+	Menu_title();
+      } else if (Token_compare(token_temp, "!LOAD")){
+	Menu_load();
+      } else if (Token_compare(token_temp, "!ITEM")){
+	Menu_item();
+      } else if (Token_compare(token_temp, "!EXIT")){
+	Menu_menu_exit();
+      } else {
+	Intprt_run(&menu);
+      }
+    }
 	
-	MenuCtrl_go_origin();
+    MenuCtrl_go_origin();
 	
-	while(Menu_mainloop()) ;
+    while(Menu_mainloop()) ;
 		
-	}
+  }
 }
 
 /**
@@ -460,3 +462,13 @@ void MenuCtrl_sec_rdisp(int x, int y)
     }
 }
 
+
+Bool Menu_chosen_question(int qnum) {
+
+  Intprt *intprt;
+
+  NIntprt_init(&intprt, ctrl.chap[qnum].fname);
+  NIntprt_run(&intprt, qnum - 1, 1);
+  NIntprt_end(&intprt);
+  return TRUE;
+}

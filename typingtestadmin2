@@ -131,18 +131,16 @@ _create_examination_string(){
 # 試験問題の名前を読み込みます
 #
 _load_question_names(){
-	
-	local examnames=""
-	local examnamestmp=""
-	
-	examnamestmp=`grep '^\!ITEM' $OFFICIAL_QUESTION_MENUTXT | $1 | cut -f 2- -d " "`
-	examnames=$examnames" "${examnamestmp//" "/"　"}
-	echo $examnames
+    
+    local examnames=""
+    
+    examnames=`grep '^\!ITEM' $OFFICIAL_QUESTION_MENUTXT | $1 | cut -f 2- -d " "`
+    echo ${examnames//" "/"_"}
 }
 
 _clean_question_name(){
 
-    local tmp=${1//"　"/" "}
+    local tmp=${1//"_"/" "}
     RETURNVAL=${tmp//"\""/}
 
 }
@@ -159,11 +157,11 @@ _choose_question_at_random(){
     local question_number_ordinary=$(($RANDOM % $question_count_ordinary + 1))
     local question_number_cover=$(($RANDOM % $question_count_cover + $question_count_ordinary + 1))
     _clean_question_name `_load_question_names "sed -n ${question_number_ordinary}p"`
-    local question_name_ordinary=$RETURNVAL
+    local question_name_ordinary="$question_number_ordinary:$RETURNVAL"
     _clean_question_name `_load_question_names "sed -n ${question_number_cover}p"`
-    local question_name_cover=$RETURNVAL
+    local question_name_cover="$question_number_cover:$RETURNVAL"
 
-    RETURNVAL="$question_name_ordinary:$question_name_cover"
+    RETURNVAL="$question_name_ordinary"$'\n'"$question_name_cover"
 }
 
 _choose_question_by_hand(){
@@ -181,7 +179,7 @@ _choose_question_by_hand(){
     do 
 	if [ $input ]; then
 	    _clean_question_name $input
-	    question_name_ordinary=$RETURNVAL
+	    question_name_ordinary="$REPLY:$RETURNVAL"
 	    break
 	else
 	    echo -e "＊1から$question_count_ordinaryの番号を入力してください\n"
@@ -193,14 +191,14 @@ _choose_question_by_hand(){
     do 
 	if [ $input ]; then
 	    _clean_question_name $input
-	    question_name_cover=$RETURNVAL
+	    question_name_cover="$(($REPLY+$question_count_ordinary)):$RETURNVAL"
 	    break
 	else
 	    echo -e "＊1から$question_count_coverの番号を入力してください\n"
 	fi
     done
 
-    RETURNVAL="$question_name_ordinary:$question_name_cover"
+    RETURNVAL="$question_name_ordinary"$'\n'"$question_name_cover"
 }
 
 #
@@ -489,7 +487,7 @@ _create_new_examination_directory(){
 	chmod -f u+rx "$ADMIN_DATA_DIR/$directory_name/$PASS_DIR"
 	
 	#問題番号記録ファイル
-	echo "$6" > "$ADMIN_DATA_DIR/$directory_name/.question"
+	echo -e "$6" > "$ADMIN_DATA_DIR/$directory_name/.question"
 	if [ $? -ne 0 ] ; then #quotaチェック
 		echo -e "プログラムでファイルを書き込むことができません\n quota -v を実行してみてください．［エンターキーを押してください］\n\n"
 		read

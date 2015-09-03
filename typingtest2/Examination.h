@@ -8,6 +8,7 @@
 #define MAX_TEXT 30
 #define MAX_TYPE_LINE 50
 #define MAX_TYPE 70
+#define MAX_QUESTION_NAME 100
 
 #define TRUE 1
 #define FALSE 0
@@ -22,12 +23,13 @@ typedef struct {
 
 //受験情報をあらわす構造体
 typedef struct {
-	struct tm * date; //受験日時
-	struct tm * testStartDate; //試験開始日時
-	char managerLogin[MAX_TEXT];//試験監督ログイン
-	int time; //時限
-	char room[10]; //教室
-	int mode;
+  struct tm * date; //受験日時
+  struct tm * testStartDate; //試験開始日時
+  char managerLogin[MAX_TEXT];//試験監督ログイン
+  int time; //時限
+  char room[10]; //教室
+  int mode;
+  char question[MAX_QUESTION_NAME];
 }Examination;
 
 void Examination_selectMode(Examination*);

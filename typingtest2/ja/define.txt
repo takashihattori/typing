@@ -88,7 +88,7 @@
 #typingtestex用データ定義
 #
 !SET pass_dir "pass"
-!SET home_dir "/home/"
+!SET home_dir "/Users/"
 !SET admin_dir ".typingtestadmin"
 !SET txt_extension "txt"
 !SET question_file ".question"

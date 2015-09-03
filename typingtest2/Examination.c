@@ -48,7 +48,6 @@ void typingtestExit();
 int confirmUserInfo(User *,char *);
 void checkStartExamination(Examination *);
 void inputString(char *,int);
-int isRightQuestion(Examination * );
 int isFirstUserInHost(Examination *);
 int selectMode(Examination *);
 
@@ -83,8 +82,8 @@ const char * MODES[3];
 //受講者の各種情報を取得する
 void Examination_registration(Examination * examination, User * user){
 	inputExaminationInfo(examination);//試験情報を入力する
-	inputUserInfo(examination,user);//受験者情報を入力する
-	checkStartExamination(examination);
+	//	inputUserInfo(examination,user);//受験者情報を入力する
+	//	checkStartExamination(examination);
 }
 
 /*************************************************************
@@ -111,7 +110,7 @@ void inputExaminationInfo(Examination * examination){
 		setExaminationDate(examination);//日付を設定する
 		
 		//試験が存在するか確認する
-		result = checkExamination(examination);
+		result = checkExamination(examination) && getQuestionName(examination);
 		if(!(result)){
 			printf(ref("error_not_exist_examination"));
 			if(!checkReInput()){
@@ -681,11 +680,6 @@ void showUserInfo(User * user){
  	char host[256];
  	FILE * file;
  	
- 	//指定された問題かどうか確認する
- 	if(isRightQuestion(examination) == FALSE){
- 		return PASS_RECORD_DIFFERENT_QUESTION; 
- 	}
- 	
  	//合格者記録用ファイルのパスを生成する
  	getExaminationDir(examination,path);
  	strcat(path,"/");
@@ -739,24 +733,23 @@ void showUserInfo(User * user){
 	return PASS_RECORD_SUCCEED;
  }
  
- //正しい質問かどうか調べる
-int isRightQuestion(Examination * examination){
-	char path[256];
-	char question[100];
-	FILE * file;
-	getExaminationDir(examination,path);
- 	strcat(path,"/");
- 	strcat(path,ref("question_file"));
- 	file = fopen(path,"r");
- 	if(file == NULL){ // 問題ファイルがない場合
- 		return FALSE;
- 	}
-	fgets(question,100,file);//一行目の問題を取得する
-	fclose(file);
-	if(strncmp(question,ref("title"),strlen(ref("title"))) != 0){//指定された問題が異なる場合
-		return FALSE;
-	}
-	return TRUE;
+int getQuestionName(Examination *examination) {
+  char path[256];
+  FILE * file;
+
+  getExaminationDir(examination,path);
+  strcat(path,"/");
+  strcat(path,ref("question_file"));
+  file = fopen(path,"r");
+  if(file == NULL){ // 問題ファイルがない場合
+    return FALSE;
+  }
+  fgets(examination->question, MAX_QUESTION_NAME, file);
+  if (examination->mode == 2) {
+    fgets(examination->question, MAX_QUESTION_NAME, file); //2行目を取得する
+  }
+  fclose(file);
+  return TRUE;
 }
 
 /******************************************************************
