@@ -74,14 +74,14 @@ _show_prompt(){
 #
 # 試験の情報を表示
 #
-# 引数:年，月，日，教室，時限，問題名
+# 引数:年，月，日，教室，時限，Question名
 #
 _show_examination_info(){
 	echo "----------------------------------------"
-	echo "日時:$1年$2月$3日"
-	echo "教室:$4"
-	echo "時限:$5限"
-	echo "問題:"$6
+	echo "Date: $1 - $2 - $3"
+	echo "Room: $4"
+	echo "Period: $5"
+	echo "Question:"$6
 	echo "----------------------------------------"
 }
 
@@ -96,11 +96,11 @@ _show_current_examination_state(){
 	
 	if [ -w "$ADMIN_DATA_DIR/$target_examination/$PASS_DIR" ]; then
 		echo "========================================"
-		echo "現在の状態:試験中（開始時刻 $START_TIME）"
+		echo "Current State: in progress (start at $START_TIME)"
 		echo "========================================"
 	else
 		echo "========================================"
-		echo "現在の状態:終了"
+		echo "Current State: closed"
 		echo "========================================"
 	fi
 
@@ -115,20 +115,20 @@ _create_examination_string(){
 	local str=$1
 	local question_name
 	
-	str=${str/"-"/"年"}
-	str=${str/"-"/"月"}
-	str=${str/"-"/"日 "}
-	str=${str/"-"/" "}
+	
+	
+	
+	
 	
 	
 	local directory_name="$1-$2-$3-$4-$5"
 	question_name=`cat "$ADMIN_DATA_DIR/$1/.question"`
 	
-	echo $str"限 "$question_name
+	echo $str $question_name
 }
 
 #
-# 試験問題の名前を読み込みます
+# 試験Questionの名前を読み込みます
 #
 _load_question_names(){
     
@@ -146,7 +146,7 @@ _clean_question_name(){
 }
 
 #
-# 試験問題の選択
+# 試験Questionの選択
 #
 
 _choose_question_at_random(){
@@ -174,7 +174,7 @@ _choose_question_by_hand(){
     local question_name_ordinary=""
     local question_name_cover=""
 
-    echo "通常方式の問題を番号で入力してください［1から$question_count_ordinaryを選択］"
+    echo "Question number for ordinary method [1 - $question_count_ordinary]"
     select input in $question_names_ordinary
     do 
 	if [ $input ]; then
@@ -182,11 +182,11 @@ _choose_question_by_hand(){
 	    question_name_ordinary="$REPLY:$RETURNVAL"
 	    break
 	else
-	    echo -e "＊1から$question_count_ordinaryの番号を入力してください\n"
+	    echo -e "Error - input a number in 1 - $question_count_ordinary\n"
 	fi
     done
 
-    echo "カバー方式の問題を番号で入力してください［1から$question_count_coverを選択］"
+    echo "Question number for cover method [1 - $question_count_cover]"
     select input in $question_names_cover
     do 
 	if [ $input ]; then
@@ -194,7 +194,7 @@ _choose_question_by_hand(){
 	    question_name_cover="$(($REPLY+$question_count_ordinary)):$RETURNVAL"
 	    break
 	else
-	    echo -e "＊1から$question_count_coverの番号を入力してください\n"
+	    echo -e "Error - input a number in 1 - $question_count_cover\n"
 	fi
     done
 
@@ -212,7 +212,7 @@ _print_out(){
 	
 	rm -f "$TMP_PS_FILE"
 	
-	echo "$targetを出力するプリンタ名を入力してください"
+	echo "Printer name for $target"
 	_show_prompt
 	read printer
 	
@@ -220,8 +220,8 @@ _print_out(){
 		#psファイルに変換
 		a2ps -nt -nh -w "$TMP_TXT_FILE" > "$TMP_PS_FILE"
 		if [ $? -ne 0 ] ;then
-			echo -e "＊PSファイルの生成に失敗しました\n"
-			echo -e "［エンターキーを押してください］\n\n"
+			echo -e "Error - fail to generate PS file\n"
+			echo -e "[ Press Enter ]\n\n"
 			read
 			return -1
 		fi
@@ -229,18 +229,18 @@ _print_out(){
 		#出力
 		lpr -P "$printer" "$TMP_PS_FILE"
 		if [ $? -ne 0 ] ;then
-			echo -e "＊印刷に失敗しました\n"
-			echo -e "［エンターキーを押してください］\n\n"
+			echo -e "Error - fail to print\n"
+			echo -e "[ Press Enter ]\n\n"
 			read
 			return -1
 		fi
 		
-		echo -e "［エンターキーを押してください］\n\n"
+		echo -e "[ Press Enter ]\n\n"
 		read
 		return 0
 	else
-		echo -e "＊不正なプリンタ名です\n"
-		echo -e "［エンターキーを押してください］\n\n"
+		echo -e "Error - invalid printer name\n"
+		echo -e "[ Press Enter ]\n\n"
 		read
 		return -1
 	fi
@@ -268,7 +268,7 @@ _initialize_tmp_dir(){
 }
 
 ########################################################
-# 開始・終了処理関連
+# 開始・ closed処理関連
 ########################################################
 
 #
@@ -328,7 +328,7 @@ _initialize(){
 }
 
 #
-# 終了処理
+#  closed処理
 #
 # 引数:なし
 #
@@ -349,10 +349,10 @@ _quit(){
 		rm -rf "$TMP_DIR"
 	fi	
 	
-	#終了メッセージの表示
+	# closedメッセージの表示
 	_clear_screen
-	echo "試験監督お疲れ様でした"
-	echo "ict-foundation@sfc.keio.ac.jpに報告メールを送るのを忘れないでください！"
+	echo "Thank you for administrating typing exam."
+	echo "Please send a report mail to ict-foundation@sfc.keio.ac.jp if you have any information."
 	
 	exit 0
 }
@@ -373,88 +373,88 @@ _register_new_examination(){
 	local period="" room="" question_name=""
 	
 	_clear_screen
-	echo "新規の試験登録を開始します"
+	echo "Register a new examination"
 	echo "========================================"
 
-	echo "教室の入力［1から5を選択］"
+	echo "Classroom [ 1 - 5 ]"
 	select input in "kappa" "epsilon" "iota" "omicron" "lambda"
 	do 
 		if [ $input ]; then
 			room="${input:0:1}"
 			break
 		else
-			echo -e "＊1から5の番号を入力してください\n"
+			echo -e "Error - input a number in 1 - 5\n"
 		fi
 	done
 
-	echo "時限を番号で入力してださい［1から6を選択］"
-	select input in "1限" "2限" "3限" "4限" "5限" "6限"
+	echo "Period [ 1 - 6 ]"
+	select input in "1st" "2nd" "3rd" "4th" "5th" "6th"
 	do 
 		if [ $input ]; then
 			period="${input:0:1}"
 			break
 		else
-			echo -e "＊1から6の番号を入力してください\n"
+			echo -e "Error - input a number in 1 - 6\n"
 		fi
 	done
 
-	echo "問題を乱数で選びますか？ "
-	select input in "はい" "いいえ"
+	echo "Do you want to choose question at random? "
+	select input in "Yes" "No"
 	do 
 	    if [ $input ]; then
 		case $input in
-		    はい)
+		    Yes)
 			_choose_question_at_random
 			question_name=$RETURNVAL
 			break;;
-		    いいえ) 
+		    No) 
 			_choose_question_by_hand
 			question_name=$RETURNVAL
 			break;;
 		esac
 	    else
-		echo -e "＊1か2の番号を入力してください\n"
+		echo -e "Error - input 1 or 2\n"
 	    fi
 	done
 
 	#登録情報の確認
 	_show_examination_info $year $month $day $room $period "$question_name"
-	echo "上記の試験を登録してよろしいですか？"
+	echo "Are you sure to register? "
 	
 	#登録
 	local register
-	select register in "はい" "いいえ"
+	select register in "Yes" "No"
 	do 
 		if [ $register ]; then
 			case $register in
-				はい)
+				Yes)
 					_create_new_examination_directory $year $month $day $room $period "$question_name"
 					break;;
-				いいえ) 
+				No) 
 					_register_new_examination
 					break;;
 			esac
 		else
-			echo -e "＊1か2の番号を入力してください\n"
+			echo -e "Error - input 1 or 2\n"
 		fi
     done
     
     #運営画面への遷移
 	local goadmin
-	echo "登録した試験の運営を行いますか？"
-	select goadmin in "はい" "いいえ"
+	echo "Do you want to begin operation of the examination?"
+	select goadmin in "Yes" "No"
 	do 
 		if [ $goadmin ]; then
 			case $goadmin in
-				はい)
+				Yes)
 					_exec_support_commnad $year-$month-$day-$room-$period
 					break;;
-				いいえ) 
+				No) 
 					_main_menu
 					break;;
 			esac
 		else
-			echo -e "＊1か2の番号を入力してください\n"
+			echo -e "Error - input 1 or 2\n"
 		fi
     done
 }
@@ -462,7 +462,7 @@ _register_new_examination(){
 #
 # 試験データを保存するディレクトリ作成
 #
-# 引数:年，月，日，教室，時限，問題名
+# 引数:年，月，日，教室，時限，Question名
 #
 _create_new_examination_directory(){
 
@@ -475,7 +475,7 @@ _create_new_examination_directory(){
 		mkdir "$ADMIN_DATA_DIR/$directory_name"
 		chmod -f go+rwx "$ADMIN_DATA_DIR/$directory_name"
 	else
-		echo -e "＊その試験は既に登録されています［エンターキーを押してください］\n"
+		echo -e "Error - the examination is already registered[ Press Enter ]\n"
 		read 
 		return -1
 	fi
@@ -486,10 +486,10 @@ _create_new_examination_directory(){
 	chmod -f u-w "$ADMIN_DATA_DIR/$directory_name/$PASS_DIR"
 	chmod -f u+rx "$ADMIN_DATA_DIR/$directory_name/$PASS_DIR"
 	
-	#問題番号記録ファイル
+	#Question番号記録ファイル
 	echo -e "$6" > "$ADMIN_DATA_DIR/$directory_name/.question"
 	if [ $? -ne 0 ] ; then #quotaチェック
-		echo -e "プログラムでファイルを書き込むことができません\n quota -v を実行してみてください．［エンターキーを押してください］\n\n"
+		echo -e "Error - cannot write a file\n Please check quota -v[ Press Enter ]\n\n"
 		read
 		exit 1
 	fi
@@ -515,24 +515,24 @@ _invigilation_support(){
 	echo "----------------------------------------"
 	echo "登録済の試験一覧"
 	echo "----------------------------------------"
-	echo "試験運営を実施する試験の番号を入力してください"
+	echo "Input a number of examination you want to operate"
 	
 	if [ "$OPTION" = "-a" ]; then
 		examinations=`ls -r "$ADMIN_DATA_DIR"`
 	else
 		examinations=`ls -r "$ADMIN_DATA_DIR" | head -6`
 	fi
-	select select_examination in $examinations "メインメニューへ"  
+	select select_examination in $examinations "Go to main menu"  
 	do 
 		if [ $select_examination ]; then
-			if [ $select_examination == "メインメニューへ" ]; then
+			if [ $select_examination == "Go to main menu" ]; then
 				_main_menu
 				break
 			fi
 			_exec_support_commnad $select_examination
 			break
 		else
-			echo -e "＊数値を入力してください\n"
+			echo -e "Error - input a number\n"
 		fi
     done
 }
@@ -550,38 +550,38 @@ _exec_support_commnad(){
 	_clear_screen
 
 	echo "----------------------------------------"
-	echo "［`_create_examination_string $1`］の試験運営"
+	echo "Operation of [ `_create_examination_string $1` ]"
 	echo "----------------------------------------"
 
-	echo "実施する試験運営業務の番号を入力してください"
-	select command in "試験開始・終了" "受験者一覧表示・印刷" "合格者一覧表示・印刷" "合格者登録" "戻る"
+	echo "Input a number of action you want to perform"
+	select command in "Start or Stop" "List applicants" "List passers" "Register passers" "Back to previous menu"
 	do 
 		if [ $command ]; then
 			case $command in
-				"試験開始・終了")
+				"Start or Stop")
 					_start_stop_examination $target_examination;;
-				"受験者一覧表示・印刷")
+				"List applicants")
 					_show_all_students $target_examination;;
                                 #"学籍番号確認")
                                 #        _validate_studentids $target_examination;;
-				"合格者一覧表示・印刷")
+				"List passers")
 					_show_pass_students $target_examination;;
-				"合格者登録")
+				"Register passers")
 					_save_pass_students $target_examination;;
-				"戻る")
+				"Back to previous menu")
 					#試験をやめておく
 					chmod -f go-w "$ADMIN_DATA_DIR/$target_examination/$PASS_DIR"
 					_invigilation_support;;
 			esac
 			break
 		else
-			echo -e "＊1から6の番号を入力してください\n"
+			echo -e "Error - input a number in 1 - 6\n"
 		fi
 	done
 }
 
 #
-# 試験の開始・終了
+# 試験の開始・ closed
 # 引数:管理対象の試験（年-月-日-教室-時限のフォーマット）
 #
 _start_stop_examination(){
@@ -592,16 +592,16 @@ _start_stop_examination(){
 	_clear_screen
 	
 	echo "----------------------------------------"
-	echo "［`_create_examination_string $1`］の開始・終了"
+	echo "Start or Stop [`_create_examination_string $1`]"
 	echo "----------------------------------------"
-	#echo -e "※戻るを選択すると，試験は終了します\n"
+	#echo -e "※Back to previous menuを選択すると，試験は closedします\n"
 	_show_current_examination_state $target_examination
 
-	select command in "試験開始" "試験終了" "戻る"
+	select command in "Start" "Stop" "Back to previous menu"
 	do 
 		if [ $command ]; then
 			case $command in
-				"試験開始")
+				"Start")
 					if [ $START_TIME -eq "-1" ]; then
 						START_TIME=`date +%H:%M:%S`
 					fi
@@ -609,16 +609,16 @@ _start_stop_examination(){
 					echo "試験を開始しました..."
 					_show_current_examination_state $target_examination
 					_start_stop_examination $target_examination;;
-				"試験終了")
+				"Stop")
 					START_TIME="-1"
 					chmod -f ugo-w "$ADMIN_DATA_DIR/$target_examination/$PASS_DIR"
-					echo "試験を終了しました"
+					echo "試験を closedしました"
 					_show_current_examination_state $target_examination
 					_start_stop_examination $target_examination;;
 				#"受験者一覧印刷")
 				#	_show_all_students $target_examination
 				#	_start_stop_examination $target_examination;;
-				"戻る")
+				"Back to previous menu")
 					#試験中のままにしない
 					#chmod -f ugo-w "$ADMIN_DATA_DIR/$target_examination/$PASS_DIR"
 					
@@ -652,7 +652,7 @@ _show_all_students(){
 	for datafile in "$ADMIN_DATA_DIR"/"$target_examination"/*.txt""; do
 	
 			if [ "$datafile" = "$ADMIN_DATA_DIR/$target_examination/*.txt" ] ; then
-				echo -e "＊受験者が居ません［エンターキーを押してください］\n\n"
+				echo -e "＊受験者が居ません[ Press Enter ]\n\n"
 				read
 				_exec_support_commnad $target_examination 
 			fi
@@ -689,7 +689,7 @@ _show_all_students(){
 	
 	#メニューを表示
 	echo -e "\n\n"
-	select command in "受験者リストを印刷" "戻る"
+	select command in "受験者リストを印刷" "Back to previous menu"
 	do 
 		if [ $command ]; then
 			case $command in
@@ -700,11 +700,11 @@ _show_all_students(){
 					done
 					_print_all_students $target_examination
 					_exec_support_commnad $target_examination;;
-				"戻る")
+				"Back to previous menu")
 					_exec_support_commnad $target_examination;;
 			esac
 		else
-			echo -e "＊1か2の番号を入力してください\n"
+			echo -e "Error - input 1 or 2\n"
 		fi
     done
 }
@@ -857,7 +857,7 @@ _show_pass_students(){
 			tmphosts[${#tmphosts[*]}]=${tmphost%.sfc.keio.ac.jp}
 			
 			if [ "$tmpdatafile" = "$ADMIN_DATA_DIR/$target_examination/*.txt" ] ; then
-				echo -e "＊受験者が居ません［エンターキーを押してください］\n\n"
+				echo -e "＊受験者が居ません[ Press Enter ]\n\n"
 				rm -rf $TMP_DIR
 				read
 				_exec_support_commnad $target_examination 
@@ -878,7 +878,7 @@ _show_pass_students(){
 			hosts[${#hosts[*]}]=${tmphost%.sfc.keio.ac.jp}
 		
 			if [ "$datafile" = "$TMP_DIR/*.txt" ] ; then
-				echo -e "＊合格者が居ません［エンターキーを押してください］\n\n"
+				echo -e "＊合格者が居ません[ Press Enter ]\n\n"
 				rm -rf $TMP_DIR
 				read
 				_exec_support_commnad $target_examination
@@ -926,7 +926,7 @@ _show_pass_students(){
 	
 	#メニューを表示
 	echo -e "\n\n"
-	select command in "合格者リストを印刷" "戻る"
+	select command in "合格者リストを印刷" "Back to previous menu"
 	do 
 		if [ $command ]; then
 			case $command in
@@ -937,12 +937,12 @@ _show_pass_students(){
 					done
 					_print_pass_students $target_examination
 					;;
-				"戻る")
+				"Back to previous menu")
 					_exec_support_commnad $target_examination
 					;;
 			esac
 		else
-			echo -e "＊1か2の番号を入力してください\n"
+			echo -e "Error - input 1 or 2\n"
 		fi
     done
 	
@@ -970,7 +970,7 @@ _print_pass_students(){
 	#合格者のデータをtempのディレクトリに合成する
 	for tmpdatafile in "$ADMIN_DATA_DIR"/"$target_examination"/*.txt""; do
 			if [ "$tmpdatafile" = "$ADMIN_DATA_DIR/$target_examination/*.txt" ] ; then
-				echo -e "＊受験者が居ません［エンターキーを押してください］\n\n"
+				echo -e "＊受験者が居ません[ Press Enter ]\n\n"
 				rm -rf $TMP_DIR
 				read
 				_exec_support_commnad $target_examination 
@@ -1027,7 +1027,7 @@ _print_pass_students(){
 	echo -e "合格者総計:${#hosts[@]}名\n" >> "$TMP_TXT_FILE"
 	echo -e "`date +%Y年%m月%d日-%H時%M分%S秒` 時点\n" >> "$TMP_TXT_FILE"
 	echo "--------------------------------------------------------------------------------------------------------" >> "$TMP_TXT_FILE"
-    echo "       端末    登録日時         ログイン 学籍番号 問題      開始日時         終了日時       名前" >> "$TMP_TXT_FILE"
+    echo "       端末    登録日時         ログイン 学籍番号 Question      開始日時          closed日時       名前" >> "$TMP_TXT_FILE"
 	echo "--------------------------------------------------------------------------------------------------------" >> "$TMP_TXT_FILE"
 	
 	local i=0
@@ -1047,7 +1047,7 @@ _print_pass_students(){
 
 
 #
-# 合格者登録
+# Register passers
 #
 # 引数:管理対象の試験（年-月-日-教室-時限のフォーマット）
 #
@@ -1066,7 +1066,7 @@ _save_pass_students(){
 	#合格者のデータをtempのディレクトリに合成する
 	for tmpdatafile in "$ADMIN_DATA_DIR"/"$target_examination"/*.txt""; do
 			if [ "$tmpdatafile" = "$ADMIN_DATA_DIR/$target_examination/*.txt" ] ; then
-				echo -e "＊受験者が居ません［エンターキーを押してください］\n\n"
+				echo -e "＊受験者が居ません[ Press Enter ]\n\n"
 				rm -rf $TMP_DIR
 				read
 				_exec_support_commnad $target_examination 
@@ -1087,7 +1087,7 @@ _save_pass_students(){
 	#合格者のデータファイルを読み込む
 	for datafile in "$TMP_DIR"/*.txt"" ; do
 			if [ "$datafile" = "$TMP_DIR/*.txt" ] ; then
-				echo -e "合格者が居ません。デフォルトのファイル名で合格者登録（空ファイルを作る）を行いますか？"
+				echo -e "合格者が居ません。デフォルトのファイル名でRegister passers（空ファイルを作る）を行いますか？"
 				select answer in "デフォルトのファイル名で登録" "登録しない"
 				do 
 					if [ $answer ]; then
@@ -1099,14 +1099,14 @@ _save_pass_students(){
 
 								#データフォルダがあるか
 								if [ ! -e "$OFFICIAL_QUALIFIED_DATA_DIR" ] ; then
-									echo -e "＊書き込み先のディレクトリが見つかりません［エンターキーを押してください］\n\n"
+									echo -e "＊書き込み先のディレクトリが見つかりません[ Press Enter ]\n\n"
 									read
 									_exec_support_commnad $target_examination;						
 								fi
 								
 								#同名のファイルがないか
 								if [ -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name" ] ; then
-									echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name は既に存在します［エンターキーを押してください］\n\n"
+									echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name は既に存在します[ Press Enter ]\n\n"
 									read
 									_exec_support_commnad $target_examination;	
 								fi
@@ -1116,19 +1116,19 @@ _save_pass_students(){
 								if [ $? -eq 0 ]; then
 									chmod -f 664 "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
 									chgrp ipl "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
-									echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name を書き込みました［エンターキーを押してください］\n\n"
+									echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name を書き込みました[ Press Enter ]\n\n"
 									read
 								else
-									echo -e "＊書き込みに失敗しました［エンターキーを押してください］\n\n"
+									echo -e "＊書き込みに失敗しました[ Press Enter ]\n\n"
 									read
 								fi
 								;;
-							いいえ) 
+							No) 
 								_exec_support_commnad $target_examination;;
 						esac
 						break
 					else
-						echo -e "＊1か2の番号を入力してください\n"
+						echo -e "Error - input 1 or 2\n"
 					fi
 				done
 				rm -rf $TMP_DIR
@@ -1173,14 +1173,14 @@ _save_pass_students(){
 				デフォルトのファイル名で登録)
 					#データフォルダがあるか
 					if [ ! -e "$OFFICIAL_QUALIFIED_DATA_DIR" ] ; then
-						echo -e "＊書き込み先のディレクトリが見つかりません［エンターキーを押してください］\n\n"
+						echo -e "＊書き込み先のディレクトリが見つかりません[ Press Enter ]\n\n"
 						read
 						_exec_support_commnad $target_examination;						
 					fi
 					
 					#同名のファイルがないか
 					if [ -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name" ] ; then
-						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name は既に存在します［エンターキーを押してください］\n\n"
+						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name は既に存在します[ Press Enter ]\n\n"
 						read
 						_exec_support_commnad $target_examination;	
 					fi
@@ -1190,17 +1190,17 @@ _save_pass_students(){
 					if [ $? -eq 0 ]; then
 						chmod -f 664 "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
 						chgrp ipl "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name"
-						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name を書き込みました［エンターキーを押してください］\n\n"
+						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$file_name を書き込みました[ Press Enter ]\n\n"
 						read
 					else
-						echo -e "＊書き込みに失敗しました［エンターキーを押してください］\n\n"
+						echo -e "＊書き込みに失敗しました[ Press Enter ]\n\n"
 						read
 					fi
 					;;
 				ファイル名を指定して登録)
 					#データフォルダがあるか
 					if [ ! -e "$OFFICIAL_QUALIFIED_DATA_DIR" ] ; then
-						echo -e "＊書き込み先のディレクトリが見つかりません［エンターキーを押してください］\n\n"
+						echo -e "＊書き込み先のディレクトリが見つかりません[ Press Enter ]\n\n"
 						read
 						_exec_support_commnad $target_examination;						
 					fi
@@ -1214,7 +1214,7 @@ _save_pass_students(){
 					
 					#同名のファイルがないか
 					if [ -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name" ] ; then
-						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name は既に存在します［エンターキーを押してください］\n\n"
+						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name は既に存在します[ Press Enter ]\n\n"
 						read
 						_exec_support_commnad $target_examination;	
 					fi
@@ -1224,20 +1224,20 @@ _save_pass_students(){
 					if [ $? -eq 0 ]; then
 						chmod -f 664 "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name"
 						chgrp ipl "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name"
-						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name を書き込みました［エンターキーを押してください］\n\n"
+						echo -e "$OFFICIAL_QUALIFIED_DATA_DIR"/"$input_file_name を書き込みました[ Press Enter ]\n\n"
 						read
 					else
-						echo -e "＊書き込みに失敗しました［エンターキーを押してください］\n\n"
+						echo -e "＊書き込みに失敗しました[ Press Enter ]\n\n"
 						read
 					fi
 					;;
 				
-				いいえ) 
+				No) 
 					_exec_support_commnad $target_examination;;
 			esac
 			break
 		else
-			echo -e "＊1か2の番号を入力してください\n"
+			echo -e "Error - input 1 or 2\n"
 		fi
     done
     
@@ -1263,7 +1263,7 @@ _main_menu(){
 	echo " Copyright(C) 2007-2011 CreW Project All Rights Reserved."
 	echo "**********************************************************"
 	
-	select command in "新規試験登録" "試験運営" "終了"
+	select command in "新規試験登録" "試験運営" " closed"
 	do
 		if [ $command ]; then
 			case $command in
@@ -1271,7 +1271,7 @@ _main_menu(){
 					_register_new_examination;;
 				"試験運営") 
 					_invigilation_support;;
-				"終了")
+				" closed")
 					_quit;;
 			esac
 			break
