@@ -1,4 +1,17 @@
+s/登録済の試験一覧/Registered examinations/
+s/試験を開始しました.../The examination has just begun.../
+s/試験を終了しました/The examination has closed/
 s/［`_create_examination_string $1`］の開始・終了/Start or Stop [`_create_examination_string $1`]/
+s/［`_create_examination_string $1`］の受験者リスト/Applicants of [`_create_examination_string $1`]/
+s/受験者総計:${#hosts[@]}名/Total: ${#hosts[@]} applicants/
+s/受験者リストを印刷/Print applicants list/
+s/`date +%Y年%m月%d日-%H時%M分%S秒` 時点/`date +%Y-%m-%d %H:%M:%S`/
+s/    学生証  合否  端末      登録日時           ログイン    学籍番号     名前/    IDcard  Pass  Host      Date               Logname     Student-number Name/
+s/受験者リスト/Applicants List/
+s/［`_create_examination_string $1`］の合格者リスト/Passers of [`_create_examination_string $1`]/
+s/合格者総計:${#hosts[@]}名/Total: ${#hosts[@]} passers/
+s/合格者リストを印刷/Print passers list/
+s/合格者リスト/Passers List/
 s/試験開始・終了/Start or Stop/
 s/試験開始/Start/
 s/試験終了/Stop/

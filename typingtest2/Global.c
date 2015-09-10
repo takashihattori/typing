@@ -10,6 +10,6 @@ char global_tmp[MAXSTRLEN];
 
 //オプションのデフォルトを設定
 int HIDE_ERR_MODE_EX = 0;
-int HIDE_TYPE_MODE_EX = 0;
+int HIDE_TYPE_MODE_EX = 1;
 int HIDE_ERR_MODE_PRA = 0;
 int HIDE_TYPE_MODE_PRA = 0;

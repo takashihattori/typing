@@ -21,6 +21,11 @@ typingtest2/.depend
 *.app
 typingtest2/typing
 
+# Generated files
+typingadmin2/typingadmin2-utf8
+typingadmin2/typingadmin2-en
+typingtest2/ja_JP.UTF-8
+
 # GNU Global
 GPATH
 GRTAGS

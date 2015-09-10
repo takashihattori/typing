@@ -1,17 +1,15 @@
 CC = gcc
 CFLAGS = -O -DUNIX -funsigned-char
-DEST_DIR = /usr/local/lib/typing
 
 SRCS = Intprt.c main.c Global.c Token.c Terminal.c Menu.c Test.c Variable.c Time.c ErrChk.c Examination.c
 OBJS = Intprt.o main.o Global.o Token.o Terminal.o Menu.o Test.o Examination.o Variable.o Time.o ErrChk.o 
 LIBS = -lldap
 
-all : typing
+all : typing data
 
 install:
-	for f in *.txt ;\
-	  do install -c -m 644 $$f $(DEST_DIR); \
-	done
+	install -c -d -m 644 ja/*.txt $(DEST_DIR)
+	install -c -d -m 644 en/*.txt $(DEST_DIR)
 	install -c -m 755 typing $(DEST_DIR)
 
 typing: $(OBJS) Makefile
@@ -23,3 +21,5 @@ depend:
 clean:
 	@rm -f typing *.o core *~
 
+data: 
+	./translate.sh

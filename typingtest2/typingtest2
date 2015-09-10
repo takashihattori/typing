@@ -2,33 +2,28 @@
 OS=`uname -s`
 HOST=`uname -n`
 
-if [ $# -eq 1 ]; then
-    LOCALE=$1
-else
-    LOCALE='ja'
-fi
+cd /pub/sfc/ipl/typing
 
-if [ ${DISPLAY} ]; then
-    cd /home/hattori/typing/typingtest2
-    if [ ${OS} = 'SunOS' ]; then
-	kterm -xrm '*.vt100.translations: #override <Btn2Up>:bell(100)' \
-	    -km jis -fn \*-fixed-medium-r-normal--24-\*-iso8859-1 \
-	    -fr \*-fixed-medium-r-normal--24-\*-jisx0201\* \
-	    -fk -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
-	    -fkb -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
-	    -fb \*-fixed-medium-r-normal--24-\*-iso8859-1 \
-	    -frb \*-fixed-medium-r-normal--24-\*-jisx0201\* \
-	    -title 'TYPING TEST' \
-	    -e ./typing --hide-type-ex --hide-type-pra ${LOCALE}
-    elif [ ${OS} = 'Darwin' ]; then
-	if [ $# -ne 1 ]; then
-	    APPLE_LANG=`defaults read .GlobalPreferences AppleLanguages | tr -d "[:space:]" | cut -c2-3`
-	    if [ ${APPLE_LANG} = 'ja' ]; then
-		LOCALE='ja'
+if [ $OS = 'Darwin' ]
+then
+    if [ $# -eq 1 ]
+    then
+	LOCALE=$1
+    else
+	L=`defaults read -g AppleLocale`
+	if [ $L = 'ja_JP' ]
+	then
+	    if [ $DISPLAY ]
+		LOCALE='ja_JP.eucJP'
 	    else
-		LOCALE='en'
+		LOCALE='ja_JP.UTF-8'
 	    fi
+	else
+	    LOCALE='en'
 	fi
+    fi
+    if [ ${DISPLAY} ]
+    then
 	kterm -xrm '*.vt100.translations: #override <Btn2Up>:bell(100)\n <KeyPress>BackSpace:string(0x7f)\n' \
 	    -km euc -fn \*-fixed-medium-r-normal--24-\*-iso8859-1 \
 	    -fr \*-fixed-medium-r-normal--24-\*-jisx0201\* \
@@ -37,29 +32,16 @@ if [ ${DISPLAY} ]; then
 	    -fb \*-fixed-medium-r-normal--24-\*-iso8859-1 \
 	    -frb \*-fixed-medium-r-normal--24-\*-jisx0201\* \
 	    -title 'TYPING TEST' \
-	    -e ./typing --hide-type-ex --hide-type-pra ${LOCALE}
+	    -e ./typing-mac --hide-type-pra $LOCALE
     else
-	kterm -xrm '*.vt100.translations: #override <Btn2Up>:bell(100)' \
-	    -km jis -fn \*-fixed-medium-r-normal--24-\*-iso8859-1 \
-	    -fr \*-fixed-medium-r-normal--24-\*-jisx0201\* \
-	    -fkB -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
-	    -fk@ -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
-	    -fkbB -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
-	    -fkb@ -jis-fixed-medium-r-normal--24-\*-jisx0208\* \
-	    -fb \*-fixed-medium-r-normal--24-\*-iso8859-1 \
-	    -frb \*-fixed-medium-r-normal--24-\*-jisx0201\* \
-	    -title 'TYPING TEST' \
-	    -e ./typing --hide-type-ex --hide-type-pra ${LOCALE}
+	./typing-mac --hide-type-pra $LOCALE
     fi
+elif [ $OS = 'SunOS' ]
+    echo 'Not supported currently on this machine.'
+#    ./typing-solaris --hide-type-pra $LANG
+elif [ $OS = 'Linux' ]
+    echo 'Not supported currently on this machine.'
+#    ./typing-linux --hide-type-pra $LANG
 else
-    if [ ${HOST} = "ccz00" ]; then
-      cd /usr/local/lib/typing/typingtestex-UTF8
-    elif [ ${HOST} = "ccx10.sfc.keio.ac.jp" ]; then
-      cd /usr/local/lib/typing/typingtestex-UTF8
-    elif [ ${HOST} = "ccx20.sfc.keio.ac.jp" ]; then
-      cd /usr/local/lib/typing/typingtestex-UTF8
-    else
-      cd /usr/local/lib/typing/typingtestex
-    fi
-    ./typing --hide-type-ex --hide-type-pra ${LOCALE}
+    echo 'Not supported currently on this machine.'
 fi

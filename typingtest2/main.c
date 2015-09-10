@@ -31,17 +31,20 @@ main(int argc, char *argv[])
 	for(i=1;i<argc;i++){		
           if (strcmp(argv[i], "--hide-err-ex") == 0) {//本番のエラーチェック結果の表示を消すモードを決める
             HIDE_ERR_MODE_EX = 1;
-          }else if(strcmp(argv[i], "--hide-type-ex") == 0) {//本番のタイプエコーを隠すモードを決める
-            HIDE_TYPE_MODE_EX = 1;
           }else if(strcmp(argv[i], "--hide-err-pra") == 0) {//練習のエラーチェック結果の表示を消すモードを決める
             HIDE_ERR_MODE_PRA = 1;
           }else if(strcmp(argv[i], "--hide-type-pra") == 0) {//練習のタイプエコーを隠すモードを決める
             HIDE_TYPE_MODE_PRA = 1;
-          }else if(strcmp(argv[i], "ja") == 0) {//日本語起動オプション
-	    strcpy(locale,"ja");
+          }else if(strcmp(argv[i], "ja_JP.eucJP") == 0) {//日本語起動オプション
+	    strcpy(locale,"ja_JP.eucJP");
+          }else if(strcmp(argv[i], "ja_JP.UTF-8") == 0) {//日本語起動オプション
+	    strcpy(locale,"ja_JP.UTF-8");
           }else if(strcmp(argv[i], "en") == 0) {//英語
 	    strcpy(locale,"en");
-          }
+          } else {
+	    fprintf(stderr, "Invalid argument\n");
+	    exit(1);
+	  }
 	}
 
 	term_init();

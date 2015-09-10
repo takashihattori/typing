@@ -65,15 +65,18 @@ const char * MODES[3];
  * モード選択関連
  **********************************************************/
  
- void Examination_selectMode(Examination * examination){
- 	int number;
-	printf(ref("select_mode_title"));
-	MODES[0] = ref("ordinary_mode");
-	MODES[1] = ref("cover_mode");
-	MODES[2] = ref("practice_mode");
-	number = selectNumber(ref("select_mode_message"),MODES,3);
-	examination->mode = number;
- }
+void Examination_selectMode(Examination * examination){
+  int number;
+  printf(ref("select_mode_title"));
+  MODES[0] = ref("ordinary_mode");
+  MODES[1] = ref("cover_mode");
+  MODES[2] = ref("practice_mode");
+  number = selectNumber(ref("select_mode_message"),MODES,3);
+  examination->mode = number;
+  if (number == 1) {
+    HIDE_TYPE_MODE_EX = 0;
+  }
+}
 
 /***********************************************************
  * 受験情報の登録
