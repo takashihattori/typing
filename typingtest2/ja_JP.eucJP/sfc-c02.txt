@@ -1,0 +1,29 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     [cover] The Snow Queen"
+""
+"================================================================"
+"In a large town, where there are so many houses, and so many"
+"people, that there is no room left for everybody to have a"
+"little garden; and where, on this account, most persons are"
+"obliged to content themselves with flowers in pots."
+"================================================================"
+"全228文字 全部で4行"
+"時間制限 137秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 137
+!SET max_error_type 9
+!SET title "[cover] The Snow Queen"
+!SET total_text_length 228
+!SET type_min_speed 100
+!TEXT
+"In a large town, where there are so many houses, and so many"
+"people, that there is no room left for everybody to have a"
+"little garden; and where, on this account, most persons are"
+"obliged to content themselves with flowers in pots."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

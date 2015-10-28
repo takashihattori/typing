@@ -1,31 +1,31 @@
 #情報処理タイピング試験用
 !SECTION 1
 !DISP 10 0
-"             SFCタイピング試験   On the Origin of Species"
+"             SFCタイピング試験     On the Origin of Species"
 ""
 "================================================================"
 "The mental powers of different animals in wild and tame state"
 "present still greater difficulties require a separate section."
 "Be it remembered I have nothing to do with origin of memory,"
 "attention, and the different faculties of the mind, but merely"
-"with their differences in each of the great divisions of nature."
+"with their differences."
 "================================================================"
-"全309文字 全部で5行"
-"時間制限 124秒 誤字制限 9字"
+"全268文字 全部で5行"
+"時間制限 108秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 124
+!SET time_limit 108
 !SET max_error_type 9
 !SET title "On the Origin of Species"
-!SET total_text_length 309
+!SET total_text_length 268
 !SET type_min_speed 150
 !TEXT
 "The mental powers of different animals in wild and tame state"
 "present still greater difficulties require a separate section."
 "Be it remembered I have nothing to do with origin of memory,"
 "attention, and the different faculties of the mind, but merely"
-"with their differences in each of the great divisions of nature."
+"with their differences."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END

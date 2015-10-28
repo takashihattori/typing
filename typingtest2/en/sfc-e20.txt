@@ -1,4 +1,4 @@
-#For Information Processing
+#For Typing Exam (FIT1)
 !SECTION 1
 !DISP 5 0
 "             SFC Typing Examination      Leonardo Da Vinci"
@@ -8,24 +8,26 @@
 "every man makes some mistakes in his first compositions and"
 "he who knows them not, cannot amend them. But you, knowing"
 "your errors, will correct your works and where you find mistakes"
-"amend them, and remember never to fall into them again."
+"amend them."
 "================================================================"
-"Total of 296 letters. 5 lines."
-"Time limit 119 sec Error limit 9 letters."
+"Total of 252 letters, 5 lines."
+"Time limit 101 sec, Error limit 9 letters."
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 119
+!SET time_limit 101
 !SET max_error_type 9
 !SET title "Leonardo Da Vinci"
-!SET total_text_length 296
+!SET total_text_length 252
 !SET type_min_speed 150
 !TEXT
 "These rules are of use only in correcting the figures; since"
 "every man makes some mistakes in his first compositions and"
 "he who knows them not, cannot amend them. But you, knowing"
 "your errors, will correct your works and where you find mistakes"
-"amend them, and remember never to fall into them again."
+"amend them."
 !MESSAGE
 "===>  Now Typing Examination is over.  <==="
 !TEST_END
+
+

@@ -8,24 +8,24 @@
 "rich, yet tattered and antique. Its walls were hung with"
 "tapestry and bedecked with manifold and multiform armorial"
 "trophies, together with an unusually great number of very"
-"spirited modern paintings in frames of rich golden arabesque."
+"spirited modern paintings."
 "================================================================"
-"全295文字 全部で5行"
-"時間制限 118秒 誤字制限 9字"
+"全260文字 全部で5行"
+"時間制限 104秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 118
+!SET time_limit 104
 !SET max_error_type 9
 !SET title "The Oval Portrait"
-!SET total_text_length 295
+!SET total_text_length 260
 !SET type_min_speed 150
 !TEXT
 "It lay in a remote turret of the building. Its decorations were"
 "rich, yet tattered and antique. Its walls were hung with"
 "tapestry and bedecked with manifold and multiform armorial"
 "trophies, together with an unusually great number of very"
-"spirited modern paintings in frames of rich golden arabesque."
+"spirited modern paintings."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END

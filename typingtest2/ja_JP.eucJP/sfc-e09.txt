@@ -1,5 +1,4 @@
 #情報処理タイピング試験用
-
 !SECTION 1
 !DISP 10 0
 "             SFCタイピング試験     VORTEX BLASTER"
@@ -8,25 +7,23 @@
 "But at long intervals, for some one of a dozen reasons science knew"
 "so little, fundamentally, of the true inwardness of the intra atomic"
 "reactions one of these small, tame, self limiting vortices flared,"
-"nova like, into a large, wild, self sustaining one. It ceased being"
-"a servant then, and became a master."
+"nova like, into a large, wild, self sustaining one."
 "================================================================"
-"全304文字 全部で5行"
-"時間制限 122秒 誤字制限 9字"
+"全252文字 全部で4行"
+"時間制限 101秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 122
+!SET time_limit 101
 !SET max_error_type 9
 !SET title "VORTEX BLASTER"
-!SET total_text_length 304
+!SET total_text_length 252
 !SET type_min_speed 150
 !TEXT
 "But at long intervals, for some one of a dozen reasons science knew"
 "so little, fundamentally, of the true inwardness of the intra atomic"
 "reactions one of these small, tame, self limiting vortices flared,"
-"nova like, into a large, wild, self sustaining one. It ceased being"
-"a servant then, and became a master."
+"nova like, into a large, wild, self sustaining one."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END

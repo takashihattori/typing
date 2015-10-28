@@ -88,7 +88,7 @@
 #typingtestex用データ定義
 #
 !SET pass_dir "pass"
-!SET home_dir "/Users/"
+!SET home_dir "/home/"
 !SET admin_dir ".typingtestadmin"
 !SET txt_extension "txt"
 !SET question_file ".question"
@@ -125,7 +125,7 @@
 "
 !SET error_not_exist_examination
 "
-指定された試験は存在しません．
+指定された試験は存在しません．(%s, %d, %s)
 "
 !SET confirm_input
 "

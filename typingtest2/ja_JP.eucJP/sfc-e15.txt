@@ -1,31 +1,31 @@
 #情報処理タイピング試験用
 !SECTION 1
 !DISP 10 0
-"             SFCタイピング試験   Voyages of Dr. Dolittle"
+"             SFCタイピング試験     Voyages of Dr. Dolittle"
 ""
 "================================================================"
 "I did not go to school; because my father was not rich enough to"
 "send me. But I was extremely fond of animals. So I used to spend"
 "my time collecting birds' eggs and butterflies, fishing in the"
 "river, rambling through the countryside after blackberries and"
-"mushrooms and helping the mussel-man mend his nets."
+"mushrooms."
 "================================================================"
-"全303文字 全部で5行"
-"時間制限 122秒 誤字制限 9字"
+"全262文字 全部で5行"
+"時間制限 105秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 122
+!SET time_limit 105
 !SET max_error_type 9
 !SET title "Voyages of Dr. Dolittle"
-!SET total_text_length 303
+!SET total_text_length 262
 !SET type_min_speed 150
 !TEXT
 "I did not go to school; because my father was not rich enough to"
 "send me. But I was extremely fond of animals. So I used to spend"
 "my time collecting birds' eggs and butterflies, fishing in the"
 "river, rambling through the countryside after blackberries and"
-"mushrooms and helping the mussel-man mend his nets."
+"mushrooms."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END

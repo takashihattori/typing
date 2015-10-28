@@ -1,33 +1,33 @@
-#For Information Processing
+#For Typing Exam (FIT1)
 !SECTION 1
 !DISP 5 0
-"       SFC Typing Examination   Fukuzawa"
+"             SFC Typing Examination      Fukuzawa"
 ""
 "================================================================"
 "These beliefs represented the beginning of an end to the privilege"
 "and plutocracy of Japan at the time, giving hope to an entire"
 "country of citizens yearning for a new society where people would"
 "be judged entirely upon their merits rather than their caste or"
-"wealth. It was the beginning of modern Japan."
+"wealth."
 "================================================================"
-"Total of 300 letters. 5 lines."
-"Time limit 120 sec Error limit 9 letters."
+"Total of 262 letters, 5 lines."
+"Time limit 105 sec, Error limit 9 letters."
 !PAUSE
-#
-#
 !TEST
 !SET cursor 1
-!SET time_limit 120
+!SET time_limit 105
 !SET max_error_type 9
 !SET title "Fukuzawa"
-!SET total_text_length 300
+!SET total_text_length 262
 !SET type_min_speed 150
 !TEXT
 "These beliefs represented the beginning of an end to the privilege"
 "and plutocracy of Japan at the time, giving hope to an entire"
 "country of citizens yearning for a new society where people would"
 "be judged entirely upon their merits rather than their caste or"
-"wealth. It was the beginning of modern Japan."
+"wealth."
 !MESSAGE
 "===>  Now Typing Examination is over.  <==="
 !TEST_END
+
+

@@ -25,7 +25,7 @@ main(int argc, char *argv[])
 #endif
 
 	//デフォルトは日本語
-        strcpy(locale,"ja");
+        strcpy(locale,"ja_JP.UTF-8");
 
 	//引数のチェックを行う
 	for(i=1;i<argc;i++){		

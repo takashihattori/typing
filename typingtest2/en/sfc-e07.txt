@@ -1,5 +1,4 @@
-#For Information Processing
-
+#For Typing Exam (FIT1)
 !SECTION 1
 !DISP 5 0
 "             SFC Typing Examination      Spacehounds of IPC"
@@ -9,24 +8,26 @@
 "fifteen feet in diameter, tapering sharply upward to a hollow point"
 "some twenty feet above them. The true shape of the room, however,"
 "was not immediately apparent, because of the enormous latticed"
-"beams and girders which braced the walls in every direction."
+"beams and girders."
 "================================================================"
-"Total of 316 letters. 5 lines."
-"Time limit 127 sec Error limit 9 letters."
+"Total of 274 letters, 5 lines."
+"Time limit 110 sec, Error limit 9 letters."
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 127
+!SET time_limit 110
 !SET max_error_type 9
 !SET title "Spacehounds of IPC"
-!SET total_text_length 316
+!SET total_text_length 274
 !SET type_min_speed 150
 !TEXT
 "Soon they entered the conical top compartment, a room scarcely"
 "fifteen feet in diameter, tapering sharply upward to a hollow point"
 "some twenty feet above them. The true shape of the room, however,"
 "was not immediately apparent, because of the enormous latticed"
-"beams and girders which braced the walls in every direction."
+"beams and girders."
 !MESSAGE
 "===>  Now Typing Examination is over.  <==="
 !TEST_END
+
+

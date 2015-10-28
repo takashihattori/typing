@@ -1,0 +1,6 @@
+Relativity
+"The present book is intended, as far as possible, to give an exact"
+"insight into the theory of Relativity to those readers who, from"
+"a general scientific and philosophical point of view, are"
+"interested in the theory, but who are not conversant with the"
+"mathematical apparatus."

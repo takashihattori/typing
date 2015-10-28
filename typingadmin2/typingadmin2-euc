@@ -35,7 +35,7 @@ CNS_IMAC_HOME="$HOME/CNSiMac";
 CNS_LAMDA_MAC_HOME="$HOME/CNSMac";
 
 #OFFICIAL_QUESTION_MENUTXT="/usr/local/lib/typing/typingtestex/ja/menu.txt"
-OFFICIAL_QUESTION_MENUTXT="/Users/hattori/Documents/typing/typingtest2/ja/menu.txt"
+OFFICIAL_QUESTION_MENUTXT="/pub/sfc/ipl/typing/ja_JP.eucJP/menu.txt"
 
 ID_LIST="/pub/sfc/ipl/idtable"
 

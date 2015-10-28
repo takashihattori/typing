@@ -1,0 +1,29 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     [cover] The Real Princess"
+""
+"================================================================"
+"There was once a Prince who wished to marry a Princess; but then"
+"she must be a real Princess. He travelled all over the world in"
+"hopes of finding such a lady; but there was always something"
+"wrong. At last he returned to his palace."
+"================================================================"
+"全228文字 全部で4行"
+"時間制限 137秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 137
+!SET max_error_type 9
+!SET title "[cover] The Real Princess"
+!SET total_text_length 228
+!SET type_min_speed 100
+!TEXT
+"There was once a Prince who wished to marry a Princess; but then"
+"she must be a real Princess. He travelled all over the world in"
+"hopes of finding such a lady; but there was always something"
+"wrong. At last he returned to his palace."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

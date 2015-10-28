@@ -1,0 +1,35 @@
+#For Typing Exam (FIT1)
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      [cover] Cinderella"
+""
+"================================================================"
+"Cinderella ran from the room."
+"Down the steps of the palace she flew."
+"She ran so fast that she lost one of her little glass slippers."
+"The clock finished striking."
+"The coach turned into a pumpkin."
+"The horses and men turned into mice."
+"================================================================"
+"Total of 226 letters, 6 lines."
+"Time limit 136 sec, Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 136
+!SET max_error_type 9
+!SET title "[cover] Cinderella"
+!SET total_text_length 226
+!SET type_min_speed 100
+!TEXT
+"Cinderella ran from the room."
+"Down the steps of the palace she flew."
+"She ran so fast that she lost one of her little glass slippers."
+"The clock finished striking."
+"The coach turned into a pumpkin."
+"The horses and men turned into mice."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END
+
+

@@ -1,4 +1,4 @@
-#!/bin/sh -f
+#!/bin/sh
 OS=`uname -s`
 HOST=`uname -n`
 
@@ -14,6 +14,7 @@ then
 	if [ $L = 'ja_JP' ]
 	then
 	    if [ $DISPLAY ]
+	    then
 		LOCALE='ja_JP.eucJP'
 	    else
 		LOCALE='ja_JP.UTF-8'
@@ -37,11 +38,11 @@ then
 	./typing-mac --hide-type-pra $LOCALE
     fi
 elif [ $OS = 'SunOS' ]
-    echo 'Not supported currently on this machine.'
-#    ./typing-solaris --hide-type-pra $LANG
+then
+    ./typing-solaris --hide-type-pra $LANG
 elif [ $OS = 'Linux' ]
-    echo 'Not supported currently on this machine.'
-#    ./typing-linux --hide-type-pra $LANG
+then
+    ./typing-linux --hide-type-pra $LANG
 else
     echo 'Not supported currently on this machine.'
 fi

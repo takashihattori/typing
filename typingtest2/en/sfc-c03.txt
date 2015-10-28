@@ -1,0 +1,31 @@
+#For Typing Exam (FIT1)
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      [cover] The Little Match Girl"
+""
+"================================================================"
+"But in the corner, at the cold hour of dawn, sat the poor girl,"
+"with rosy cheeks and with a smiling mouth, leaning against the"
+"wall. Stiff and stark sat the child there with her matches, of"
+"which one bundle had been burnt."
+"================================================================"
+"Total of 219 letters, 4 lines."
+"Time limit 132 sec, Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 132
+!SET max_error_type 9
+!SET title "[cover] The Little Match Girl"
+!SET total_text_length 219
+!SET type_min_speed 100
+!TEXT
+"But in the corner, at the cold hour of dawn, sat the poor girl,"
+"with rosy cheeks and with a smiling mouth, leaning against the"
+"wall. Stiff and stark sat the child there with her matches, of"
+"which one bundle had been burnt."
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END
+
+

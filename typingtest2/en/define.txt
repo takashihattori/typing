@@ -113,7 +113,7 @@ Hit 1 or 2 to Select Mode (Your Input: %s)
 "
 !SET ordinary_mode "Ordinary Method (You can see the keyboard)"
 !SET cover_mode "Cover Method (You must cover the keyboard)"
-!SET prctice_mode "Practice Mode"
+!SET practice_mode "Practice Mode"
 
 #試験情報入力
 
@@ -126,7 +126,7 @@ Input Examination Information
 !SET error_not_exist_examination
 "
 
-Designated Examination does not exist.
+Designated Examination does not exist. (%s, %d, %s)
 "
 !SET confirm_input
 "

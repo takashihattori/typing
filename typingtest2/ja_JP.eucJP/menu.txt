@@ -13,171 +13,143 @@
 #!ITEM "test"
 
 !TITLE "SFCタイピング活赋(1)"
-!LOAD "ja/sfc-e01.txt"
+!LOAD "ja_JP.eucJP/sfc-e01.txt"
 !ITEM "Keio"
 
 !TITLE "SFCタイピング活赋(2)"
-!LOAD "ja/sfc-e02.txt"
+!LOAD "ja_JP.eucJP/sfc-e02.txt"
 !ITEM "Fukuzawa"
 
 !TITLE "SFCタイピング活赋(3)"
-!LOAD "ja/sfc-e03.txt"
+!LOAD "ja_JP.eucJP/sfc-e03.txt"
 !ITEM "History of Keio"
 
 !TITLE "SFCタイピング活赋(4)"
-!LOAD "ja/sfc-e04.txt"
+!LOAD "ja_JP.eucJP/sfc-e04.txt"
 !ITEM "Relativity"
 
 !TITLE "SFCタイピング活赋(5)"
-!LOAD "ja/sfc-e05.txt"
+!LOAD "ja_JP.eucJP/sfc-e05.txt"
 !ITEM "On the Origin of Species"
 
 !TITLE "SFCタイピング活赋(6)"
-!LOAD "ja/sfc-e06.txt"
+!LOAD "ja_JP.eucJP/sfc-e06.txt"
 !ITEM "Skylark Three"
 
 !TITLE "SFCタイピング活赋(7)"
-!LOAD "ja/sfc-e07.txt"
+!LOAD "ja_JP.eucJP/sfc-e07.txt"
 !ITEM "Spacehounds of IPC"
 
 !TITLE "SFCタイピング活赋(8)"
-!LOAD "ja/sfc-e08.txt"
+!LOAD "ja_JP.eucJP/sfc-e08.txt"
 !ITEM "Subspace Survivors"
 
 !TITLE "SFCタイピング活赋(9)"
-!LOAD "ja/sfc-e09.txt"
+!LOAD "ja_JP.eucJP/sfc-e09.txt"
 !ITEM "VORTEX BLASTER"
 
 !TITLE "SFCタイピング活赋(10)"
-!LOAD "ja/sfc-e10.txt"
+!LOAD "ja_JP.eucJP/sfc-e10.txt"
 !ITEM "Twenty Thousand Leagues"
 
 !TITLE "SFCタイピング活赋(11)"
-!LOAD "ja/sfc-e11.txt"
+!LOAD "ja_JP.eucJP/sfc-e11.txt"
 !ITEM "Centre of The Earth"
 
 !TITLE "SFCタイピング活赋(12)"
-!LOAD "ja/sfc-e12.txt"
+!LOAD "ja_JP.eucJP/sfc-e12.txt"
 !ITEM "The Underground City"
 
 !TITLE "SFCタイピング活赋(13)"
-!LOAD "ja/sfc-e13.txt"
+!LOAD "ja_JP.eucJP/sfc-e13.txt"
 !ITEM "Dr. Dolittle"
 
 !TITLE "SFCタイピング活赋(14)"
-!LOAD "ja/sfc-e14.txt"
+!LOAD "ja_JP.eucJP/sfc-e14.txt"
 !ITEM "Dr. Dolittle C.6"
 
 !TITLE "SFCタイピング活赋(15)"
-!LOAD "ja/sfc-e15.txt"
+!LOAD "ja_JP.eucJP/sfc-e15.txt"
 !ITEM "Voyages of Dr. Dolittle"
 
 !TITLE "SFCタイピング活赋(16)"
-!LOAD "ja/sfc-e16.txt"
+!LOAD "ja_JP.eucJP/sfc-e16.txt"
 !ITEM "Voyages of Dr. Dolittle 2"
 
 !TITLE "SFCタイピング活赋(17)"
-!LOAD "ja/sfc-e17.txt"
+!LOAD "ja_JP.eucJP/sfc-e17.txt"
 !ITEM "The Magician"
 
 !TITLE "SFCタイピング活赋(18)"
-!LOAD "ja/sfc-e18.txt"
+!LOAD "ja_JP.eucJP/sfc-e18.txt"
 !ITEM "Moon and Sixpence"
 
 !TITLE "SFCタイピング活赋(19)"
-!LOAD "ja/sfc-e19.txt"
+!LOAD "ja_JP.eucJP/sfc-e19.txt"
 !ITEM "The Gentle Grafter"
 
 !TITLE "SFCタイピング活赋(20)"
-!LOAD "ja/sfc-e20.txt"
+!LOAD "ja_JP.eucJP/sfc-e20.txt"
 !ITEM "Leonardo Da Vinci"
 
 !TITLE "SFCタイピング活赋(21)"
-!LOAD "ja/sfc-e21.txt"
+!LOAD "ja_JP.eucJP/sfc-e21.txt"
 !ITEM "The Voyage of The Beagle"
 
 !TITLE "SFCタイピング活赋(22)"
-!LOAD "ja/sfc-e22.txt"
+!LOAD "ja_JP.eucJP/sfc-e22.txt"
 !ITEM "Triplanetary"
 
 !TITLE "SFCタイピング活赋(23)"
-!LOAD "ja/sfc-e23.txt"
+!LOAD "ja_JP.eucJP/sfc-e23.txt"
 !ITEM "The Invisible Man"
 
 !TITLE "SFCタイピング活赋(24)"
-!LOAD "ja/sfc-e24.txt"
+!LOAD "ja_JP.eucJP/sfc-e24.txt"
 !ITEM "Sylvie and Bruno"
 
 !TITLE "SFCタイピング活赋(25)"
-!LOAD "ja/sfc-e25.txt"
+!LOAD "ja_JP.eucJP/sfc-e25.txt"
 !ITEM "DADDY-LONG-LEGS"
 
 !TITLE "SFCタイピング活赋(26)"
-!LOAD "ja/sfc-e26.txt"
+!LOAD "ja_JP.eucJP/sfc-e26.txt"
 !ITEM "Dear Enemy"
 
 !TITLE "SFCタイピング活赋(27)"
-!LOAD "ja/sfc-e27.txt"
+!LOAD "ja_JP.eucJP/sfc-e27.txt"
 !ITEM "Rue Morgue"
 
 !TITLE "SFCタイピング活赋(28)"
-!LOAD "ja/sfc-e28.txt"
+!LOAD "ja_JP.eucJP/sfc-e28.txt"
 !ITEM "The Oval Portrait"
 
 !TITLE "SFCタイピング活赋(29)"
-!LOAD "ja/sfc-e29.txt"
+!LOAD "ja_JP.eucJP/sfc-e29.txt"
 !ITEM "Anne of Green Gables"
 
 !TITLE "SFCタイピング活赋(30)"
-!LOAD "ja/sfc-e30.txt"
+!LOAD "ja_JP.eucJP/sfc-e30.txt"
 !ITEM "Anne of Avonlea"
 
-!TITLE "SFCタイピング活赋(31)"
-!LOAD "ja/sfc-e31.txt"
-!ITEM "All Around The Moon"
-
-!TITLE "SFCタイピング活赋(32)"
-!LOAD "ja/sfc-e32.txt"
-!ITEM "An Antarctic Mystery"
-
-!TITLE "SFCタイピング活赋(33)"
-!LOAD "ja/sfc-e33.txt"
-!ITEM "The Blockade Runners"
-
-!TITLE "SFCタイピング活赋(34)"
-!LOAD "ja/sfc-e34.txt"
-!ITEM "The Four Million"
-
-!TITLE "SFCタイピング活赋(35)"
-!LOAD "ja/sfc-e35.txt"
-!ITEM "The Gift of the Magi"
-
-!TITLE "SFCタイピング活赋(36)"
-!LOAD "ja/sfc-e36.txt"
-!ITEM "Coral Reefs"
-
-!TITLE "SFCタイピング活赋(37)"
-!LOAD "ja/sfc-e37.txt"
-!ITEM "The Decent of Man"
-
-!TITLE "SFCタイピング活赋(38)"
-!LOAD "ja/sfc-e38.txt"
-!ITEM "Volcanic Islands"
-
-!TITLE "SFCタイピング活赋(39)"
-!LOAD "ja/sfc-e39.txt"
-!ITEM "The Variation of Animals"
-
-!TITLE "SFCタイピング活赋(40)"
-!LOAD "ja/sfc-e40.txt"
-!ITEM "Insectivorous Plants"
-
 !TITLE "SFCタイピング活赋(カバ〖1)"
-!LOAD "ja/sfc-c01.txt"
-!ITEM "Cover1"
+!LOAD "ja_JP.eucJP/sfc-c01.txt"
+!ITEM "[cover] The Real Princess"
 
 !TITLE "SFCタイピング活赋(カバ〖2)"
-!LOAD "ja/sfc-c02.txt"
-!ITEM "Cover2"
+!LOAD "ja_JP.eucJP/sfc-c02.txt"
+!ITEM "[cover] The Snow Queen"
+
+!TITLE "SFCタイピング活赋(カバ〖3)"
+!LOAD "ja_JP.eucJP/sfc-c03.txt"
+!ITEM "[cover] The Little Match Girl"
+
+!TITLE "SFCタイピング活赋(カバ〖4)"
+!LOAD "ja_JP.eucJP/sfc-c04.txt"
+!ITEM "[cover] The Red Shoes"
+
+!TITLE "SFCタイピング活赋(カバ〖5)"
+!LOAD "ja_JP.eucJP/sfc-c05.txt"
+!ITEM "[cover] Cinderella"
 
 !MENU_END

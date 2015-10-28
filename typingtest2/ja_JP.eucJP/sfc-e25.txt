@@ -7,25 +7,25 @@
 "Our innocent prattle appeared to amuse him and he waited for"
 "a later train in order to take tea in the study. We had an awful"
 "lot of trouble getting permission. It's hard enough entertaining"
-"fathers and grandfathers, but uncles are a step worse; and"
-"as for brothers and cousins, they are next to impossible."
+"fathers and grandfathers; and as for brothers, they are"
+"next to impossible."
 "================================================================"
-"全303文字 全部で5行"
-"時間制限 122秒 誤字制限 9字"
+"全262文字 全部で5行"
+"時間制限 105秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 122
+!SET time_limit 105
 !SET max_error_type 9
 !SET title "DADDY-LONG-LEGS"
-!SET total_text_length 303
+!SET total_text_length 262
 !SET type_min_speed 150
 !TEXT
 "Our innocent prattle appeared to amuse him and he waited for"
 "a later train in order to take tea in the study. We had an awful"
 "lot of trouble getting permission. It's hard enough entertaining"
-"fathers and grandfathers, but uncles are a step worse; and"
-"as for brothers and cousins, they are next to impossible."
+"fathers and grandfathers; and as for brothers, they are"
+"next to impossible."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END

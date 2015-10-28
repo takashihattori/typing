@@ -1,4 +1,4 @@
-#For Information Processing
+#For Typing Exam (FIT1)
 !SECTION 1
 !DISP 5 0
 "             SFC Typing Examination      Skylark Three"
@@ -8,24 +8,24 @@
 "apparently must come from their own planet, for they have ceased"
 "attacking, have dug in, and are simply holding their ground."
 "It may be that they had not anticipated as much resistance as we"
-"could offer with space-ships and intra-atomic energy."
+"could offer with space-ships."
 "================================================================"
-"Total of 304 letters. 5 lines."
-"Time limit 122 sec Error limit 9 letters."
+"Total of 280 letters, 5 lines."
+"Time limit 112 sec, Error limit 9 letters."
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 122
+!SET time_limit 112
 !SET max_error_type 9
 !SET title "Skylark Three"
-!SET total_text_length 304
+!SET total_text_length 280
 !SET type_min_speed 150
 !TEXT
 "Some material essential to the operation of their war machinery"
 "apparently must come from their own planet, for they have ceased"
 "attacking, have dug in, and are simply holding their ground."
 "It may be that they had not anticipated as much resistance as we"
-"could offer with space-ships and intra-atomic energy."
+"could offer with space-ships."
 !MESSAGE
 "===>  Now Typing Examination is over.  <==="
 !TEST_END

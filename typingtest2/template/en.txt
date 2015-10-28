@@ -1,0 +1,25 @@
+#For Typing Exam (FIT1)
+!SECTION 1
+!DISP 5 0
+"             SFC Typing Examination      %title"
+""
+"================================================================"
+%text
+"================================================================"
+"Total of %chars letters, %lines lines."
+"Time limit %limit sec, Error limit 9 letters."
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit %limit
+!SET max_error_type 9
+!SET title "%title"
+!SET total_text_length %chars
+!SET type_min_speed %speed
+!TEXT
+%text
+!MESSAGE
+"===>  Now Typing Examination is over.  <==="
+!TEST_END
+
+

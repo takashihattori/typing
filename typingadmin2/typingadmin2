@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cd /pub/sfc/ipl/typing
+
+if [ $LANG = 'ja_JP.eucJP' -o $LANG = 'ja_JP.eucjp' -o $LANG = 'ja_JP.EUC-JP' ]
+then
+    ./typingadmin2-euc
+elif [ `echo $LANG | cut -c 1-2` = 'ja' ]
+then
+    ./typingadmin2-utf8
+else
+    ./typingadmin2-en
+fi

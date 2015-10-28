@@ -1,0 +1,29 @@
+#情報処理タイピング試験用
+!SECTION 1
+!DISP 10 0
+"             SFCタイピング試験     [cover] The Little Match Girl"
+""
+"================================================================"
+"But in the corner, at the cold hour of dawn, sat the poor girl,"
+"with rosy cheeks and with a smiling mouth, leaning against the"
+"wall. Stiff and stark sat the child there with her matches, of"
+"which one bundle had been burnt."
+"================================================================"
+"全219文字 全部で4行"
+"時間制限 132秒 誤字制限 9字"
+!PAUSE
+!TEST
+!SET cursor 1
+!SET time_limit 132
+!SET max_error_type 9
+!SET title "[cover] The Little Match Girl"
+!SET total_text_length 219
+!SET type_min_speed 100
+!TEXT
+"But in the corner, at the cold hour of dawn, sat the poor girl,"
+"with rosy cheeks and with a smiling mouth, leaning against the"
+"wall. Stiff and stark sat the child there with her matches, of"
+"which one bundle had been burnt."
+!MESSAGE
+"===>  タイピング試験が終わりました。  <==="
+!TEST_END

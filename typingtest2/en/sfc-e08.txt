@@ -1,5 +1,4 @@
-#For Information Processing
-
+#For Typing Exam (FIT1)
 !SECTION 1
 !DISP 5 0
 "             SFC Typing Examination      Subspace Survivors"
@@ -9,24 +8,26 @@
 "complex mathematical structure. The parents did not want to be"
 "pilloried as crackpots, as publicity seeking liars, or as being"
 "unable to count; and they knew that nobody would believe them if"
-"they told the truth; even or especially? no medical doctor."
+"they told the truth."
 "================================================================"
-"Total of 309 letters. 5 lines."
-"Time limit 124 sec Error limit 9 letters."
+"Total of 270 letters, 5 lines."
+"Time limit 108 sec, Error limit 9 letters."
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 124
+!SET time_limit 108
 !SET max_error_type 9
 !SET title "Subspace Survivors"
-!SET total_text_length 309
+!SET total_text_length 270
 !SET type_min_speed 150
 !TEXT
 "To Adams it was only one tiny datum in an incredibly huge and"
 "complex mathematical structure. The parents did not want to be"
 "pilloried as crackpots, as publicity seeking liars, or as being"
 "unable to count; and they knew that nobody would believe them if"
-"they told the truth; even or especially? no medical doctor."
+"they told the truth."
 !MESSAGE
 "===>  Now Typing Examination is over.  <==="
 !TEST_END
+
+

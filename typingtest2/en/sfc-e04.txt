@@ -1,31 +1,33 @@
-#For Information Processing
+#For Typing Exam (FIT1)
 !SECTION 1
 !DISP 5 0
-"             SFC Typing Examination    Relativity"
+"             SFC Typing Examination      Relativity"
 ""
 "================================================================"
 "The present book is intended, as far as possible, to give an exact"
 "insight into the theory of Relativity to those readers who, from"
 "a general scientific and philosophical point of view, are"
 "interested in the theory, but who are not conversant with the"
-"mathematical apparatus of theoretical physics."
+"mathematical apparatus."
 "================================================================"
-"Total of 294 letters. 5 lines."
-"Time limit 118 sec Error limit 9 letters."
+"Total of 271 letters, 5 lines."
+"Time limit 109 sec, Error limit 9 letters."
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 118
+!SET time_limit 109
 !SET max_error_type 9
 !SET title "Relativity"
-!SET total_text_length 294
+!SET total_text_length 271
 !SET type_min_speed 150
 !TEXT
 "The present book is intended, as far as possible, to give an exact"
 "insight into the theory of Relativity to those readers who, from"
 "a general scientific and philosophical point of view, are"
 "interested in the theory, but who are not conversant with the"
-"mathematical apparatus of theoretical physics."
+"mathematical apparatus."
 !MESSAGE
 "===>  Now Typing Examination is over.  <==="
 !TEST_END
+
+

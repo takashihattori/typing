@@ -4,28 +4,28 @@
 "             SFCタイピング試験     Anne of Green Gables"
 ""
 "================================================================"
-"Not a stray stick nor stone was to be seen, for Mrs. Rachel would"
+"Not a stray stick was to be seen, for Mrs. Rachel would"
 "have seen it if there had been. Privately she was of the opinion"
-"that Marilla Cuthbert swept that yard over as often as she swept"
+"that Marilla swept that yard over as often as she swept"
 "her house. One could have eaten a meal off the ground without"
-"overbrimming the proverbial peck of dirt."
+"overbrimming the peck of dirt."
 "================================================================"
-"全295文字 全部で5行"
-"時間制限 118秒 誤字制限 9字"
+"全265文字 全部で5行"
+"時間制限 106秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 118
+!SET time_limit 106
 !SET max_error_type 9
 !SET title "Anne of Green Gables"
-!SET total_text_length 295
+!SET total_text_length 265
 !SET type_min_speed 150
 !TEXT
-"Not a stray stick nor stone was to be seen, for Mrs. Rachel would"
+"Not a stray stick was to be seen, for Mrs. Rachel would"
 "have seen it if there had been. Privately she was of the opinion"
-"that Marilla Cuthbert swept that yard over as often as she swept"
+"that Marilla swept that yard over as often as she swept"
 "her house. One could have eaten a meal off the ground without"
-"overbrimming the proverbial peck of dirt."
+"overbrimming the peck of dirt."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END

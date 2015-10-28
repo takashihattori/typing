@@ -1,4 +1,4 @@
-#For Information Processing
+#For Typing Exam (FIT1)
 !SECTION 1
 !DISP 5 0
 "             SFC Typing Examination      Anne of Avonlea"
@@ -8,24 +8,26 @@
 "a post, turned the skirt of her pretty gingham dress over her"
 "shoulders, mounted the fence, and started in pursuit of her"
 "frantic friend. She could run faster than Anne, who was hampered"
-"by her clinging and drenched skirt, and soon overtook her."
+"by her clinging and drenched skirt."
 "================================================================"
-"Total of 295letters. 6 lines."
-"Time limit 118 sec Error limit 9 letters."
+"Total of 272 letters, 5 lines."
+"Time limit 109 sec, Error limit 9 letters."
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 118
+!SET time_limit 109
 !SET max_error_type 9
 !SET title "Anne of Avonlea"
-!SET total_text_length 295
+!SET total_text_length 272
 !SET type_min_speed 150
 !TEXT
 "Diana hopped briskly down, tied the horse securely to"
 "a post, turned the skirt of her pretty gingham dress over her"
 "shoulders, mounted the fence, and started in pursuit of her"
 "frantic friend. She could run faster than Anne, who was hampered"
-"by her clinging and drenched skirt, and soon overtook her."
+"by her clinging and drenched skirt."
 !MESSAGE
 "===>  Now Typing Examination is over.  <==="
 !TEST_END
+
+

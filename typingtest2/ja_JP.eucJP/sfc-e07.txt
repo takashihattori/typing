@@ -1,5 +1,4 @@
 #情報処理タイピング試験用
-
 !SECTION 1
 !DISP 10 0
 "             SFCタイピング試験     Spacehounds of IPC"
@@ -9,24 +8,24 @@
 "fifteen feet in diameter, tapering sharply upward to a hollow point"
 "some twenty feet above them. The true shape of the room, however,"
 "was not immediately apparent, because of the enormous latticed"
-"beams and girders which braced the walls in every direction."
+"beams and girders."
 "================================================================"
-"全316文字 全部で5行"
-"時間制限 127秒 誤字制限 9字"
+"全274文字 全部で5行"
+"時間制限 110秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 127
+!SET time_limit 110
 !SET max_error_type 9
 !SET title "Spacehounds of IPC"
-!SET total_text_length 316
+!SET total_text_length 274
 !SET type_min_speed 150
 !TEXT
 "Soon they entered the conical top compartment, a room scarcely"
 "fifteen feet in diameter, tapering sharply upward to a hollow point"
 "some twenty feet above them. The true shape of the room, however,"
 "was not immediately apparent, because of the enormous latticed"
-"beams and girders which braced the walls in every direction."
+"beams and girders."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END

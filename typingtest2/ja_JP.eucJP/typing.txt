@@ -1,7 +1,7 @@
-!LOAD "ja/define.txt"
+!LOAD "ja_JP.eucJP/define.txt"
 !SELECTMODE
 !REGISTRATION
 # main sequence
-#!LOAD "ja/title.txt"
-!LOAD "ja/menu.txt"
-!LOAD "ja/epilogue.txt"
+#!LOAD "ja_JP.eucJP/title.txt"
+!LOAD "ja_JP.eucJP/menu.txt"
+!LOAD "ja_JP.eucJP/epilogue.txt"

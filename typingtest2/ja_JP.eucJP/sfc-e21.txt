@@ -4,28 +4,28 @@
 "             SFCタイピング試験     The Voyage of The Beagle"
 ""
 "================================================================"
-"On the 6th of January we reached Teneriffe, but were prevented"
-"landing, by fears of our bringing the cholera: the next morning"
-"we saw the sun rise behind the rugged outline of the Grand"
-"Canary island, and suddenly illuminate the Peak of Teneriffe,"
-"whilst the lower parts were veiled in fleecy clouds."
+"We were prevented landing, by fears of our bringing the"
+"cholera: the next morning we saw the sun rise behind the"
+"rugged outline of the Grand Canary island, and suddenly"
+"illuminate the Peak of Teneriffe, whilst the lower parts were"
+"veiled in fleecy clouds."
 "================================================================"
-"全296文字 全部で5行"
-"時間制限 119秒 誤字制限 9字"
+"全251文字 全部で5行"
+"時間制限 101秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 119
+!SET time_limit 101
 !SET max_error_type 9
 !SET title "The Voyage of The Beagle"
-!SET total_text_length 296
+!SET total_text_length 251
 !SET type_min_speed 150
 !TEXT
-"On the 6th of January we reached Teneriffe, but were prevented"
-"landing, by fears of our bringing the cholera: the next morning"
-"we saw the sun rise behind the rugged outline of the Grand"
-"Canary island, and suddenly illuminate the Peak of Teneriffe,"
-"whilst the lower parts were veiled in fleecy clouds."
+"We were prevented landing, by fears of our bringing the"
+"cholera: the next morning we saw the sun rise behind the"
+"rugged outline of the Grand Canary island, and suddenly"
+"illuminate the Peak of Teneriffe, whilst the lower parts were"
+"veiled in fleecy clouds."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END

@@ -7,25 +7,25 @@
 "We arrived in a snowstorm at eleven last night, Singapore and"
 "Jane and I. It does not appear to be customary for"
 "superintendents of orphan asylums to bring with them personal"
-"maids and Chinese chows. The night watchman and housekeeper, who"
-"had waited up to receive me, were thrown into an awful flutter."
+"maids and Chinese chows. The night watchman and housekeeper"
+"were thrown into an awful flutter."
 "================================================================"
-"全299文字 全部で5行"
-"時間制限 120秒 誤字制限 9字"
+"全265文字 全部で5行"
+"時間制限 106秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 120
+!SET time_limit 106
 !SET max_error_type 9
 !SET title "Dear Enemy"
-!SET total_text_length 299
+!SET total_text_length 265
 !SET type_min_speed 150
 !TEXT
 "We arrived in a snowstorm at eleven last night, Singapore and"
 "Jane and I. It does not appear to be customary for"
 "superintendents of orphan asylums to bring with them personal"
-"maids and Chinese chows. The night watchman and housekeeper, who"
-"had waited up to receive me, were thrown into an awful flutter."
+"maids and Chinese chows. The night watchman and housekeeper"
+"were thrown into an awful flutter."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END

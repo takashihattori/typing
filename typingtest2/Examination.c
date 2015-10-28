@@ -73,7 +73,7 @@ void Examination_selectMode(Examination * examination){
   MODES[2] = ref("practice_mode");
   number = selectNumber(ref("select_mode_message"),MODES,3);
   examination->mode = number;
-  if (number == 1) {
+  if (number == 2) {
     HIDE_TYPE_MODE_EX = 0;
   }
 }
@@ -85,8 +85,8 @@ void Examination_selectMode(Examination * examination){
 //受講者の各種情報を取得する
 void Examination_registration(Examination * examination, User * user){
 	inputExaminationInfo(examination);//試験情報を入力する
-	//	inputUserInfo(examination,user);//受験者情報を入力する
-	//	checkStartExamination(examination);
+	inputUserInfo(examination,user);//受験者情報を入力する
+	checkStartExamination(examination);
 }
 
 /*************************************************************
@@ -115,12 +115,12 @@ void inputExaminationInfo(Examination * examination){
 		//試験が存在するか確認する
 		result = checkExamination(examination) && getQuestionName(examination);
 		if(!(result)){
-			printf(ref("error_not_exist_examination"));
-			if(!checkReInput()){
-				typingtestExit();
-			}
-			AUTO_SELECT=selectMode(examination);
-			continue;
+		  printf(ref("error_not_exist_examination"), examination->managerLogin, examination->time, examination->room);
+		  if(!checkReInput()){
+		    typingtestExit();
+		  }
+		  AUTO_SELECT=selectMode(examination);
+		  continue;
 		}
 		
 		//同じ時間に別のユーザーが受験していなかったか確認する
@@ -219,22 +219,27 @@ void inputRoom(Examination * examination){
 //自動入力
 
 void inputRoomAuto(Examination * examination){
-	char host[256];
-	char *str;
-	get_hostname(host);
-	int number;
+	char host[MAXSTRLEN];
+	int result, number, room;
 	
-	str=strtok(host,".");
-	str=strtok(str,"zmac");
-	number=atoi(str);
-	if(number<40)number=0;
-	else if(number<80)number=1;
-	else if(number<120)number=2;
-	else if(number<160)number=3;
-	else number=4;
+	result = gethostname(host, MAXSTRLEN);
+	if (result != 0) { 
+	  perror(NULL);
+	  return;
+	}
+	strtok(host, ".");
+	if (strncmp(host, "zmac", 4) == 0) {
+	  number = atoi(host+4);
+	  if (number<160) {
+	    room = number / 40;
+	  } else {
+	    room = 4;
+	  }
+	} else {
+	  room = 4;
+	}
 	
-	strcpy(examination->room, ROOMS[number]);
-	//printf("%s館なう\n",ROOMS[number]);
+	strcpy(examination->room, ROOMS[room]);
 }
 
 //試験官のログイン名を入力する

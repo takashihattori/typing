@@ -1,4 +1,4 @@
-#For Information Processing
+#For Typing Exam (FIT1)
 !SECTION 1
 !DISP 5 0
 "             SFC Typing Examination      Keio"
@@ -8,24 +8,24 @@
 "education, with practical training dating back to the founding of"
 "Keio University hospital in 1920. Keio has since established"
 "a number of medical organizations, all adhering to the original"
-"concept of care based on three fundamentals."
+"concept of care."
 "================================================================"
-"Total of 294 letters. 5 lines."
-"Time limit 118 sec Error limit 9 letters."
+"Total of 266 letters, 5 lines."
+"Time limit 107 sec, Error limit 9 letters."
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 118
+!SET time_limit 107
 !SET max_error_type 9
 !SET title "Keio"
-!SET total_text_length 294
+!SET total_text_length 266
 !SET type_min_speed 150
 !TEXT
 "Keio University has a long, distinguished tradition in medical"
 "education, with practical training dating back to the founding of"
 "Keio University hospital in 1920. Keio has since established"
 "a number of medical organizations, all adhering to the original"
-"concept of care based on three fundamentals."
+"concept of care."
 !MESSAGE
 "===>  Now Typing Examination is over.  <==="
 !TEST_END

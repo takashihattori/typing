@@ -1,31 +1,33 @@
-#For Information Processing
+#For Typing Exam (FIT1)
 !SECTION 1
 !DISP 5 0
 "             SFC Typing Examination      The Invisible Man"
 ""
 "================================================================"
-"But it was not that which startled Mrs. Hall. It was the fact"
-"that all his forehead above his blue glasses was covered by"
-"a white bandage, and that another covered his ears, leaving not"
-"a scrap of his face exposed excepting only his pink, eaked nose."
-"It was bright, pink, and shiny just as it had been at first."
+"It was the fact that all his forehead above his blue"
+"glasses was covered by a white bandage, and that another"
+"covered his ears, leaving not a scrap of his face exposed"
+"excepting only his pink, eaked nose.  It was bright, pink,"
+"and shiny just as it had been at first."
 "================================================================"
-"Total of 307 letters. 5 lines."
-"Time limit 123 sec Error limit 9 letters."
+"Total of 262 letters, 5 lines."
+"Time limit 105 sec, Error limit 9 letters."
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 123
+!SET time_limit 105
 !SET max_error_type 9
 !SET title "The Invisible Man"
-!SET total_text_length 307
+!SET total_text_length 262
 !SET type_min_speed 150
 !TEXT
-"But it was not that which startled Mrs. Hall. It was the fact"
-"that all his forehead above his blue glasses was covered by"
-"a white bandage, and that another covered his ears, leaving not"
-"a scrap of his face exposed excepting only his pink, eaked nose."
-"It was bright, pink, and shiny just as it had been at first."
+"It was the fact that all his forehead above his blue"
+"glasses was covered by a white bandage, and that another"
+"covered his ears, leaving not a scrap of his face exposed"
+"excepting only his pink, eaked nose.  It was bright, pink,"
+"and shiny just as it had been at first."
 !MESSAGE
 "===>  Now Typing Examination is over.  <==="
 !TEST_END
+
+

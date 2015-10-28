@@ -8,24 +8,24 @@
 "ruled micrometer grating, exactly upon the cross-hairs of his"
 "directors, showed that the immense vessel was precisely upon"
 "the calculated course, as laid down by the automatic integrating"
-"course-plotters. Everything was quiet and in order."
+"course-plotters."
 "================================================================"
-"全299文字 全部で5行"
-"時間制限 120秒 誤字制限 9字"
+"全264文字 全部で5行"
+"時間制限 106秒 誤字制限 9字"
 !PAUSE
 !TEST
 !SET cursor 1
-!SET time_limit 120
+!SET time_limit 106
 !SET max_error_type 9
 !SET title "Triplanetary"
-!SET total_text_length 299
+!SET total_text_length 264
 !SET type_min_speed 150
 !TEXT
 "A brilliant point of white in the center of the pilot's closely"
 "ruled micrometer grating, exactly upon the cross-hairs of his"
 "directors, showed that the immense vessel was precisely upon"
 "the calculated course, as laid down by the automatic integrating"
-"course-plotters. Everything was quiet and in order."
+"course-plotters."
 !MESSAGE
 "===>  タイピング試験が終わりました。  <==="
 !TEST_END
